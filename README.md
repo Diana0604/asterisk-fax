@@ -11,6 +11,7 @@ Config for. A fax telephony system using asterisk for scape-room style shit
 ## Step 1: Turn raspberry into ehternet router 
 - If you don't have wireless access to internet: Install USB dongle (TODO)
 - Follow https://linuxhint.com/raspberry_pi_wired_router/ instructions
+- Do *NOT* activate firewall (TODO -> CHECK)
 ## Step 2: Set up hardware
 - Connect ethernet cable from pi to grandstream pbx in the Global Network pin
 - Connect fax machine from extension #2
