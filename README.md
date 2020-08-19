@@ -1,13 +1,26 @@
 # asterisk-fax
 Config for. A fax telephony system using asterisk for scape-room style shit
 # What you'll need
-- Raspberry PI
-- SD card
-- 12V (?) connector for PI
+## Basics
+- Raspberry PI - I used Model 4B
+- SD card - 16GB <= size <= 64GB
+- Appropriate Power Supply - (3.0A for Model 4B)
+## Connect to pi
+
 - ATA (Grandstream, Linksys...) -> I have listed how to config the ones I have used and normally it's pretty similar from brand to brand
-- Install asterisk: Follow http://www.raspberry-asterisk.org/ instructions
-- If you don't have access to wireless internet: USB Dongle + SIM with data
+- Optional (if you want to have portable system): USB Dongle + SIM with data TODO: which dongles work?
 # Installation
+## Step 1: Install asterisk
+The first thing to do is install asterisk.
+- Download newest image from http://www.raspberry-asterisk.org/downloads/ (at the time of this project I used *RasPBX images based on Raspbian 10 Buster*)
+- Connect SD card to your computer
+- Install OS into SD card. You can find instructions in section *Writing the image* of https://www.raspberrypi.org/documentation/installation/installing-images/
+- Boot your raspberry pi
+## Step 2: Connect to your pi
+There are two ways to connect to your newly installed asterisk!
+### Option 1 (preferred): SSH
+- Connect pi to internet through ethernet - It has to be the same 
+### Option 2: Directly
 ## Step 1: Turn raspberry into ehternet router 
 - If you don't have wireless access to internet: Install USB dongle (TODO)
 - Follow https://linuxhint.com/raspberry_pi_wired_router/ instructions
