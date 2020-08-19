@@ -38,3 +38,5 @@ There are two ways to connect to your newly installed asterisk!
 ### Grandstream
 ### Linksys
 TODO
+
+### TODO: reboot script
