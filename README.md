@@ -32,6 +32,8 @@ There are two ways to connect to your newly installed asterisk!
 - Go to Extensions -> Add new PJSIP Extension and add Extensions 1000, 2000, 3000 (1000 can be used from extension #1 and 3000 can be used from computer for ex.)
 - Go to that thing that detects the network
 - blablalba
+## AUDIO
+/usr/bin/vlc /fax1/audios/xx.wav 
 ## Step 3: Configure an ATA to be used with your raspberry
 ### Grandstream
 ### Linksys
