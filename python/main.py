@@ -1,7 +1,7 @@
 #REMEMBER TO CHANGE TO /fax BEFORE GITTING
-import music
+import music, debug
 
-DEBUG = 1
+debugger = debug.Debug(1)
 currentPath = "/fax/"
 #sounds 
 OPENING_THEME = currentPath + "audios/speaker/00-arrival.mp3"
@@ -15,13 +15,12 @@ breathing = music.Audio(BREATHING, 1)
 
 opening.play()
 
-if(DEBUG):
-    print('************ OPENING THEME FINISHED ************')
+
+debugger.log('************ OPENING THEME FINISHED ************')
 
 threads.append(breathing.play())
 
-if(DEBUG):
-    print('************ MACHINE IS BREATHING ************')
+debugger.log('************ MACHINE IS BREATHING ************')
 
 for thread in threads:
     thread.join()
