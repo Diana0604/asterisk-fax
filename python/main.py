@@ -1,10 +1,19 @@
+#REMEMBER TO CHANGE TO /fax BEFORE GITTING
 import music
 
 currentPath = "/fax/"
 #sounds 
-OPENING_THEME = "audios/speaker/00-arrival.mp3"
-BREATHING = "audios/speaker/01-breathing.mp3"
+OPENING_THEME = currentPath + "audios/speaker/00-arrival.mp3"
+BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
+
+threads = []
 
 #play first song
-music.Play(OPENING_THEME)
-music.Play(BREATHING)
+opening = music.Audio(OPENING_THEME)
+breathing = music.Audio(BREATHING, 1)
+
+opening.play()
+threads.append(breathing.play())
+
+for thread in threads:
+    thread.join()
