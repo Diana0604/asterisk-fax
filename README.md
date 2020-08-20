@@ -34,6 +34,7 @@ There are two ways to connect to your newly installed asterisk!
 - blablalba
 ## AUDIO
 /usr/bin/vlc /fax1/audios/xx.wav 
+nano /etc/rc.local 
 ## Step 3: Configure an ATA to be used with your raspberry
 ### Grandstream
 ### Linksys
