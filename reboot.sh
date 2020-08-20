@@ -8,6 +8,4 @@
 #/usr/bin/cvlc /fax/audios/speaker/01-breathing.mp3 > /dev/null 2>&1 & 
 
 
-python3 /fax/music.py
-
-
+python3 /fax/python/main.py
