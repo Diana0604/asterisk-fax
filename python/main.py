@@ -16,9 +16,12 @@ breathing = music.Audio(BREATHING, 1)
 opening.play()
 
 if(DEBUG):
-    print('Checkpoint')
+    print('************ OPENING THEME FINISHED ************')
 
 threads.append(breathing.play())
+
+if(DEBUG):
+    print('************ MACHINE IS BREATHING ************')
 
 for thread in threads:
     thread.join()
