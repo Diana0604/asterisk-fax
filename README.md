@@ -20,13 +20,26 @@ The first thing to do is install asterisk.
 - Connect SD card to your computer
 - Install OS into SD card. You can find instructions in section *Writing the image* of https://www.raspberrypi.org/documentation/installation/installing-images/
 - Boot your raspberry pi
-### First configs
+### First configs - Raspberry
 - Enter with user root, password raspberry
 - raspi-config -> Advanced Options -> Expand Filesystem -> reboot
 - regen-hostkeys
 - configure-timezone
 -dpkg reconfigure-locales-> all -> en_GB
 - raspbx-upgrade
+### First configs - FreePBX
+From a computer that is connected to the same network as pi:
+- Open browser
+- Go to raspbx.local
+#### Add extensions
+- Applications -> Extensions
+-Add Extension -> Add new extension (pjspi) -> Choose User Extension/Display Name and Secret
+### Activate NAT & FAX
+- Settings -> Asterisk SIP Settings
+- In NAT Settings section -> Detect Network Settings
+- In T38 Pass-Through select YES
+
+Once all is done Apply Config
 ## Step 2: Connect to your pi
 There are two ways to connect to your newly installed asterisk!
 ### Option 1 (preferred): SSH
