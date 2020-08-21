@@ -48,6 +48,7 @@ There are two ways to connect to your newly installed asterisk!
 ## Step 1: Turn raspberry into ehternet router 
 ### Configure the network
 - If you don't have wireless access to internet: Install USB dongle (TODO)
+All files can be found ethernet folder if you don't wanna do all the steps
 - `sudo nano /etc/network/interfaces.d/wlan0`
 In this file, add code: 
     ```
