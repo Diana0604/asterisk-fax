@@ -1,3 +1,10 @@
 - `mv wlan0 /etc/network/interfaces.d/wlan0`
 - `mv eth0 /etc/network/interfaces.d/eth0`
+- `sudo reboot`
+- check `ip addr show wlan0` and `ip addr show eth0`
+- `sudo apt update`
+- `sudo apt install isc-dhcp-server` - it's ok if not active
 - `mv dhcp /etc/dhcp/dhcpd.conf`
+- `sudo nano /etc/default/isc-dhcp-server` add `eth0` in ipv4
+- `sudo reboot`
+- `sudo systemctl status isc-dhcp-server` - should be `active (running)`
