@@ -9,7 +9,7 @@ import music, debug, calls
 debugger = debug.Debug(1)
 currentPath = "/fax/"
 #sounds
-OPENING_THEME = currentPath + "audios/speaker/00-arrival.mp3"
+OPENING_THEME = "audios/speaker/00-arrival.mp3"
 BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 
 threads = []
