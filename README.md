@@ -16,6 +16,13 @@ The first thing to do is install asterisk.
 - Connect SD card to your computer
 - Install OS into SD card. You can find instructions in section *Writing the image* of https://www.raspberrypi.org/documentation/installation/installing-images/
 - Boot your raspberry pi
+### First configs
+- Enter with user root, password raspberry
+- raspi-config -> Advanced Options -> Expand Filesystem -> reboot
+- regen-hostkeys
+- configure-timezone
+-dpkg reconfigure-locales-> all -> en_GB
+- raspbx-upgrade
 ## Step 2: Connect to your pi
 There are two ways to connect to your newly installed asterisk!
 ### Option 1 (preferred): SSH
