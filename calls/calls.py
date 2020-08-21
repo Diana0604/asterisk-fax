@@ -1,6 +1,6 @@
 from shutil import copyfile
 
-OUTGOING_PATH = './'
+OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
 
 class Call(object):
