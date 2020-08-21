@@ -1,12 +1,16 @@
 # asterisk-fax
 Config for. A fax telephony system using asterisk for scape-room style shit
+
+BACKUP: sudo dd if=/dev/diskN bs=4m | pv | dd of=name.img bs=4m
+
+where diskN has to be replaced by the external disk and name by the name you desire
+
 # What you'll need
 ## Basics
 - Raspberry PI - I used Model 4B
 - SD card - 16GB <= size <= 64GB
 - Appropriate Power Supply - (3.0A for Model 4B)
 ## Connect to pi
-
 - ATA (Grandstream, Linksys...) -> I have listed how to config the ones I have used and normally it's pretty similar from brand to brand
 - Optional (if you want to have portable system): USB Dongle + SIM with data TODO: which dongles work?
 # Installation
