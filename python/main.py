@@ -1,7 +1,7 @@
 #REMEMBER TO CHANGE TO /fax BEFORE GITTING
-# some_file.py
-import sys
-# insert at 1, 0 is the script path (or '' in REPL)
+import sys, time
+
+#insert path to system
 sys.path.insert(1, '/fax/python')
 
 import music, debug, calls
@@ -28,6 +28,7 @@ threads.append(breathing.play())
 debugger.log('************ MACHINE IS BREATHING ************')
 
 health = calls.Call('00-health.call')
+time.sleep(30)
 health.dial()
 
 debugger.log('********* LAUNCHED FIRST CALL ****************')
