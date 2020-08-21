@@ -9,7 +9,3 @@ class Call(object):
     
     def dial(self):
         copyfile( CALLS_PATH + self.call, OUTGOING_PATH + self.call)
-
-
-prova = Call('00-health.call')
-prova.dial()
