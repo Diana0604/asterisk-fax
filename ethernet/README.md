@@ -1,0 +1,3 @@
+- `mv wlan0 /etc/network/interfaces.d/wlan0`
+- `mv eth0 /etc/network/interfaces.d/eth0`
+- `mv dhcp /etc/dhcp/dhcpd.conf`
