@@ -2,5 +2,5 @@ Channel: PJSIP/2000
 MaxRetries: 2
 RetryTime: 60
 WaitTime: 30
-Context: tif-to-fax
-Extension: 01
+Context: tbl
+Extension: 01helloworld

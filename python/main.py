@@ -38,7 +38,11 @@ debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOE
 healthfax = calls.Call('00-healthfax.call')
 healthfax.dial()
 
-debugger.log('********* LAUNCHED FIRST FAX ****************')
+debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
+
+time.sleep(10)
+helloworld = calls.Call('01-helloworld.call')
+debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE ")
 
 for thread in threads:
     thread.join()
