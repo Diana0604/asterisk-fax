@@ -27,13 +27,18 @@ threads.append(breathing.play())
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
-health = calls.Call('00-healthcall.call')
+healthcall = calls.Call('00-healthcall.call')
 time.sleep(30)
-health.dial()
+healthcall.dial()
 
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
+debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
+healthfax = calls.Call('00-healthfax.call')
+healthfax.dial()
+
+debugger.log('********* LAUNCHED FIRST FAX ****************')
 
 for thread in threads:
     thread.join()
