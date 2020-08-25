@@ -40,7 +40,8 @@ healthfax.dial()
 
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 
-time.sleep(60)
+time.sleep(70)
+debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
 helloworld = calls.Call('01-helloworld.call')
 helloworld.dial()
 debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST.")
