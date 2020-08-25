@@ -1,7 +1,7 @@
 # asterisk-fax
 Config for. A fax telephony system using asterisk for scape-room style shit
 
-BACKUP: sudo dd if=/dev/diskN bs=4m | pv | dd of=name.img bs=4m
+BACKUP:` sudo dd if=/dev/diskN bs=4m | pv | dd of=name.img bs=4m`
 
 where diskN has to be replaced by the external disk and name by the name you desire
 
@@ -46,8 +46,41 @@ There are two ways to connect to your newly installed asterisk!
 - Connect pi to internet through ethernet - It has to be the same 
 ### Option 2: Directly
 ## Step 1: Turn raspberry into ehternet router 
+### Configure the network
 - If you don't have wireless access to internet: Install USB dongle (TODO)
-- Follow https://linuxhint.com/raspberry_pi_wired_router/ instructions
+All files can be found ethernet folder if you don't wanna do all the steps
+- `sudo nano /etc/network/interfaces.d/wlan0`
+In this file, add code: 
+    ```
+    allow-hotplug wlan0
+    iface wlan0 inet dhcp
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+    ```
+- `sudo nano /etc/network/interfaces.d/eth0`
+In this file, add code: 
+    ```
+    auto eth0
+      iface eth0 inet static
+      address 192.168.100.1
+      netmask 255.255.255.0
+    ```
+- `sudo systemctl disable dhcpcd`
+- `sudo reboot`
+-Now check ` ip addr show eth0` gives you `192.168.100.1`
+### Configure DHCDP
+- `sudo apt update'
+- `sudo apt install isc-dhcp-server`. Don't worry if you see a red alarming `Active: failed`. We have not configured dhcdp so it's ok.
+- `sudo nano /etc/dhcp/dhcpd.conf`. In this file: 
+```
+TODO
+```
+- `sudo nano /etc/default/isc-dhcp-server`, in that file, modify appropriate line for:
+    ```
+    INTERFACESV4="eth0"
+    ```
+- `sudo reboot`
+- `sudo systemctl status isc-dhcp-server` should be running
+(All taken from Follow https://linuxhint.com/raspberry_pi_wired_router/ instructions )
 - Do *NOT* activate firewall (TODO -> CHECK)
 ## Step 2: Set up hardware
 - Connect ethernet cable from pi to grandstream pbx in the Global Network pin
@@ -57,8 +90,9 @@ There are two ways to connect to your newly installed asterisk!
 - Go to that thing that detects the network
 - blablalba
 ## AUDIO
-/usr/bin/vlc /fax1/audios/xx.wav 
-nano /etc/rc.local 
+`/usr/bin/vlc /fax1/audios/xx.wav `
+## Execute on boot
+`nano /etc/rc.local `
 ## Step 3: Configure an ATA to be used with your raspberry
 ### Grandstream
 ### Linksys
