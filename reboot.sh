@@ -7,5 +7,5 @@
 
 #/usr/bin/cvlc /fax/audios/speaker/01-breathing.mp3 > /dev/null 2>&1 & 
 
-
+amixer set 'Headphone' 100%
 python3 /fax/python/main.py
