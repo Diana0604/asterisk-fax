@@ -8,6 +8,6 @@ class Debug(object):
         if(self.mode > 0):
             print(message)
         
-    def checkpoint(self, message, wait = 10):
+    def checkpoint(self, message, wait = 60):
         print(message)
         i, o, e = select.select( [sys.stdin], [], [], wait )
