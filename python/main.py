@@ -15,21 +15,21 @@ BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 threads = []
 
 #play first song
-opening = music.Audio(OPENING_THEME)
-breathing = music.Audio(BREATHING, 1)
+#opening = music.Audio(OPENING_THEME)
+#breathing = music.Audio(BREATHING, 1)
 
-opening.play()
+#opening.play()
 
 
 debugger.log('************ OPENING THEME FINISHED ************')
 
-threads.append(breathing.play())
+#threads.append(breathing.play())
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
-healthcall = calls.Call('00-healthcall.call')
-time.sleep(30)
-healthcall.dial()
+#healthcall = calls.Call('00-healthcall.call')
+#time.sleep(30)
+#healthcall.dial()
 
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
@@ -40,9 +40,10 @@ healthfax.dial()
 
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 
-time.sleep(10)
+time.sleep(60)
 helloworld = calls.Call('01-helloworld.call')
-debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE ")
+helloworld.dial()
+debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST.")
 
 for thread in threads:
     thread.join()
