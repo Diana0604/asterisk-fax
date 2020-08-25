@@ -2,5 +2,5 @@ Channel: PJSIP/2000
 MaxRetries: 2
 RetryTime: 60
 WaitTime: 30
-Context: call-zero
-Extension: 000
+Context: healthcheck
+Extension: 002
