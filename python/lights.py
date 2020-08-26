@@ -56,6 +56,10 @@ class Lights(object):
             ledR.value = ledR.value + (finalR-initR)/7
             ledB.value = ledB.value + (finalB-initB)/7
             ledG.value = ledG.value + (finalG-initG)/7
+            print('ledR: ', ledR.value)
+            print('ledG: ', ledG.value)
+            print('ledB: ', ledB.value)
+            sleep(0.3)
 
 
 #button.when_pressed = turn_lights_on
