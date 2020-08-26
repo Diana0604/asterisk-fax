@@ -18,8 +18,10 @@ threads = []
 
 #play first song
 
-
+debugger.log('************ TURNING LIGHTS ************')
 lights.iradescent()
+debugger.log('************ LIGHTS ON ************')
+debugger.log('************ STARTING OPENING THEME ************')
 music.Audio(OPENING_THEME).play()
 
 debugger.log('************ OPENING THEME FINISHED ************')

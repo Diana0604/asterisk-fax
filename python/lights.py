@@ -40,7 +40,3 @@ def turn_lights_off():
 #button.when_pressed = turn_lights_on
 #button.when_released = turn_lights_off
 
-#turn_lights_on()
-
-pause()
-
