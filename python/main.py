@@ -34,8 +34,8 @@ debugger.log('************ MACHINE IS BREATHING ************')
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
-healthfax = calls.Call('00-healthfax.call')
+#input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
+#healthfax = calls.Call('00-healthfax.call')
 #healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 
@@ -55,15 +55,21 @@ debugger.log('********* LAUNCHED TRUST EX 1 ****************')
 #trust_exercise_2.dial()
 debugger.log('********* LAUNCHED TRUST EX 2 ****************')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE THIRD TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
-trust_exercise_3 = calls.Call('02-trust3.call')
-trust_exercise_3.dial()
+#input("PRESS ENTER IF YOU WANT TO TRIGGER THE THIRD TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
+#trust_exercise_3 = calls.Call('02-trust3.call')
+#trust_exercise_3.dial()
 debugger.log('********* LAUNCHED TRUST EX 3 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE ANTENNA FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX FAX FROM THEM.")
 antenna = calls.Call('03-antenna.call')
 antenna.dial()
 debugger.log('***************** LAUNCHED ANTENNA ***********')
+
+input("PRESS ENTER IF YOU WANT TO TRIGGER THE SPIES FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
+spies = calls.Call('04-spies.call')
+spies.dial()
+debugger.log('***************** LAUNCHED SPIES CALL ***********')
+
 
 
 
