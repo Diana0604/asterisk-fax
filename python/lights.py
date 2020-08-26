@@ -46,9 +46,16 @@ class Lights(object):
         ledG.value = finalG*0.1
         ledB.value = finalB*0.1
     def red(self):
-		ledR.value = 1
-		ledG.value = 0
-		ledB.value = 0
+        initR = ledR.value
+        initB = ledB.value
+        initG = ledG.value
+        finalR = 1.0
+        finalB = 0.0
+        finalG = 0.0
+        for i in range (0,7):
+            ledR.value = ledR.value + (finalR-initR)/7
+            ledB.value = ledB.value + (finalB-initB)/7
+            ledG.value = ledG.value + (finalG-initG)/7
 
 
 #button.when_pressed = turn_lights_on
