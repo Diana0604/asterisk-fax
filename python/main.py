@@ -56,13 +56,14 @@ debugger.log('********* LAUNCHED TRUST EX 1 ****************')
 debugger.log('********* LAUNCHED TRUST EX 2 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
-trust_exercise_3 = calls.Call('03-trust3.call')
+trust_exercise_3 = calls.Call('02-trust3.call')
 trust_exercise_3.dial()
 debugger.log('********* LAUNCHED TRUST EX 3 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX FAX FROM THEM.")
-
-
+antenna = calls.Call('03-antenna.call')
+antenna.dial()
+debugger.log('***************** LAUNCHED ANTENNA ***********')
 
 for thread in threads:
     thread.join()
