@@ -22,7 +22,7 @@ opening.play()
 
 debugger.log('************ OPENING THEME FINISHED ************')
 
-#threads.append(breathing.play())
+threads.append(breathing.play())
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
