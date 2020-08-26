@@ -75,9 +75,8 @@ debugger.log('***************** LAUNCHED SPIES CALL ***********')
 #spies.dial()
 #debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
-#time.sleep(200)
-
-consignia = calls.Call('consignia.call')
+input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
+consignia = calls.Call('06-consignia.call')
 consignia.dial()
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
