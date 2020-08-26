@@ -4,7 +4,7 @@ import sys, time
 #insert path to system
 sys.path.insert(1, '/fax/python')
 
-import music, debug, calls, lights
+import music, debug, calls#, lights
 
 debugger = debug.Debug(1)
 currentPath = "/fax/"
@@ -19,7 +19,7 @@ threads = []
 #play first song
 
 debugger.log('************ TURNING LIGHTS ************')
-lights.Lights().iradescent()
+#lights.Lights().iradescent()
 debugger.log('************ LIGHTS ON ************')
 debugger.log('************ STARTING OPENING THEME ************')
 music.Audio(OPENING_THEME).play()
@@ -36,7 +36,7 @@ debugger.log('************ MACHINE IS BREATHING ************')
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
 #healthfax = calls.Call('00-healthfax.call')
 #healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
@@ -47,37 +47,37 @@ debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
 
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST IS SENT BACK.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST IS SENT BACK.")
 #trust_exercise_1 = calls.Call('02-trust1.call')
 #trust_exercise_1.dial()
 debugger.log('********* LAUNCHED TRUST EX 1 ****************')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
 #trust_exercise_2 = calls.Call('02-trust2.call')
 #trust_exercise_2.dial()
 debugger.log('********* LAUNCHED TRUST EX 2 ****************')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE THIRD TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE THIRD TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
 #trust_exercise_3 = calls.Call('02-trust3.call')
 #trust_exercise_3.dial()
 debugger.log('********* LAUNCHED TRUST EX 3 ****************')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE ANTENNA FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX FAX FROM THEM.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE ANTENNA FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX FAX FROM THEM.")
 #antenna = calls.Call('03-antenna.call')
 #antenna.dial()
 debugger.log('***************** LAUNCHED ANTENNA ***********')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE SPIES FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE SPIES FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
 #spies = calls.Call('04-spies.call')
 #spies.dial()
 debugger.log('***************** LAUNCHED SPIES CALL ***********')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE MISSION FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE MISSION FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
 #spies = calls.Call('05-mission.call')
 #spies.dial()
 debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
 #charging = music.Audio(CHARGING_UP, 1)
 #threads.append(charging.play())
 #consignia = calls.Call('06-consignia.call')
@@ -85,7 +85,7 @@ input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER 
 
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
-input("PRESS WHEN LAST FAXES SHOULD COME THROUGH")
+raw_input("PRESS WHEN LAST FAXES SHOULD COME THROUGH")
 #calls.Call('07-laststeps1.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED ***************')
 #music.Audio(HEARTBEAT,0).play()
