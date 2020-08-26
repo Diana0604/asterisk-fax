@@ -1,14 +1,19 @@
-from threading import Thread
+#LED STRIP WHERE R - 17 G - 27 B - 22
+#BUTTONS CONNECTED TO PIN 23
+from gpiozero import PWMLED
+from gpiozero import Button
+from signal import pause
 from time import sleep
+from random import randrange
 
-def threaded_function(arg):
-    for i in range(arg):
-        print("running")
-        sleep(1)
+ledR = PWMLED(17)
+ledG = PWMLED(27)
+ledB = PWMLED(22)
 
+ledR.value = 0.5
+ledG.value = 0.5
+ledB.value = 0.5
 
-if __name__ == "__main__":
-    thread = Thread(target = threaded_function, args = (10, ))
-    thread.start()
-    thread.join()
-    print("thread finished...exiting")
+#button.when_pressed = turn_lights_on
+#button.when_released = turn_lights_off
+
