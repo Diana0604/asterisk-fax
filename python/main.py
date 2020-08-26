@@ -75,13 +75,26 @@ debugger.log('***************** LAUNCHED SPIES CALL ***********')
 #spies.dial()
 #debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
-consignia = calls.Call('06-consignia.call')
-consignia.dial()
+#input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
+#consignia = calls.Call('06-consignia.call')
+#consignia.dial()
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
-
-
+input("PRESS WHEN LAST FAXES SHOULD COME THROUGH")
+calls.Call('07-laststeps1.call').dial()
+debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED ***************')
+time.sleep(120)
+calls.Call('07-laststeps2.call').dial()
+debugger.log('********************* LAUNCHED FINAL STEP 1 ***************')
+time.sleep(120)
+calls.Call('07-laststeps3.call').dial()
+debugger.log('********************* LAUNCHED FINAL STEP 2 ***************')
+time.sleep(120)
+calls.Call('07-laststeps4.call').dial()
+debugger.log('********************* LAUNCHED FINAL STEP 3 ***************')
+time.sleep(120)
+calls.Call('07-laststeps5.call').dial()
+debugger.log('********************* LAUNCHED FINAL STEP 4 ***************')
 
 for thread in threads:
     thread.join()

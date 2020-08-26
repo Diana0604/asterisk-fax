@@ -1,0 +1,6 @@
+Channel: PJSIP/2000
+MaxRetries: 2
+RetryTime: 60
+WaitTime: 30
+Context: laststeps
+Extension: 07-laststeps2
