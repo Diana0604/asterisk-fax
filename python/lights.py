@@ -56,6 +56,7 @@ class Lights(object):
             ledR.value = ledR.value + (finalR-initR)/7
             ledB.value = ledB.value + (finalB-initB)/7
             ledG.value = ledG.value + (finalG-initG)/7
+            sleep(1)
         ledR.value = 1
         ledB.value = 0
         ledG.value = 0
