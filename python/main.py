@@ -25,7 +25,7 @@ debugger.log('************ STARTING OPENING THEME ************')
 music.Audio(OPENING_THEME).play()
 
 debugger.log('************ OPENING THEME FINISHED ************')
-#breathing = music.Audio(BREATHING, 1).play()
+breathing = music.Audio(BREATHING, 1).play()
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
