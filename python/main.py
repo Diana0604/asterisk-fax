@@ -75,11 +75,17 @@ spies = calls.Call('05-mission.call')
 spies.dial()
 debugger.log('***************** LAUNCHED SPIES CALL ***********')
 
-input("PRESS ENTER IF YOU WANT TO TRIGGER THE CAKE FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
+time.sleep(300)
+
 spies = calls.Call('05-cake.call')
 spies.dial()
 debugger.log('***************** LAUNCHED SPIES CALL ***********')
 
+time.sleep(300)
+
+consignia = calls.Call('consignia.call')
+consignia.dial()
+debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
 
 
