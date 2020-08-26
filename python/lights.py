@@ -45,6 +45,10 @@ class Lights(object):
         ledR.value = finalR
         ledG.value = finalG
         ledB.value = finalB
+	def red(self):
+		ledR.value = 1
+		ledG.value = 0
+		ledB.value = 0
 
 #button.when_pressed = turn_lights_on
 #button.when_released = turn_lights_off

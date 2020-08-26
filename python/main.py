@@ -15,11 +15,13 @@ CHARGING_UP = currentPath + "audios/speaker/02-charging_up.mp3"
 HEARTBEAT = currentPath + "audios/speaker/03-breathing_hearbeat.mp3"
 HEARTBEAT_INTENSE = currentPath + "audios/speaker/04-breathing_heartbeat_intense.mp3"
 threads = []
+#lights
+lightsController = lights.Lights()
 
 #play first song
 
 debugger.log('************ TURNING LIGHTS ************')
-lights.Lights().iradescent()
+lightsController.iradescent()
 debugger.log('************ LIGHTS ON ************')
 debugger.log('************ STARTING OPENING THEME ************')
 music.Audio(OPENING_THEME).play()
@@ -80,6 +82,7 @@ debugger.log('***************** LAUNCHED MISSION CALL ***********')
 raw_input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
 #charging = music.Audio(CHARGING_UP, 1)
 #threads.append(charging.play())
+lightsController.red()
 #consignia = calls.Call('06-consignia.call')
 #consignia.dial()
 
