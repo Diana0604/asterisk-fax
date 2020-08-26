@@ -34,7 +34,7 @@ debugger.log('************ MACHINE IS BREATHING ************')
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
-debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
+input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
 healthfax = calls.Call('00-healthfax.call')
 #healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
@@ -45,11 +45,11 @@ helloworld = calls.Call('01-helloworld.call')
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
 
 
-debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST IS SENT BACK.")
+input("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST IS SENT BACK.")
 trust_exercise_1 = calls.Call('02-trust1.call')
 trust_exercise_1.dial()
 
-debugger.checkpoint("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
+input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
 trust_exercise_2 = calls.Call('02-trust2.call')
 trust_exercise_2.dial()
 
