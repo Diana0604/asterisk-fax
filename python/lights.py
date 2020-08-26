@@ -1,6 +1,5 @@
 #LED STRIP WHERE R - 17 G - 27 B - 22
 #BUTTONS CONNECTED TO PIN 23
-
 from gpiozero import PWMLED
 from gpiozero import Button
 from signal import pause
@@ -13,7 +12,7 @@ ledB = PWMLED(22)
 
 button = Button(23)
 
-def turn_lights_on():
+def iradescent():
         time_slept = 0
         while time_slept < 25:
                 ledR.value = 0.5 + randrange(-2,3)*0.1

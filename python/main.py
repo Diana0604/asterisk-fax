@@ -4,7 +4,7 @@ import sys, time
 #insert path to system
 sys.path.insert(1, '/fax/python')
 
-import music, debug, calls
+import music, debug, calls, lights
 
 debugger = debug.Debug(1)
 currentPath = "/fax/"
@@ -19,8 +19,8 @@ threads = []
 #play first song
 
 
-
-#music.Audio(OPENING_THEME).play()
+lights.iradescent()
+music.Audio(OPENING_THEME).play()
 
 debugger.log('************ OPENING THEME FINISHED ************')
 #breathing = music.Audio(BREATHING, 1).play()
