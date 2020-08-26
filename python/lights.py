@@ -11,8 +11,21 @@ ledG = PWMLED(27)
 ledB = PWMLED(22)
 
 button = Button(23)
+import time, vlc, threading
 
-def iradescent():
+class Lights(object):
+    def __init__(self, background = 1):
+        self.background = background
+
+    def iradescent(self):
+        if(self.background == 1):
+            thread = threading.Thread(target=self.iradescent_thread, args=())
+            thread.daemon = True                            # Daemonize thread
+            thread.start()                                  # Start the execution
+            return thread
+        else:
+            self.run()
+    def iradescent_thread(self):
         time_slept = 0
         while time_slept < 25:
                 ledR.value = 0.5 + randrange(-2,3)*0.1
@@ -31,11 +44,6 @@ def iradescent():
         ledR.value = 0.5
         ledG.value = 0.5
         ledB.value = 0.5
-
-def turn_lights_off():
-        ledR.value = 0
-        ledG.value = 0
-        ledB.value = 0
 
 #button.when_pressed = turn_lights_on
 #button.when_released = turn_lights_off
