@@ -27,37 +27,37 @@ breathing = music.Audio(BREATHING, 1).play()
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
-#healthcall = calls.Call('00-healthcall.call')
-#time.sleep(30)
-#healthcall.dial()
+healthcall = calls.Call('00-healthcall.call')
+time.sleep(30)
+healthcall.dial()
 
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
-#healthfax = calls.Call('00-healthfax.call')
-#healthfax.dial()
+healthfax = calls.Call('00-healthfax.call')
+healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 
-#time.sleep(100)
-#helloworld = calls.Call('01-helloworld.call')
-#helloworld.dial()
+time.sleep(100)
+helloworld = calls.Call('01-helloworld.call')
+helloworld.dial()
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
 
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE FIRST TRUST EXERCISE. THIS SHOULD HAPPEN AFTER CHECKLIST IS SENT BACK.")
-#trust_exercise_1 = calls.Call('02-trust1.call')
-#trust_exercise_1.dial()
+trust_exercise_1 = calls.Call('02-trust1.call')
+trust_exercise_1.dial()
 debugger.log('********* LAUNCHED TRUST EX 1 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE SECOND TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
-#trust_exercise_2 = calls.Call('02-trust2.call')
-#trust_exercise_2.dial()
+trust_exercise_2 = calls.Call('02-trust2.call')
+trust_exercise_2.dial()
 debugger.log('********* LAUNCHED TRUST EX 2 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE THIRD TRUST EXERCISE. THIS HSOULD HAPPEN AFTER WE KNOW THEY HAVE CALLED NUMBER XXXX.")
-#trust_exercise_3 = calls.Call('02-trust3.call')
-#trust_exercise_3.dial()
+trust_exercise_3 = calls.Call('02-trust3.call')
+trust_exercise_3.dial()
 debugger.log('********* LAUNCHED TRUST EX 3 ****************')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER THE ANTENNA FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX FAX FROM THEM.")
