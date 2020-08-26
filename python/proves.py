@@ -10,9 +10,11 @@ ledR = PWMLED(17)
 ledG = PWMLED(27)
 ledB = PWMLED(22)
 
-ledR.value = 0.5
-ledG.value = 0.5
+ledR.value = 0.3
+ledG.value = 0
 ledB.value = 0.5
+
+pause()
 
 #button.when_pressed = turn_lights_on
 #button.when_released = turn_lights_off
