@@ -9,20 +9,21 @@ import music, debug, calls
 debugger = debug.Debug(1)
 currentPath = "/fax/"
 #sounds
-OPENING_THEME = "audios/speaker/00-arrival.mp3"
+OPENING_THEME = currentPath + "audios/speaker/00-arrival.mp3"
 BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
-
+CHARGING_UP = currentPath + "audios/speaker/02-charging_up.mp3"
+HEARTBEAT = currentPath + "audios/speaker/03-breathing_hearbeat.mp3"
+HEARTBEAT_INTENSE = currentPath + "audios/speaker/04-breathing_hearbeat_intense.mp3"
 threads = []
 
 #play first song
-opening = music.Audio(OPENING_THEME)
-breathing = music.Audio(BREATHING, 1)
 
-opening.play()
+
+
+music.Audio(OPENING_THEME).play()
 
 debugger.log('************ OPENING THEME FINISHED ************')
-
-threads.append(breathing.play())
+breathing = music.Audio(BREATHING, 1).play()
 
 debugger.log('************ MACHINE IS BREATHING ************')
 
@@ -75,23 +76,30 @@ input("PRESS ENTER IF YOU WANT TO TRIGGER THE MISSION FAX. THIS SHOULD HAPPEN AF
 debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
 input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
+charging = music.Audio(CHARGING_UP, 1)
+threads.append(charging.play())
 #consignia = calls.Call('06-consignia.call')
 #consignia.dial()
+
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
 input("PRESS WHEN LAST FAXES SHOULD COME THROUGH")
 #calls.Call('07-laststeps1.call').dial()
-#debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED ***************')
-#time.sleep(360)
+music.Audio(HEARTBEAT,0).play()
+debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED ***************')
+heartbeat_intense = music.Audio(HEARTBEAT_INTENSE,1)
+heartbeat_intense_thread = heartbeat_intense.play()
 #calls.Call('07-laststeps2.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 1 ***************')
-#time.sleep(120)
+time.sleep(120)
 #calls.Call('07-laststeps3.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 2 ***************')
-#time.sleep(300)
+time.sleep(300)
 #calls.Call('07-laststeps4.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 3 ***************')
-#time.sleep(600)
+time.sleep(600)
+heartbeat_intense_thread.join()
+music.Audio(HEARTBEAT,1).play()
 #calls.Call('07-laststeps5.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 4 ***************')
 
