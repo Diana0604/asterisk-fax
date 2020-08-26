@@ -24,10 +24,14 @@ class Lights(object):
             return thread
     def iradescent_thread(self):
         time_slept = 0
-        while time_slept < 16:
-                ledR.value = 0.5 + randrange(-2,3)*0.1
-                ledG.value = 0.5 + randrange(-2,3)*0.1
-                ledB.value = 0.5 + randrange(-2,3)*0.1
+        finalR = 0.3
+        finalG = 0
+        finalB = 0.5
+        while time_slept < 17:
+                ratio = 1.0/time_slept
+                ledR.value = finalR + randrange(-finalR,finalR)*0.1*ratio
+                ledG.value = finalG + randrange(-finalG,finalG)*0.1*ratio
+                ledB.value = finalB + randrange(-finalB,finalB)*0.1*ratio
                 time1 = 0.1 + randrange(0,4)*0.1
                 time_slept += time1
                 sleep(time1)
@@ -37,10 +41,10 @@ class Lights(object):
                 time2 = 0.1 + randrange(0,4)*0.1
                 sleep(time2)
                 time_slept += time2
-        sleep(17 - time_slept)
-        ledR.value = 0.5
-        ledG.value = 0.5
-        ledB.value = 0.5
+        sleep(18 - time_slept)
+        ledR.value = finalR
+        ledG.value = finalG
+        ledB.value = finalB
 
 #button.when_pressed = turn_lights_on
 #button.when_released = turn_lights_off
