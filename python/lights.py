@@ -18,13 +18,10 @@ class Lights(object):
         self.background = background
 
     def iradescent(self):
-        if(self.background == 1):
             thread = threading.Thread(target=self.iradescent_thread, args=())
             thread.daemon = True                            # Daemonize thread
             thread.start()                                  # Start the execution
             return thread
-        else:
-            self.run()
     def iradescent_thread(self):
         time_slept = 0
         while time_slept < 17:
