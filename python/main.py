@@ -21,10 +21,10 @@ lightsController = lights.Lights()
 #play first song
 
 debugger.log('************ TURNING LIGHTS ************')
-lightsController.iradescent()
+#lightsController.iradescent()
 debugger.log('************ LIGHTS ON ************')
 debugger.log('************ STARTING OPENING THEME ************')
-music.Audio(OPENING_THEME).play()
+#music.Audio(OPENING_THEME).play()
 
 debugger.log('************ OPENING THEME FINISHED ************')
 breathing = music.Audio(BREATHING, 1).play()
@@ -32,8 +32,8 @@ breathing = music.Audio(BREATHING, 1).play()
 debugger.log('************ MACHINE IS BREATHING ************')
 
 healthcall = calls.Call('00-healthcall.call')
-time.sleep(30)
-#healthcall.dial()
+#time.sleep(30)
+healthcall.dial()
 
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
@@ -43,7 +43,7 @@ healthfax = calls.Call('00-healthfax.call')
 #healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 
-time.sleep(100)
+#time.sleep(100)
 helloworld = calls.Call('01-helloworld.call')
 #helloworld.dial()
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
