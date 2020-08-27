@@ -8,4 +8,5 @@ class Call(object):
         self.call = call
     
     def dial(self):
+        #FIRST CHECK IF PJSIP/2000 IS FREE
         copyfile( CALLS_PATH + self.call, OUTGOING_PATH + self.call)
