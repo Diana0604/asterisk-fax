@@ -30,7 +30,7 @@ class Lights(object):
         while time_slept < 17:
                 ratio = time_slept*0.01
                 ledR.value = min(1,max(0,finalR*0.1 + randrange(-finalR,finalR)*0.1)) #*ratio
-                ledG.value = min(1,max(0,finalG*0.1 + randrange(-finalG,finalG)*0.1)) #*ratio
+                ledG.value = min(1,max(0,finalG*0.1 + randrange(finalG,3)*0.1)) #*ratio
                 ledB.value = min(1,max(0,finalB*0.1 + randrange(-finalB,finalB)*0.1)) #*ratio
                 time1 = 0.1 + randrange(0,4)*0.1
                 time_slept += time1
