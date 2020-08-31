@@ -33,9 +33,9 @@ breathing = music.Audio(BREATHING, 1).play()
 debugger.log('************ MACHINE IS BREATHING ************')
 
 healthcall = calls.Call('00-healthcall.call')
-time.sleep(120)
+#time.sleep(120)
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH CALL. THIS GOES AFTER THEY SEND A FAX")
 healthcall.dial()
-
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
 
