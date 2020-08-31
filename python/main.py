@@ -45,7 +45,7 @@ healthfax = calls.Call('00-healthfax.call')
 healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 #KNOW WHEN THAT FAX IS DONE?
-#time.sleep(100)
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HELLO WORLD. MAKE SURE HEATHLINE FAX HAS GONE THROUGH")
 helloworld = calls.Call('01-helloworld.call')
 helloworld.dial()
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')

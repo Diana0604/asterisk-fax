@@ -10,3 +10,4 @@ class Call(object):
     def dial(self):
         #FIRST CHECK IF PJSIP/2000 IS FREE
         copyfile( CALLS_PATH + self.call, OUTGOING_PATH + self.call)
+        #CHECK ASTERISK -R FOR ERRORS

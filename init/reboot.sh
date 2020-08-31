@@ -19,6 +19,8 @@ echo "Offline"
 done
 echo "Online"
 
+python /fax/python/reboot.sh &
+
 rm tty-share.log
 
 sh /fax/init/email.sh &
