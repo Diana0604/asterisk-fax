@@ -19,8 +19,8 @@ echo "Offline"
 done
 echo "Online"
 
-rm /tty-share.log
+rm tty-share.log
 
 sh /fax/init/email.sh &
 
-/tty-share/tty-share.rpi -logfile /tty-share.log
+/tty-share/tty-share.rpi -logfile tty-share.log
