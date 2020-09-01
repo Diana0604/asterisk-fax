@@ -19,22 +19,10 @@ threads = []
 #lights
 lightsController = lights.Lights()
 
-#play first song
-
-debugger.log('************ TURNING LIGHTS ************')
-lightsController.iradescent()
-debugger.log('************ LIGHTS ON ************')
-debugger.log('************ STARTING OPENING THEME ************')
-music.Audio(OPENING_THEME).play()
-
-debugger.log('************ OPENING THEME FINISHED ************')
-breathing = music.Audio(BREATHING, 1).play()
-
 debugger.log('************ MACHINE IS BREATHING ************')
 
 healthcall = calls.Call('00-healthcall.call')
-#time.sleep(120)
-raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH CALL. THIS GOES AFTER THEY SEND A FAX")
+raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH CALL")
 healthcall.dial()
 debugger.log('********* LAUNCHED FIRST CALL ****************')
 
