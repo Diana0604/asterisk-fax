@@ -36,6 +36,7 @@ debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')
 raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HELLO WORLD. MAKE SURE HEATHLINE FAX HAS GONE THROUGH")
 helloworld = calls.Call('01-helloworld.call')
 helloworld.dial()
+lightsController.purple()
 debugger.log('********* LAUNCHED HELLOWORLD FAX ****************')
 
 
