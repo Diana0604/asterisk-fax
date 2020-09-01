@@ -72,10 +72,10 @@ debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
 raw_input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
 charging = music.Audio(CHARGING_UP, 1)
+lightsController.red()
 utils.stop_previous_scripts()
 threads.append(charging.play())
 
-lightsController.red()
 consignia = calls.Call('06-consignia.call')
 consignia.dial()
 
