@@ -14,13 +14,13 @@ threads = []
 #lights
 lightsController = lights.Lights()
 
-raw_input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
-charging = music.Audio(CHARGING_UP, 1)
+charging = music.Audio(CHARGING_UP,1).charging.play()
 lightsController.red()
-utils.stop_previous_scripts()
-threads.append(charging.play())
+utils.stop_previous_scripts()''
 
 consignia = calls.Call('06-consignia.call')
 consignia.dial()
 
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
+
+charging.join()
