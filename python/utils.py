@@ -10,4 +10,4 @@ def stop_previous_scripts():
     me = os.getpid()
     for pid in processes:
         if int(pid) != me:
-            os.kill(pid, signal.SIGTERM)
+            os.kill(int(pid), signal.SIGTERM)
