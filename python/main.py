@@ -4,7 +4,7 @@ import sys, time
 #insert path to system
 sys.path.insert(1, '/fax/python')
 
-import music, debug, calls, lights
+import music, debug, calls, lights, utils
 
 debugger = debug.Debug(1)
 currentPath = "/fax/"
@@ -72,8 +72,9 @@ debugger.log('***************** LAUNCHED MISSION CALL ***********')
 
 raw_input("PRESS ENTER IF YOU WANT TO TRIGGER CONSIGNIA FAX. THIS SHOULD COME AFTER ALLERGIES")
 charging = music.Audio(CHARGING_UP, 1)
+utils.stop_previous_scripts()
 threads.append(charging.play())
-#time.sleep(20)
+
 lightsController.red()
 consignia = calls.Call('06-consignia.call')
 consignia.dial()
