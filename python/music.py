@@ -1,5 +1,8 @@
 import time, vlc, threading
 
+def stop_all_music():
+    vlc.MediaPlayer().stop()
+
 class Audio(object):
     def __init__(self, sound, background = 0, volume = 100):
         self.background = background
@@ -24,3 +27,4 @@ class Audio(object):
         time.sleep(1.5)
         duration = player.get_length() / 1000
         time.sleep(duration)
+
