@@ -28,8 +28,8 @@ debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED *************
 
 calls.Call('07-laststeps2.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 1 ***************')
-music.Audio(HEARTBEAT).play()
 utils.stop_previous_scripts()
+music.Audio(HEARTBEAT).play()
 
 calls.Call('07-laststeps3.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 2 ***************')
