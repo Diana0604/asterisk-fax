@@ -24,5 +24,3 @@ consignia = calls.Call('06-consignia.call')
 consignia.dial()
 
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
-
-raw_input("PRESS WHEN LAST FAXES SHOULD COME THROUGH")
