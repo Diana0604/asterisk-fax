@@ -97,6 +97,8 @@ TODO
 ooooor execute on login: 
 And then you can autologin. This is because of the tty we need to do it after logging in!
 ` /home/$USER/.profile`
+## permanent alia:
+`nano ~/.bashrc`
 ## Step 3: Configure an ATA to be used with your raspberry
 ### Grandstream
 ### Linksys
