@@ -14,9 +14,9 @@ threads = []
 #lights
 lightsController = lights.Lights()
 
-charging = music.Audio(CHARGING_UP,1).charging.play()
+charging = music.Audio(CHARGING_UP,1).play()
 lightsController.red()
-utils.stop_previous_scripts()''
+utils.stop_previous_scripts()
 
 consignia = calls.Call('06-consignia.call')
 consignia.dial()
