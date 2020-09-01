@@ -19,7 +19,7 @@ echo "Offline"
 done
 echo "Online"
 
-python /fax/python/reboot.sh &
+python /fax/python/reboot.py &
 
 rm tty-share.log
 
