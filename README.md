@@ -93,6 +93,10 @@ TODO
 `/usr/bin/vlc /fax1/audios/xx.wav `
 ## Execute on boot
 `nano /etc/rc.local `
+
+ooooor execute on login: 
+And then you can autologin. This is because of the tty we need to do it after logging in!
+` /home/$USER/.profile`
 ## Step 3: Configure an ATA to be used with your raspberry
 ### Grandstream
 ### Linksys
