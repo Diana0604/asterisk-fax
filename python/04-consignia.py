@@ -10,6 +10,7 @@ debugger = debug.Debug(1)
 currentPath = "/fax/"
 #sounds
 CHARGING_UP = currentPath + "audios/speaker/02-charging_up.mp3"
+BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 threads = []
 #lights
 lightsController = lights.Lights()
@@ -24,3 +25,5 @@ consignia.dial()
 debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
 charging.join()
+while True:
+    breathing = music.Audio(BREATHING).play()
