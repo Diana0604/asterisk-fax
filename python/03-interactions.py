@@ -20,6 +20,16 @@ spies.dial()
 debugger.log('***************** LAUNCHED SPIES CALL ***********')
 
 raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE MISSION FAX. THIS SHOULD HAPPEN AFTER WE RECEIVE XXX CALL FROM THEM.")
-spies = calls.Call('05-mission.call')
-spies.dial()
+mission = calls.Call('05-mission.call')
+mission.dial()
+
 debugger.log('***************** LAUNCHED MISSION CALL ***********')
+currentPath = "/fax/"
+#sounds
+COUGHING = currentPath + "audios/speaker/03-coughing.mp3"
+BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
+
+music.Audio(COUGHING).play()
+
+while True:
+    breathing = music.Audio(BREATHING).play()

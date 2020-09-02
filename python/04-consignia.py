@@ -9,7 +9,7 @@ import music, debug, calls, lights, utils
 debugger = debug.Debug(1)
 currentPath = "/fax/"
 #sounds
-CHARGING_UP = currentPath + "audios/speaker/02-charging_up.mp3"
+CHARGING_UP = currentPath + "audios/speaker/03-charging_up.mp3"
 BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 threads = []
 #lights
@@ -26,4 +26,4 @@ debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
 
 charging.join()
 while True:
-    breathing = music.Audio(BREATHING).play()
+    music.Audio(CHARGING_UP).play()
