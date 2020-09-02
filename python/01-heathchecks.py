@@ -13,7 +13,7 @@ debugger.log('********* LAUNCHED FIRST CALL ****************')
 time.sleep(60)
 #NEEDS TIME IN BETWEEN FOR THEM TO LEARN TO ANSWER
 healthfax1 = calls.Call('00-healthfax1.call')
-healthfax.dial()
+healthfax1.dial()
 
 raw_iput("PRESS ENTER WHEN YOU WANT TO SEND LAST FAX. THIS COMES AFTER BOTH THEY CALL AND FAX US")
 healthfax2 = calls.Call('00-healthfax2.call')
