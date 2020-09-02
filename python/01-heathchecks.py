@@ -10,10 +10,12 @@ debugger = debug.Debug(1)
 healthcall = calls.Call('00-healthcall.call')
 healthcall.dial()
 debugger.log('********* LAUNCHED FIRST CALL ****************')
-
-
-raw_input("PRESS ENTER IF YOU WANT TO TRIGGER THE HEALTH FAX. THIS GOES AFTER THEY SEND A FAX")
+time.sleep(60)
 #NEEDS TIME IN BETWEEN FOR THEM TO LEARN TO ANSWER
-healthfax = calls.Call('00-healthfax.call')
+healthfax1 = calls.Call('00-healthfax1.call')
+healthfax.dial()
+
+raw_iput("PRESS ENTER WHEN YOU WANT TO SEND LAST FAX. THIS COMES AFTER BOTH THEY CALL AND FAX US")
+healthfax2 = calls.Call('00-healthfax2.call')
 healthfax.dial()
 debugger.log('********* LAUNCHED HEALTHCHECK FAX ****************')

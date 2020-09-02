@@ -1,0 +1,6 @@
+Channel: PJSIP/2000
+MaxRetries: 3
+RetryTime: 60
+WaitTime: 30
+Context: healthcheck
+Extension: 0032
