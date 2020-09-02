@@ -12,17 +12,19 @@ amixer set 'Headphone' 100%
 #python /fax/python/main.py
 #initial vs main
 
-wget -q --spider http://google.com 
-while ! [ $? -eq 0 ] 
-do 
-echo "Offline" 
+wget -q --spider http://google.com
+while ! [ $? -eq 0 ]
+do
+echo "Offline"
 done
 echo "Online"
 
 python /fax/python/reboot.py &
 
-rm tty-share.log
+#temptty=${STRFTIME(,,%C%y%m%d%H%M)}
+
+export temptty=$(date +"%r")
 
 sh /fax/init/email.sh &
 
-/tty-share/tty-share.rpi -logfile tty-share.log
+/tty-share/tty-share.rpi -logfile "/tmp/${temptty}-tty-share.log"
