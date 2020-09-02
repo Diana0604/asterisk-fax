@@ -13,8 +13,6 @@ SOUND11 = currentPath + "audios/speaker/04-sound11.mp3"
 threads = []
 #lights
 lightsController = lights.Lights()
-
-
 lightsController.purple()
 calls.Call('07-laststeps1.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEPS EXPLAINED ***************')

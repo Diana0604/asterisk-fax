@@ -1,6 +1,8 @@
 #REMEMBER TO CHANGE TO /fax BEFORE GITTING
 import sys, time
 
+from gpiozero import Button
+
 #insert path to system
 sys.path.insert(1, '/fax/python')
 
@@ -18,7 +20,7 @@ FINALE = currentPath + "audios/speaker/10-final.mp3"
 threads = []
 #lights
 lightsController = lights.Lights()
-
+lightsController.purple()
 calls.Call('07-laststeps2.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 1 ***************')
 utils.stop_previous_scripts()
@@ -35,16 +37,16 @@ music.Audio(SOUND14).play()
 calls.Call('07-laststeps5.call').dial()
 debugger.log('********************* LAUNCHED FINAL STEP 4 ***************')
 music.Audio(SOUND15).play()
-music.Audio(TBL).play()
+debugger.log('PLAYING TBL')
+music.Audio(TBL_MONOLOGUE).play()
 
-button = Button()
+#button = Button(26)
+#def launch_finale():
+#    print('finale')
+#    music.Audio(FINALE).play()
 
-def launch_finale():
-    print('finale')
-    music.Audio(FINALE).play()
-
-pressed = False
-while ! pressed:
-    if button.is_pressed:
-        pressed = True
-        launch_finale()
+#pressed = False
+#while not pressed:
+#    if button.is_pressed:
+#        pressed = True
+#        launch_finale()

@@ -8,8 +8,9 @@ import music, debug, calls, lights, utils
 
 debugger = debug.Debug(1)
 #lights
+#lightsController = lights.Lights()
 lightsController = lights.Lights()
-
+lightsController.purple()
 antenna = calls.Call('03-antenna.call')
 antenna.dial()
 debugger.log('***************** LAUNCHED ANTENNA ***********')
@@ -26,10 +27,10 @@ mission.dial()
 debugger.log('***************** LAUNCHED MISSION CALL ***********')
 currentPath = "/fax/"
 #sounds
-COUGHING = currentPath + "audios/speaker/03-coughing.mp3"
+COUGHING = currentPath + "audios/speaker/02-coughing.mp3"
 BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 
-music.Audio(COUGHING).play()
+#music.Audio(COUGHING).play()
 
-while True:
-    breathing = music.Audio(BREATHING).play()
+#while True:
+#    breathing = music.Audio(BREATHING).play()
