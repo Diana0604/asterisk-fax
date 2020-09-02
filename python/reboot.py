@@ -1,5 +1,5 @@
 #REMEMBER TO CHANGE TO /fax BEFORE GITTING
-import sys, time
+import sys, time, os
 
 #insert path to system
 sys.path.insert(1, '/fax/python')
@@ -7,21 +7,22 @@ sys.path.insert(1, '/fax/python')
 import music, debug, calls, lights
 
 debugger = debug.Debug(1)
-currentPath = "/fax/"
+CURRENT_PATH = ""
+if os.uname()[0] != 'Darwin':
+    CURRENT_PATH = "/fax/"
 #sounds
-OPENING_THEME = currentPath + "audios/speaker/00-arrival.mp3"
-BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
+OPENING_THEME = CURRENT_PATH + "audios/speaker/00-arrival.mp3"
+BREATHING = CURRENT_PATH + "audios/speaker/01-breathing.mp3"
 #lights
 lightsController = lights.Lights()
 
 #play first song
 
-debugger.log('************ TURNING LIGHTS ************')
 lightsController.iradescent()
-debugger.log('************ LIGHTS ON ************')
-debugger.log('************ STARTING OPENING THEME ************')
+debugger.title('STARTING OPENING THEME')
 music.Audio(OPENING_THEME).play()
 
-debugger.log('************ OPENING THEME FINISHED ************')
-while True:
-    breathing = music.Audio(BREATHING).play()
+debugger.title('OPENING THEME FINISHED')
+t1 = music.Audio(BREATHING, True, True).play()
+debugger.title('MACHINE IS BREATHING')
+t1.join()
