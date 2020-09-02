@@ -10,7 +10,7 @@ debugger = debug.Debug(1)
 healthcall = calls.Call('00-healthcall.call')
 healthcall.dial()
 debugger.log('********* LAUNCHED FIRST CALL ****************')
-time.sleep(60)
+raw_input('ress when you wanna send fax')
 #NEEDS TIME IN BETWEEN FOR THEM TO LEARN TO ANSWER
 healthfax1 = calls.Call('00-healthfax1.call')
 healthfax1.dial()
