@@ -12,18 +12,10 @@ currentPath = "/fax/"
 CHARGING_UP = currentPath + "audios/speaker/03-charging_up.mp3"
 BREATHING = currentPath + "audios/speaker/01-breathing.mp3"
 threads = []
-#lights
-lightsController = lights.Lights()
-
 charging = music.Audio(CHARGING_UP,1).play()
 lightsController.red()
 utils.stop_previous_scripts()
 
-consignia = calls.Call('06-consignia.call')
-consignia.dial()
-
-debugger.log('********************* LAUNCHED CONSIGNIA CALL ***************')
-
-#charging.join()
-#while True:
-#    music.Audio(CHARGING_UP).play()
+charging.join()
+while True:
+    music.Audio(CHARGING_UP).play()
