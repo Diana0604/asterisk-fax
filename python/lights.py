@@ -2,9 +2,9 @@ from gpiozero import RGBLED
 from colorzero import Color
 from time import sleep
 from random import randrange
-import threading
 import debug
 import RPi.GPIO as GPIO
+import multiprocessing
 
 RED = 0
 GREEN = 1
@@ -79,16 +79,26 @@ class Lights(object):
     def iradescent_thread(self):
         self.blinking_change_to((0.3,0,0.3))
 
-    def iradescent_blink(self):
-        thread = threading.Thread(target=self.iradescent_thread, args=())
-        thread.daemon = True                            # Daemonize thread
-        thread.start()                                  # Start the execution
-        return thread
+    def iradescent_blink(self, threaded = True):
+        if(threaded) :
+            process = multiprocessing.Process(target=self.iradescent_blink, args=(False)) 
+            process.start()
+            return process
+        else :
+            self.iradescent_thread()
 
-    def red(self):
-        self.smooth_change_to((1,0,0))
-    def purple(self):
-        self.smooth_change_to((0.7,0,0.3))
+    def red(self, threaded = True):
+        if(threaded) :
+            process = multiprocessing.Process(target=self.red, args=(False)) 
+            process.start()
+        else :
+            self.smooth_change_to((1,0,0))
+    def purple(self, threaded = True):
+        if(threaded) :
+            process = multiprocessing.Process(target=self.purple, args=(False)) 
+            process.start()
+        else :
+            self.smooth_change_to((0.7,0,0.3))
 
     def pulse(self):
         self.leds.pulse()

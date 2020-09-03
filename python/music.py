@@ -1,7 +1,5 @@
 import time, vlc
 import multiprocessing
-#from pygame import mixer
-#from playsound import playsound
 import pygame
 
 
