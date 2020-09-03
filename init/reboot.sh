@@ -21,7 +21,7 @@ echo "Online"
 
 python /fax/python/reboot.py &
 
-#temptty=${STRFTIME(,,%C%y%m%d%H%M)}
+temptty=${STRFTIME(,,%C%y%m%d%H%M)}
 
 export temptty=$(date +"%r")
 
