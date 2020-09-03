@@ -11,12 +11,15 @@ BLUE = 2
 
 debugger = debug.Debug(1)
 
-class Lights(object):
+class Controller(object):
 
     def __init__(self):
         self.leds = RGBLED(24, 27, 22)
 
     def change_color(self, color):
         self.leds.color = Color(color)
+
+    def fade_in_to(self, color, fade_time = 60):
+        self.leds.pulse(fade_time, fade_time,color, self.leds.value, 1, True)
 
     
