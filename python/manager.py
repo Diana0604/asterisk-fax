@@ -1,5 +1,6 @@
 import os, debug, calls, lights, music, utils
 import multiprocessing
+from time import sleep
 
 CURRENT_PATH = ""
 if os.uname()[0] != 'Darwin':
@@ -16,11 +17,14 @@ SOUND15 = CURRENT_PATH + "audios/speaker/08-sound15.mp3"
 TBL_MONOLOGUE = CURRENT_PATH + "audios/speaker/09-tbl.mp3"
 FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
 
+PURPLE = (0.7,0,0.3)
+RED = (1,0,0)
+
 debugger = debug.Debug(1)
 music_processes = []
 
 
-lightsController = lights.Lights()
+lights_controller = lights.Controller()
 
 
 def step1_healthcall():
@@ -39,7 +43,7 @@ def step4_helloworld():
     debugger.title('LAUNCHING HELLOWORLD FAX')
     calls.dial('02-trust1.call')
     debugger.title('HELLOWORLD FAX HAS BEEN LAUNCHED')
-    lightsController.purple()
+    lights_controller.fade_in_to(PURPLE)
 def step5_trust1():
     debugger.title('LAUNCHING TRUST EXERCISE NUMBER 1')
     calls.dial('02-trust1.call')
@@ -74,13 +78,15 @@ def step10_mission():
     new_music_process(music.Audio(BREATHING, True, True).play())
     debugger.title('MACHINE IS BREATHING')
 def step11_consignia():
+    lights_controller.fade_in_to(RED)
     debugger.title('LAUNCHING CONSIGNIA CALL')
     calls.dial('06-consignia.call')
     debugger.title('CONSIGNIA CALL LAUNCHED')
     debugger.title('SETTING CHARGE UP ON BACKGROUND')
     new_music_process(music.Audio(CHARGING_UP, True, True).play())
     debugger.title('MACHINE IS CHARGING UP')
-    lightsController.red()
+    sleep(60)
+    lights_controller.pulse()
 def step12_laststeps_explained():
     debugger.title('LAUNCHING LAST STEPS EXPLANATION')
     calls.dial('07-laststeps1.call')
@@ -88,7 +94,7 @@ def step12_laststeps_explained():
     debugger.title('SETTING SOUND11 ON BACKGROUND')
     new_music_process(music.Audio(SOUND11, True, False).play())
     debugger.title('SOUND 11 SET')
-    lightsController.purple()
+    lights_controller.fade_in_to(PURPLE)
 def step13_laststeps():
     debugger.title('LAUNCHING LAST STEP 1')
     calls.dial('07-laststeps2.call')
