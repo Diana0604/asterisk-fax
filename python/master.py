@@ -46,7 +46,7 @@ while not ended :
     debugger.log("[3] -> Ending of healthchecks. This is launched after they have BOTH made a call and sent us a fax. Fax is the last thing that happens.")
     debugger.subtitle("HELLO WORLD + TRUST EXERCISES")
     debugger.log("[4] -> helloworld fax. This fax is sent after all the healthchecks have been made. Wait a bit after healthcheck 3 to launch it. It marks the beginning of the show.")
-    debugger.log("[5] -> trust exercise 1. This goes after they have sent us the checklist with everything done.")
+    debugger.log("[5] -> trust exercise 1. This goes after they have sent us the declaration with everything done.")
     debugger.log("[6] -> trust exercise 2. This goes after they have called 126.")
     debugger.log("[7] -> trust exercise 3. This goes after they have called 1999.")
     debugger.subtitle("ANTENNA / SPIES / MISSION")

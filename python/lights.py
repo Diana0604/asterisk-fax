@@ -25,7 +25,7 @@ class Controller(object):
         debugger.title('LIGHTS ARE FADING INTO: ' + str(color))
 
     def pulse(self, fade_in_time=1, fade_out_time=1, n=None, background=True):
-        current = self.leds.value
+        current = (0,0,0)
         self.leds.pulse(fade_in_time, fade_out_time, (0, 0, 0), current, n=None, background=True)
         debugger.title('LIGHTS ARE PULSING IN AND OUT OF: ' + str(current))
 
