@@ -13,17 +13,7 @@ BLUE = 2
 
 debugger = debug.Debug(1)
 
-class Lights(object):
-    def __init__(self):
-	import RPi.GPIO as GPIO
-#        GPIO.setmode(GPIO.BOARD)
-#        GPIO.setup(11,GPIO.OUT)
-#        GPIO.setup(12,GPIO.OUT)
-#        GPIO.setup(13,GPIO.OUT)
- #GPIO.output(05,True)
-        #GPIO.output(05,False)
-        #print('init')
-    
+class Lights(object):    
     def calculate_steps(self, init, final):
         def get_int(num):
             return abs(int(10*num))
@@ -31,7 +21,6 @@ class Lights(object):
 
     def smooth_change_to(self, final):
         init = leds.value
-        #init = (0,0,0)
         if init == final:
             return
         
@@ -93,11 +82,3 @@ class Lights(object):
 
     def pulse(self):
         leds.pulse()
-
-
-light = Lights()
-nothing = (0,0,0)
-red = (1,0,0)
-purple = (0.7,0,0.3)
-#light.red()
-#print(light.calculate_steps(purple, nothing))
