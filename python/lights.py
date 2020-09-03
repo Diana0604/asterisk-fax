@@ -59,15 +59,19 @@ class Lights(object):
         self.leds.color = Color(final)
     
     def generate_random_values(self, init, final):
+        def get_random(num1, num2):
+            min_num = min(num1, num2)
+            max_num = max(num1, num2)
+            return randrange(min_num,max_num)
         red = init[RED]
         green = init[GREEN]
         blue = init[BLUE]
         if(init[RED] - final[RED] > 0.1):
-            red = randrange(int(10*init[RED]), int(10*final[RED]))*0.1
+            red = get_random(int(10*init[RED]), int(10*final[RED]))*0.1
         if(init[GREEN] - final[GREEN] > 0.1):
-            green = randrange(int(10*init[GREEN]), int(10*final[GREEN]))*0.1
+            green = get_random(int(10*init[GREEN]), int(10*final[GREEN]))*0.1
         if(init[BLUE] - final[BLUE] > 0.1):
-            blue = randrange(int(10*init[BLUE]), int(10*final[BLUE]))*0.1
+            blue = get_random(int(10*init[BLUE]), int(10*final[BLUE]))*0.1
         return (red, green, blue)
 
     def blinking_change_to(self, final, time = 18):
