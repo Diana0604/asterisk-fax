@@ -81,7 +81,7 @@ class Lights(object):
 
     def iradescent_blink(self, threaded = True):
         if(threaded) :
-            process = multiprocessing.Process(target=self.iradescent_blink, args=(False)) 
+            process = multiprocessing.Process(target=self.iradescent_blink, args=([False])) 
             process.start()
             return process
         else :
@@ -89,13 +89,13 @@ class Lights(object):
 
     def red(self, threaded = True):
         if(threaded) :
-            process = multiprocessing.Process(target=self.red, args=(False)) 
+            process = multiprocessing.Process(target=self.red, args=([False])) 
             process.start()
         else :
             self.smooth_change_to((1,0,0))
     def purple(self, threaded = True):
         if(threaded) :
-            process = multiprocessing.Process(target=self.purple, args=(False)) 
+            process = multiprocessing.Process(target=self.purple, args=([False])) 
             process.start()
         else :
             self.smooth_change_to((0.7,0,0.3))
