@@ -90,26 +90,26 @@ def step12_laststeps_explained():
 def step13_laststeps():
     debugger.title('LAUNCHING LAST STEP 1')
     calls.dial('07-laststeps2.call')
-    debugger.title('LAUNCED LAST STEP 1')
+    debugger.title('LAUNCHED LAST STEP 1')
     debugger.title('PLAYING SOUND 12')
     kill_all_processes()
     music.Audio(SOUND12).play()
 
     debugger.title('LAUNCHING LAST STEP 2')
     calls.dial('07-laststeps3.call')
-    debugger.title('LAUNCED LAST STEP 2')
+    debugger.title('LAUNCHED LAST STEP 2')
     debugger.title('PLAYING SOUND 13')
     music.Audio(SOUND13).play()
 
     debugger.title('LAUNCHING LAST STEP 3')
     calls.dial('07-laststeps4.call')
-    debugger.title('LAUNCED LAST STEP 3')
+    debugger.title('LAUNCHED LAST STEP 3')
     debugger.title('PLAYING SOUND 14')
     music.Audio(SOUND14).play()
 
     debugger.title('LAUNCHING LAST STEP 4')
     calls.dial('07-laststeps5.call')
-    debugger.title('LAUNCED LAST STEP 4')
+    debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
     music.Audio(SOUND15).play()
     import button
