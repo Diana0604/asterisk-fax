@@ -23,6 +23,6 @@ debugger.title('STARTING OPENING THEME')
 music.Audio(OPENING_THEME).play()
 
 debugger.title('OPENING THEME FINISHED')
-t1 = music.Audio(BREATHING, True, True).play()
+t1 = music.Audio(BREATHING, False, True).play()
 debugger.title('MACHINE IS BREATHING')
 t1.join()

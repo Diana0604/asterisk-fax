@@ -4,15 +4,25 @@ from time import sleep
 from random import randrange
 import threading
 import debug
+import RPi.GPIO as GPIO
 leds = RGBLED(17, 27, 22)
-
+leds.color = Color('black')
 RED = 0
 GREEN = 1
 BLUE = 2
 
+debugger = debug.Debug(1)
+
 class Lights(object):
     def __init__(self):
-        print('init')
+	import RPi.GPIO as GPIO
+#        GPIO.setmode(GPIO.BOARD)
+#        GPIO.setup(11,GPIO.OUT)
+#        GPIO.setup(12,GPIO.OUT)
+#        GPIO.setup(13,GPIO.OUT)
+ #GPIO.output(05,True)
+        #GPIO.output(05,False)
+        #print('init')
     
     def calculate_steps(self, init, final):
         def get_int(num):
@@ -41,11 +51,11 @@ class Lights(object):
         green = init[GREEN]
         blue = init[BLUE]
         if(init[RED] != final[RED]):
-            red = randrange(10*int(init[RED]), 10*int(final[RED]))*0.1
+            red = randrange(int(10*init[RED]), int(10*final[RED]))*0.1
         if(init[GREEN] != final[GREEN]):
-            green = randrange(10*int(init[GREEN]), 10*int(final[GREEN]))*0.1
+            green = randrange(int(10*init[GREEN]), int(10*final[GREEN]))*0.1
         if(init[BLUE] != final[BLUE]):
-            blue = randrange(10*int(init[BLUE]), 10*int(final[BLUE]))*0.1
+            blue = randrange(int(10*init[BLUE]), int(10*final[BLUE]))*0.1
         return (red, green, blue)
 
     def blinking_change_to(self, final, time = 18):
@@ -53,9 +63,9 @@ class Lights(object):
         if init == final:
             return
         def random_sleep(time):
-            sleep = randrange(0,time)*0.1
-            sleep(sleep)
-            return sleep
+            seconds = randrange(0,time)*0.1
+            sleep(seconds)
+            return seconds
         time_slept = 0
         while time_slept < time - 1:
             new_values = self.generate_random_values(init, final)
@@ -65,6 +75,7 @@ class Lights(object):
             time_slept += random_sleep(2)
         sleep(time - time_slept)
         leds.color = Color(final)
+        debugger.title('final color')
 
     def iradescent_thread(self):
         self.blinking_change_to((0.3,0,0.3))
