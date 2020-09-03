@@ -74,21 +74,21 @@ def step10_mission():
     new_music_process(music.Audio(BREATHING, True, True).play())
     debugger.title('MACHINE IS BREATHING')
 def step11_consignia():
-    lightsController.red()
     debugger.title('LAUNCHING CONSIGNIA CALL')
     calls.dial('06-consignia.call')
     debugger.title('CONSIGNIA CALL LAUNCHED')
     debugger.title('SETTING CHARGE UP ON BACKGROUND')
     new_music_process(music.Audio(CHARGING_UP, True, True).play())
     debugger.title('MACHINE IS CHARGING UP')
+    lightsController.red()
 def step12_laststeps_explained():
-    lightsController.purple()
     debugger.title('LAUNCHING LAST STEPS EXPLANATION')
     calls.dial('07-laststeps1.call')
     debugger.title('LAST STEPS EXPLANATION LAUNCHED')
     debugger.title('SETTING SOUND11 ON BACKGROUND')
     new_music_process(music.Audio(SOUND11, True, False).play())
     debugger.title('SOUND 11 SET')
+    lightsController.purple()
 def step13_laststeps():
     debugger.title('LAUNCHING LAST STEP 1')
     calls.dial('07-laststeps2.call')

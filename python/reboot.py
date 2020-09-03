@@ -18,9 +18,10 @@ lightsController = lights.Lights()
 
 #play first song
 
-lightsController.iradescent_blink()
+
 debugger.title('STARTING OPENING THEME')
-music.Audio(OPENING_THEME).play()
+music.Audio(OPENING_THEME, True).play()
+lightsController.iradescent_blink()
 
 debugger.title('OPENING THEME FINISHED')
 t1 = music.Audio(BREATHING, False, True).play()
