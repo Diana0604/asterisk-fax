@@ -22,4 +22,9 @@ class Controller(object):
     def fade_in_to(self, color, fade_time = 60):
         self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
 
+    def blink_to(self, color, blink_time = 60):
+        for i in range(blink_time):
+            on_time = randrange(0,10)*0.1
+            self.leds.blink(on_time, 1 - on_time, 0, 0, self.leds.value, color, 1, True)
+
     
