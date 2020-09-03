@@ -7,7 +7,7 @@
 
 #/usr/bin/cvlc /fax/audios/speaker/01-breathing.mp3 > /dev/null 2>&1 & 
 
-amixer set 'Headphone' 100%
+#amixer set 'Headphone' 100%
 
 #python /fax/python/main.py
 #initial vs main
@@ -19,11 +19,7 @@ echo "Offline"
 done
 echo "Online"
 
-python /fax/python/reboot.py &
-
-temptty=${STRFTIME(,,%C%y%m%d%H%M)}
-
-export temptty=$(date +"%r")
+export temptty=$(date +"%T")
 
 sh /fax/init/email.sh &
 
