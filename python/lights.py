@@ -51,7 +51,9 @@ class Lights(object):
             next_blue = current_values[BLUE] + step_size_blue
             new_color = Color(next_red, next_green, next_blue)
             print('changing to:')
-            print(new_color)
+            print(next_red)
+            print(next_green)
+            print(next_blue)
             self.leds.color = new_color
             sleep(0.5)
         self.leds.color = Color(final)
