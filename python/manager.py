@@ -30,6 +30,7 @@ lights_controller = None
 def override_reboot():
     new_music_process(music.Audio(BREATHING, True, True).play())
     utils.stop_previous_scripts()
+    raw_input('let mek now')
     import lights
     lights_controller = lights.Controller()
     lights_controller.change_color(IRADESCENT)
@@ -77,7 +78,6 @@ def step10_mission():
     calls.dial('05-mission.call')
     debugger.title('MISSION FAX LAUNCHED')
     debugger.title('PLAYING COUHGING')
-    utils.stop_previous_scripts()
     p = music.Audio(COUGHING, True).play()
     new_music_process(p)
     p.join()
