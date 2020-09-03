@@ -20,7 +20,7 @@ class Lights(object):
 
     def calculate_steps(self, init, final):
         def get_int(num):
-            return abs(int(10*num))
+            return abs(int(100*num))
         return max(get_int(init[RED] - final[RED]), get_int(init[GREEN] - final[GREEN]), get_int(init[BLUE] - final[BLUE]))
 
     def smooth_change_to(self, final):
@@ -32,6 +32,8 @@ class Lights(object):
         print('to ')
         print(final)
         steps = self.calculate_steps(init, final)
+        print('number of steps:')
+        print(steps)
         print('calculating steps')
         step_size_red = abs((init[RED] - final[RED])/steps)
         print('red')
