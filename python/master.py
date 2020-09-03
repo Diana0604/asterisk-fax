@@ -17,8 +17,6 @@ def get_option(var):
 #vars
 ended = False
 
-manager.override_reboot()
-
 def switch_steps(i):
     switcher = {
         1: manager.step1_healthcall,
