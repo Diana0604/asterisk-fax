@@ -1,5 +1,5 @@
 Channel: PJSIP/2000
-MaxRetries: 3
+MaxRetries: 0
 RetryTime: 60
 WaitTime: 30
 Context: finale
