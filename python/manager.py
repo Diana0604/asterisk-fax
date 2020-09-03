@@ -17,8 +17,9 @@ TBL_MONOLOGUE = CURRENT_PATH + "audios/speaker/09-tbl.mp3"
 FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
 
 debugger = debug.Debug(1)
-lightsController = lights.Lights()
 music_processes = []
+
+lightsController = None
 
 
 def step1_healthcall():
@@ -34,6 +35,7 @@ def step3_healthfax2():
     calls.dial('00-healthfax2.call')
     debugger.title('HEALTHCHECK NUMBER 3 HAS BEEN LAUNCHED')
 def step4_helloworld():
+    lightsController = lights.Lights()
     lightsController.purple()
     debugger.title('LAUNCHING HELLOWORLD FAX')
     calls.dial('02-trust1.call')

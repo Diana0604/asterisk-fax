@@ -6,14 +6,17 @@ import threading
 import debug
 import RPi.GPIO as GPIO
 leds = RGBLED(24, 27, 22)
-#leds.color = Color('black')
 RED = 0
 GREEN = 1
 BLUE = 2
 
 debugger = debug.Debug(1)
 
-class Lights(object):    
+class Lights(object):
+
+    def __init__(self):
+        leds.color = Color('black')
+
     def calculate_steps(self, init, final):
         def get_int(num):
             return abs(int(10*num))
@@ -69,7 +72,7 @@ class Lights(object):
     def iradescent_thread(self):
         self.blinking_change_to((0.3,0,0.3))
 
-    def iradescent(self):
+    def iradescent_blink(self):
         thread = threading.Thread(target=self.iradescent_thread, args=())
         thread.daemon = True                            # Daemonize thread
         thread.start()                                  # Start the execution
