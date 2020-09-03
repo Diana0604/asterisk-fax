@@ -24,16 +24,13 @@ IRADESCENT = (0.5,0,0.5)
 debugger = debug.Debug(1)
 music_processes = []
 
-lights_controller = None
 
-
-def override_reboot():
-    new_music_process(music.Audio(BREATHING, True, True).play())
-    utils.stop_previous_scripts()
-    raw_input('let mek now')
-    import lights
-    lights_controller = lights.Controller()
-    lights_controller.change_color(IRADESCENT)
+new_music_process(music.Audio(BREATHING, True, True).play())
+utils.stop_previous_scripts()
+raw_input('let mek now')
+import lights
+lights_controller = lights.Controller()
+lights_controller.change_color(IRADESCENT)
 
 
 def step1_healthcall():
