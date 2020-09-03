@@ -39,7 +39,7 @@ def step3_healthfax2():
     debugger.title('HEALTHCHECK NUMBER 3 HAS BEEN LAUNCHED')
 def step4_helloworld():
     debugger.title('LAUNCHING HELLOWORLD FAX')
-    calls.dial('02-trust1.call')
+    calls.dial('01-helloworld.call')
     debugger.title('HELLOWORLD FAX HAS BEEN LAUNCHED')
     lights_controller.fade_in_to(PURPLE)
 def step5_trust1():
