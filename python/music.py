@@ -22,7 +22,7 @@ class Audio(object):
 
     def run(self):
         pygame.mixer.init()
-        pygame.mixer.music.load("myFile.wav")
+        pygame.mixer.music.load(self.sound)
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
