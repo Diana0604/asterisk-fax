@@ -20,6 +20,6 @@ class Controller(object):
         self.leds.color = Color(color)
 
     def fade_in_to(self, color, fade_time = 60):
-        self.leds.pulse(fade_time, fade_time,color, self.leds.value, 1, True)
+        self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
 
     
