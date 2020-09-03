@@ -22,10 +22,17 @@ class Controller(object):
 
     def fade_in_to(self, color, fade_time = 60):
         self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
+        debugger.title('LIGHTS ARE FADING INTO: ' + str(color))
+
+    def pulse(self, fade_in_time=1, fade_out_time=1, n=None, background=True):
+        current = self.leds.value
+        self.leds.pulse(fade_in_time, fade_out_time, (0, 0, 0), current, n=None, background=True)
+        debugger.title('LIGHTS ARE PULSING IN AND OUT OF: ' + str(current))
 
     def blink_to(self, color, time = 18):
         counter = time*5
         init = self.leds.value
+        debugger.title('LIGHTS ARE BLINKING INTO: ' + str(color))
         for i in range(1, counter - 1):
             random_color = (randrange(0,100)*0.01,randrange(0,100)*0.01,randrange(0,100)*0.01)
             random_time = randrange(1,2)*0.1
