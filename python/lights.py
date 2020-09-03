@@ -41,7 +41,7 @@ class Lights(object):
         step_size_green = (final[GREEN] - init[GREEN])/steps
         print('green')
         print(step_size_green)
-        step_size_blue = (final[BLUE] - init[BLUE])/steps)
+        step_size_blue = (final[BLUE] - init[BLUE])/steps
         print('blue')
         print(step_size_blue)
         for i in range(steps):
