@@ -1,6 +1,7 @@
 import os, debug, calls, music, utils
 import multiprocessing
 from time import sleep
+import lights
 
 CURRENT_PATH = ""
 if os.uname()[0] != 'Darwin':
@@ -138,6 +139,5 @@ def exit():
 new_music_process(music.Audio(BREATHING, True, True).play())
 utils.stop_previous_scripts()
 raw_input('let mek now')
-import lights
 lights_controller = lights.Controller()
 lights_controller.change_color(IRADESCENT)
