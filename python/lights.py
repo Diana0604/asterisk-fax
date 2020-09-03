@@ -5,7 +5,7 @@ from random import randrange
 import threading
 import debug
 import RPi.GPIO as GPIO
-leds = RGBLED(24, 27, 22)
+
 RED = 0
 GREEN = 1
 BLUE = 2
@@ -15,7 +15,8 @@ debugger = debug.Debug(1)
 class Lights(object):
 
     def __init__(self):
-        leds.color = Color('black')
+        self.leds = RGBLED(24, 27, 22)
+        self.leds.color = Color('black')
 
     def calculate_steps(self, init, final):
         def get_int(num):
@@ -23,7 +24,7 @@ class Lights(object):
         return max(get_int(init[RED] - final[RED]), get_int(init[GREEN] - final[GREEN]), get_int(init[BLUE] - final[BLUE]))
 
     def smooth_change_to(self, final):
-        init = leds.value
+        init = self.leds.value
         if init == final:
             return
         
@@ -32,11 +33,11 @@ class Lights(object):
         step_size_green = (init[RED] - final[RED])/steps
         step_size_blue = (init[RED] - final[RED])/steps
         for i in range(steps):
-            current_values = leds.value
+            current_values = self.leds.value
             new_color = Color(current_values[RED] + step_size_red, current_values[GREEN] + step_size_green, current_values[BLUE] + step_size_blue)
-            leds.color = new_color
+            self.leds.color = new_color
             sleep(0.5)
-        leds.color = Color(final)
+        self.leds.color = Color(final)
     
     def generate_random_values(self, init, final):
         red = init[RED]
@@ -51,7 +52,7 @@ class Lights(object):
         return (red, green, blue)
 
     def blinking_change_to(self, final, time = 18):
-        init = leds.value
+        init = self.leds.value
         if init == final:
             return
         def random_sleep(time):
@@ -61,12 +62,12 @@ class Lights(object):
         time_slept = 0
         while time_slept < time - 1:
             new_values = self.generate_random_values(init, final)
-            leds.color = Color(new_values)
+            self.leds.color = Color(new_values)
             time_slept += random_sleep(4)
-            leds.off()
+            self.leds.off()
             time_slept += random_sleep(2)
         sleep(time - time_slept)
-        leds.color = Color(final)
+        self.leds.color = Color(final)
         debugger.title('final color')
 
     def iradescent_thread(self):
@@ -84,4 +85,4 @@ class Lights(object):
         self.smooth_change_to((0.7,0,0.3))
 
     def pulse(self):
-        leds.pulse()
+        self.leds.pulse()
