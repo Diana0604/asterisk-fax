@@ -23,9 +23,10 @@ class Controller(object):
     def fade_in_to(self, color, fade_time = 60):
         self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
 
-    def blink_to(self, color, blink_time = 60):
+    def blink_to(self, color, time = 18):
+        counter = time*5
         init = self.leds.value
-        for i in range(0, blink_time - 1):
+        for i in range(1, counter - 1):
             random_color = (randrange(0,100)*0.01,randrange(0,100)*0.01,randrange(0,100)*0.01)
             random_time = randrange(1,2)*0.1
             self.leds.blink(random_time, 0.2-random_time, 0, 0, init, random_color, 1, False)
