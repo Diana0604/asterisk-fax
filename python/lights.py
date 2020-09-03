@@ -20,7 +20,7 @@ class Controller(object):
     def change_color(self, color):
         self.leds.color = Color(color)
 
-    def fade_in_to(self, color, fade_time = 60):
+    def fade_in_to(self, color, fade_time = 10):
         self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
         debugger.title('LIGHTS ARE FADING INTO: ' + str(color))
 
@@ -29,7 +29,7 @@ class Controller(object):
         self.leds.pulse(fade_in_time, fade_out_time, (0, 0, 0), current, n=None, background=True)
         debugger.title('LIGHTS ARE PULSING IN AND OUT OF: ' + str(current))
 
-    def blink_to(self, color, time = 18):
+    def blink_to(self, color, time = 16):
         counter = time*5
         init = self.leds.value
         debugger.title('LIGHTS ARE BLINKING INTO: ' + str(color))
