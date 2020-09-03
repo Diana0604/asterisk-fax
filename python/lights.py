@@ -5,8 +5,8 @@ from random import randrange
 import threading
 import debug
 import RPi.GPIO as GPIO
-leds = RGBLED(17, 27, 22)
-leds.color = Color('black')
+leds = RGBLED(24, 27, 22)
+#leds.color = Color('black')
 RED = 0
 GREEN = 1
 BLUE = 2
