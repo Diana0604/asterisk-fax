@@ -33,13 +33,13 @@ class Lights(object):
         print(final)
         steps = self.calculate_steps(init, final)
         print('calculating steps')
-        step_size_red = (init[RED] - final[RED])/steps
+        step_size_red = abs((init[RED] - final[RED])/steps)
         print('red')
         print(step_size_red)
-        step_size_green = (init[GREEN] - final[GREEN])/steps
+        step_size_green = abs((init[GREEN] - final[GREEN])/steps)
         print('green')
         print(step_size_green)
-        step_size_blue = (init[BLUE] - final[BLUE])/steps
+        step_size_blue = abs((init[BLUE] - final[BLUE])/steps)
         print('blue')
         print(step_size_blue)
         for i in range(steps):
