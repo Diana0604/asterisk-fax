@@ -25,10 +25,6 @@ IRADESCENT = (0.5,0,0.5)
 debugger = debug.Debug(1)
 music_processes = []
 
-new_music_process(music.Audio(BREATHING, True, True).play())
-lights_controller = lights.Controller()
-lights_controller.change_color(IRADESCENT)
-
 def step1_healthcall():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 1')
     calls.dial('00-healthcall.call')
@@ -139,3 +135,8 @@ def exit():
     debugger.title("KILLING PROCESSES")
     kill_all_processes()
     debugger.title("PROCESSES PROCESSES")
+
+
+new_music_process(music.Audio(BREATHING, True, True).play())
+lights_controller = lights.Controller()
+lights_controller.change_color(IRADESCENT)
