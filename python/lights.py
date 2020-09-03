@@ -25,5 +25,9 @@ class Controller(object):
 
     def blink_to(self, color, blink_time = 10):
         init = self.leds.value
-        for i in range(0, blink_time):
-            self.leds.blink(0.25, 0.25, 0, 0, init, color, 1, False)
+        for i in range(0, blink_time - 1):
+            random_color = (randrange(0,255),randrange(0,255),randrange(0,255))
+            random_time = randrange(1,9)*0.1
+            self.leds.blink(random_time, 1-random_time, 0, 0, init, random_color, 1, False)
+        random_time = randrange(1,9)*0.1
+        self.leds.blink(random_time, 1-random_time, 0, 0, init, color, 1, False)
