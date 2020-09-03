@@ -44,7 +44,6 @@ while not ended :
     debugger.log("[1] -> healthcheck number 1. This is the first call that is launched on the show.")
     debugger.log("[2] -> healthcheck number 2. This is the first fax that is launched. You should launch this option after ~30 seconds of first step.")
     debugger.log("[3] -> Ending of healthchecks. This is launched after they have BOTH made a call and sent us a fax. Fax is the last thing that happens.")
-    debugger.log("[3] -> Ending of healthchecks. This is launched after they have BOTH made a call and sent us a fax. Fax is the last thing that happens.")
     debugger.subtitle("HELLO WORLD + TRUST EXERCISES")
     debugger.log("[4] -> helloworld fax. This fax is sent after all the healthchecks have been made. Wait a bit after healthcheck 3 to launch it. It marks the beginning of the show.")
     debugger.log("[5] -> trust exercise 1. This goes after they have sent us the checklist with everything done.")

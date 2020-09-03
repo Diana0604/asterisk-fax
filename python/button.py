@@ -16,7 +16,7 @@ def launch_finale():
     music.Audio(FINALE).play()
     debugger.title('LAUNCING FINAL CALL')
     sleep(7)
-    calls.dial('08-finale')
+    calls.dial('08-finale.call')
 
 def wait_for_button():
     debugger.title('BUTTON IS WAITING')
@@ -25,6 +25,8 @@ def wait_for_button():
         if button.is_pressed:
             pressed = True
             launch_finale()
+            import lights
+            lights.Controller()
 
 t1 = threading.Thread(target = wait_for_button)
 t1.start()
