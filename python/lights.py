@@ -27,15 +27,27 @@ class Lights(object):
         init = self.leds.value
         if init == final:
             return
-        
+        print('going from: ')
+        print(init)
+        print('to ')
+        print(final)
         steps = self.calculate_steps(init, final)
         print('calculating steps')
         step_size_red = (init[RED] - final[RED])/steps
+        print('red')
+        print(step_size_red)
         step_size_green = (init[GREEN] - final[GREEN])/steps
+        print('green')
+        print(step_size_green)
         step_size_blue = (init[BLUE] - final[BLUE])/steps
+        print('blue')
+        print(step_size_blue)
         for i in range(steps):
             current_values = self.leds.value
-            new_color = Color(current_values[RED] + step_size_red, current_values[GREEN] + step_size_green, current_values[BLUE] + step_size_blue)
+            next_red = current_values[RED] + step_size_red
+            next_green = current_values[GREEN] + step_size_green
+            next_blue = current_values[BLUE] + step_size_blue
+            new_color = Color(next_red, next_green, next_blue)
             print('changing to: ' + new_color)
             self.leds.color = new_color
             sleep(0.5)
