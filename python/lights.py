@@ -55,18 +55,18 @@ class Lights(object):
             print(next_green)
             print(next_blue)
             self.leds.color = new_color
-            sleep(0.5)
+            sleep(0.1)
         self.leds.color = Color(final)
     
     def generate_random_values(self, init, final):
         red = init[RED]
         green = init[GREEN]
         blue = init[BLUE]
-        if(init[RED] != final[RED]):
+        if(init[RED] - final[RED] > 0.1):
             red = randrange(int(10*init[RED]), int(10*final[RED]))*0.1
-        if(init[GREEN] != final[GREEN]):
+        if(init[GREEN] - final[GREEN] > 0.1):
             green = randrange(int(10*init[GREEN]), int(10*final[GREEN]))*0.1
-        if(init[BLUE] != final[BLUE]):
+        if(init[BLUE] - final[BLUE] > 0.1):
             blue = randrange(int(10*init[BLUE]), int(10*final[BLUE]))*0.1
         return (red, green, blue)
 
