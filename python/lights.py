@@ -23,9 +23,9 @@ class Controller(object):
         self.leds.pulse(0, fade_time,self.leds.value, color, 1, True)
 
     def blink_to(self, color, blink_time = 10):
-        self.leds.blink(0.25, 0.25, 0, 0, self.leds.value, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, self.leds.value, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, self.leds.value, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, self.leds.value, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, self.leds.value, color, blink_time, False)
-
+        init = self.leds.value
+        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
+        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
+        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
+        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
+        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
