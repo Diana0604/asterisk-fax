@@ -15,6 +15,7 @@ def launch_finale():
     debugger.title('LAUNCING FINAL MUSIC')
     music.Audio(FINALE).play()
     debugger.title('LAUNCING FINAL CALL')
+    sleep(7)
     calls.dial('08-finale')
 
 def wait_for_button():
