@@ -1,7 +1,9 @@
 import time, vlc
 import multiprocessing
 #from pygame import mixer
-from playsound import playsound
+#from playsound import playsound
+import pygame
+
 
 class Audio(object):
     def __init__(self, sound, background = False, looping = False, volume = 100):
@@ -19,7 +21,13 @@ class Audio(object):
             self.run()
 
     def run(self):
-        playsound(self.sound)
+        pygame.mixer.init()
+        pygame.mixer.music.load("myFile.wav")
+        pygame.mixer.music.play()
+        while pygame.mixer.music.get_busy() == True:
+            continue
         if self.looping:
-            while True:
-                playsound(self.sound)
+            pygame.mixer.music.play()
+            while pygame.mixer.music.get_busy() == True:
+                continue
+        
