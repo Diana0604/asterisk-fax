@@ -25,8 +25,5 @@ class Controller(object):
 
     def blink_to(self, color, blink_time = 10):
         init = self.leds.value
-        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
-        self.leds.blink(0.25, 0.25, 0, 0, init, color, blink_time, False)
+        for i in range(0, blink_time):
+            self.leds.blink(0.25, 0.25, 0, 0, init, color, 1, False)
