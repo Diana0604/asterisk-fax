@@ -1,4 +1,4 @@
-import os, debug, calls, lights, music, utils
+import os, debug, calls, music, utils
 import multiprocessing
 from time import sleep
 
@@ -19,12 +19,20 @@ FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
 
 PURPLE = (0.7,0,0.3)
 RED = (1,0,0)
+IRADESCENT = (0.5,0,0.5)
 
 debugger = debug.Debug(1)
 music_processes = []
 
+lights_controller = None
 
-lights_controller = lights.Controller()
+
+def override_reboot():
+    new_music_process(music.Audio(BREATHING, True, True).play())
+    utils.stop_previous_scripts()
+    import lights
+    lights_controller = lights.Controller()
+    lights_controller.change_color(IRADESCENT)
 
 
 def step1_healthcall():
