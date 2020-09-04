@@ -9,7 +9,7 @@ CALLS_PATH = '/fax/calls/'
 debugger = debug.Debug(1)
 
 
-def remove_files_from(folder)
+def remove_files_from(folder):
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)
         try:
