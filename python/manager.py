@@ -147,6 +147,7 @@ def launch_finale():
     debugger.title('LAUNCING FINAL CALL')
     sleep(7)
     calls.dial('08-finale.call')
+    lights_controller.change_color((0,0,0))
 
 def wait_for_button():
     debugger.title('BUTTON IS WAITING')
@@ -155,8 +156,7 @@ def wait_for_button():
         if button.is_pressed:
             pressed = True
             launch_finale()
-            import lights
-            lights.Controller()
+
 
 
 new_music_process(music.Audio(BREATHING, True, True).play())
