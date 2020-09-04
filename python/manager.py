@@ -19,6 +19,7 @@ SOUND14 = CURRENT_PATH + "audios/speaker/07-sound14.mp3"
 SOUND15 = CURRENT_PATH + "audios/speaker/08-sound15.mp3"
 TBL_MONOLOGUE = CURRENT_PATH + "audios/speaker/09-tbl.mp3"
 FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
+WORMHOLE = CURRENT_PATH + "audios/speaker/11-wormhole.mp3"
 
 PURPLE = (0.7,0,0.3)
 RED = (1,0,0)
@@ -143,7 +144,7 @@ def exit():
 
 def launch_finale():
     debugger.title('LAUNCING FINAL MUSIC')
-    music.Audio(FINALE).play()
+    music.Audio(WORMHOLE).play()
     debugger.title('LAUNCING FINAL CALL')
     sleep(7)
     calls.dial('08-finale.call')
