@@ -2,6 +2,7 @@ from shutil import copyfile
 import shutil
 import os
 import debug
+import time
 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
@@ -28,4 +29,5 @@ def dial(call):
         debugger.log('THIS WOULD COPY: '  + call_file + ' to ' + outgoing_call)
     else :
         copyfile( call_file, outgoing_call)
+        time.sleep(5)
         remove_files_from(OUTGOING_PATH)
