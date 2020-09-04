@@ -2,6 +2,8 @@ import os, debug, calls, music, utils
 import multiprocessing
 from time import sleep
 import lights
+from gpiozero import Button
+
 
 CURRENT_PATH = ""
 if os.uname()[0] != 'Darwin':
@@ -21,6 +23,8 @@ FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
 PURPLE = (0.7,0,0.3)
 RED = (1,0,0)
 IRADESCENT = (0.5,0,0.5)
+
+button = Button(26)
 
 debugger = debug.Debug(1)
 music_processes = []
@@ -51,9 +55,9 @@ def step6_trust2():
     calls.dial('02-trust2.call')
     debugger.title('TRUST EXERCISE NUMBER 2 LAUNCHED')
 def step7_trust3():
-    debugger.title('LAUNCHING TRUST EXERCISE NUMBER 2')
+    debugger.title('LAUNCHING TRUST EXERCISE NUMBER 3')
     calls.dial('02-trust3.call')
-    debugger.title('TRUST EXERCISE NUMBER 2 LAUNCHED')
+    debugger.title('TRUST EXERCISE NUMBER 3 LAUNCHED')
 def step8_antenna():
     debugger.title('LAUNCHING ANTENNA FAX')
     calls.dial('03-antenna.call')
@@ -117,10 +121,11 @@ def step13_laststeps():
     debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
     music.Audio(SOUND15).play()
-    import button
+    t1 = threading.Thread(target = wait_for_button)
+    t1.start()
     debugger.title('PLAYING TBL')
     music.Audio(TBL_MONOLOGUE).play()
-
+    t1.join()
 
 def new_music_process(process):
     kill_all_processes()
@@ -135,6 +140,23 @@ def exit():
     debugger.title("KILLING PROCESSES")
     kill_all_processes()
     debugger.title("PROCESSES PROCESSES")
+
+def launch_finale():
+    debugger.title('LAUNCING FINAL MUSIC')
+    music.Audio(FINALE).play()
+    debugger.title('LAUNCING FINAL CALL')
+    sleep(7)
+    calls.dial('08-finale.call')
+
+def wait_for_button():
+    debugger.title('BUTTON IS WAITING')
+    pressed = False
+    while not pressed:
+        if button.is_pressed:
+            pressed = True
+            launch_finale()
+            import lights
+            lights.Controller()
 
 
 new_music_process(music.Audio(BREATHING, True, True).play())
