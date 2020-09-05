@@ -102,6 +102,7 @@ def step12_laststeps_explained():
     new_music_process(music.Audio(SOUND11, True, False).play())
     debugger.title('SOUND 11 SET')
     lights_controller.fade_in_to(PURPLE)
+    sleep(140)
 def step13_laststeps():
     debugger.title('LAUNCHING LAST STEP 1')
     calls.dial('07-laststeps2.call')
