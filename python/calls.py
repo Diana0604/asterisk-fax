@@ -29,4 +29,5 @@ def dial(call):
         debugger.log('THIS WOULD COPY: '  + call_file + ' to ' + outgoing_call)
     else :
         copyfile( call_file, outgoing_call)
+        time.sleep(2)
         remove_files_from(OUTGOING_PATH)

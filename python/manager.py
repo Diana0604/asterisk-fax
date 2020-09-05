@@ -34,7 +34,7 @@ def step1_healthcall():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 1')
     calls.dial('00-healthcall.call')
     debugger.title('HEALTHCHECK NUMBER 1 HAS BEEN LAUNCHED')
-    sleep(180)
+    sleep(200)
     step2_healthfax1()
 def step2_healthfax1():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 2')
@@ -154,7 +154,7 @@ def launch_finale():
     debugger.title('LAUNCING FINAL MUSIC')
     music.Audio(WORMHOLE).play()
     debugger.title('LAUNCING FINAL CALL')
-    sleep(7)
+    sleep(100)
     calls.dial('08-finale.call')
     lights_controller.change_color((0,0,0))
 
@@ -168,6 +168,6 @@ def wait_for_button():
 
 
 
-new_music_process(music.Audio(BREATHING, True, True).play())
+new_music_process(music.Audio(BREATHING, True, True, 0.3).play())
 lights_controller = lights.Controller()
 lights_controller.change_color(IRADESCENT)
