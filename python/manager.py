@@ -34,6 +34,8 @@ def step1_healthcall():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 1')
     calls.dial('00-healthcall.call')
     debugger.title('HEALTHCHECK NUMBER 1 HAS BEEN LAUNCHED')
+    sleep(180)
+    step2_healthfax1()
 def step2_healthfax1():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 2')
     calls.dial('00-healthfax1.call')
@@ -42,6 +44,9 @@ def step3_healthfax2():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 3')
     calls.dial('00-healthfax2.call')
     debugger.title('HEALTHCHECK NUMBER 3 HAS BEEN LAUNCHED')
+    sleep(45)
+    step4_helloworld()
+
 def step4_helloworld():
     debugger.title('LAUNCHING HELLOWORLD FAX')
     calls.dial('01-helloworld.call')
