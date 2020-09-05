@@ -103,6 +103,8 @@ def step12_laststeps_explained():
     debugger.title('SOUND 11 SET')
     lights_controller.fade_in_to(PURPLE)
     sleep(140)
+
+import threading
 def step13_laststeps():
     debugger.title('LAUNCHING LAST STEP 1')
     calls.dial('07-laststeps2.call')
