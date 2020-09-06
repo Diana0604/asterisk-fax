@@ -17,15 +17,15 @@ OPENING_THEME = CURRENT_PATH + "audios/speaker/00-arrival.mp3"
 BREATHING = CURRENT_PATH + "audios/speaker/01-breathing.mp3"
 #lights
 lights_controller = lights.Controller()
-
+music_controller = music.Controller()
 #play first song
 
 
 debugger.title('STARTING OPENING THEME')
-music.Audio(OPENING_THEME, True).play()
+music_controller.play(OPENING_THEME, True)
 lights_controller.blink_to(IRADESCENT)
 
 debugger.title('OPENING THEME FINISHED')
-t1 = music.Audio(BREATHING, False, True).play()
+music_controller.play(BREATHING, False, True)
 debugger.title('MACHINE IS BREATHING')
 t1.join()
