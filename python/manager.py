@@ -27,6 +27,9 @@ IRADESCENT = (0.5,0,0.5)
 
 button = Button(26)
 
+lights_controller = lights.Controller()
+music_controller = music.Controller()
+
 debugger = debug.Debug(1)
 music_processes = []
 
@@ -77,12 +80,12 @@ def step10_mission():
     calls.dial('05-mission.call')
     debugger.title('MISSION FAX LAUNCHED')
     debugger.title('PLAYING COUHGING')
-    p = music.Audio(COUGHING, True).play()
+    p = music_controller.play(COUGHING, True)
     new_music_process(p)
     p.join()
     debugger.title('FINISHED PLAYING COUGHING')
     debugger.title('SETTING BREATHING ON BACKGROUND')
-    new_music_process(music.Audio(BREATHING, True, True).play())
+    new_music_process(music_controller.play(BREATHING, True, True))
     debugger.title('MACHINE IS BREATHING')
 def step11_consignia():
     lights_controller.fade_in_to(RED)
@@ -90,7 +93,7 @@ def step11_consignia():
     calls.dial('06-consignia.call')
     debugger.title('CONSIGNIA CALL LAUNCHED')
     debugger.title('SETTING CHARGE UP ON BACKGROUND')
-    new_music_process(music.Audio(CHARGING_UP, True, True).play())
+    new_music_process(music_controller.play(CHARGING_UP, True, True, 0.3))
     debugger.title('MACHINE IS CHARGING UP')
     sleep(60)
     lights_controller.pulse()
@@ -99,7 +102,7 @@ def step12_laststeps_explained():
     calls.dial('07-laststeps1.call')
     debugger.title('LAST STEPS EXPLANATION LAUNCHED')
     debugger.title('SETTING SOUND11 ON BACKGROUND')
-    new_music_process(music.Audio(SOUND11, True, False).play())
+    new_music_process(music_controller.play(SOUND11, True, False))
     debugger.title('SOUND 11 SET')
     lights_controller.fade_in_to(PURPLE)
     sleep(140)
@@ -111,29 +114,36 @@ def step13_laststeps():
     debugger.title('LAUNCHED LAST STEP 1')
     debugger.title('PLAYING SOUND 12')
     kill_all_processes()
-    music.Audio(SOUND12).play()
+    music_controller.play(SOUND12)
 
     debugger.title('LAUNCHING LAST STEP 2')
     calls.dial('07-laststeps3.call')
     debugger.title('LAUNCHED LAST STEP 2')
     debugger.title('PLAYING SOUND 13')
-    music.Audio(SOUND13).play()
+    music_controller.play(SOUND13)
 
     debugger.title('LAUNCHING LAST STEP 3')
     calls.dial('07-laststeps4.call')
     debugger.title('LAUNCHED LAST STEP 3')
     debugger.title('PLAYING SOUND 14')
-    music.Audio(SOUND14).play()
+    new_music_process(music_controller.play(SOUND14, True, False, 1))
+    music_controller.play(SOUND12, True, True, 1, music_processes)
 
+def step14_laststeps():
+    debugger.title('LAUNCHING LAST STEP 3.5')
+    calls.dial('07-laststeps4.5.call')
+    debugger.title('LAUNCHED LAST STEP 3.5')
+
+def step15_laststeps():
     debugger.title('LAUNCHING LAST STEP 4')
     calls.dial('07-laststeps5.call')
     debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
-    music.Audio(SOUND15).play()
+    music_controller.play(SOUND15)
     t1 = threading.Thread(target = wait_for_button)
     t1.start()
     debugger.title('PLAYING TBL')
-    music.Audio(TBL_MONOLOGUE).play()
+    music_controller.play(TBL_MONOLOGUE)
     t1.join()
 
 def new_music_process(process):
@@ -152,11 +162,12 @@ def exit():
 
 def launch_finale():
     debugger.title('LAUNCING FINAL MUSIC')
-    music.Audio(WORMHOLE).play()
-    debugger.title('LAUNCING FINAL CALL')
-    sleep(100)
-    calls.dial('08-finale.call')
+    music_controller.play(WORMHOLE, True)
+    lights_controller.blink_to((1,1,1), 42)
     lights_controller.change_color((0,0,0))
+    sleep(60)
+    debugger.title('LAUNCING FINAL CALL')
+    calls.dial('08-finale.call')
 
 def wait_for_button():
     debugger.title('BUTTON IS WAITING')
@@ -166,8 +177,5 @@ def wait_for_button():
             pressed = True
             launch_finale()
 
-
-
-new_music_process(music.Audio(BREATHING, True, True, 0.3).play())
-lights_controller = lights.Controller()
+new_music_process(music_controller.play(BREATHING, True, True, 0.3))
 lights_controller.change_color(IRADESCENT)

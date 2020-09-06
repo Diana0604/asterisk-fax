@@ -39,3 +39,4 @@ class Controller(object):
             self.leds.blink(random_time, 0.2-random_time, 0, 0, init, random_color, 1, False)
         random_time = randrange(1,2)*0.1
         self.leds.blink(random_time, 0.2-random_time, 0, 0, init, color, 1, False)
+        debugger.title('LIGHTS FINISH BLINKING')

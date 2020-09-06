@@ -3,29 +3,32 @@ import multiprocessing
 import pygame
 
 
-class Audio(object):
-    def __init__(self, sound, background = False, looping = False, volume = 1):
-        self.background = background
-        self.sound = sound
-        self.volume = volume
-        self.looping = looping
+class Controller(object):
 
-    def play(self):
-        if(self.background):
-            process = multiprocessing.Process(target=self.run, args=()) 
+    def play(self, sound, background = False, looping = False, volume = 1, music_processes = []):
+        if(background):
+            process = multiprocessing.Process(target=self.run, args=(sound, background, looping, volume, music_processes)) 
             process.start() 
             return process
         else:
-            self.run()
+            self.run(sound, background, looping, volume)
 
-    def run(self):
+    def wait_for_silence(self, music_processes):
+        while len(music_processes) > 0:
+            print("playing a sound")
+            process = music_processes.pop()
+            process.join()
+        print("not playing")
+
+    def run(self, sound, background, looping, volume, music_processes = []):
+        self.wait_for_silence(music_processes)
         pygame.mixer.init()
-        pygame.mixer.music.load(self.sound)
-        pygame.mixer.music.set_volume(self.volume)
+        pygame.mixer.music.load(sound)
+        pygame.mixer.music.set_volume(volume)
         pygame.mixer.music.play()
         while pygame.mixer.music.get_busy() == True:
             continue
-        if self.looping:
+        if looping:
             while True:
                 pygame.mixer.music.play()
                 while pygame.mixer.music.get_busy() == True:

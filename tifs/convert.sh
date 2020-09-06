@@ -10,6 +10,7 @@ gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps1.tif 07-laststeps1.pdf
 gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps2.tif 07-laststeps2.pdf  -c quit
 gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps3.tif 07-laststeps3.pdf  -c quit
 gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps4.tif 07-laststeps4.pdf  -c quit
+gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps4.5.tif 07-laststeps4.5.pdf  -c quit
 gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=07-laststeps5.tif 07-laststeps5.pdf  -c quit
 gs -q -dNOPAUSE -sDEVICE=tiffg4 -sOutputFile=final.tif final.pdf  -c quit
 rm *pdf
