@@ -154,7 +154,7 @@ def launch_finale():
     music_controller.play(WORMHOLE, True)
     lights_controller.blink_to((1,1,1), 42)
     lights_controller.change_color((0,0,0))
-    sleep(60)
+    sleep(10)
     debugger.title('LAUNCING FINAL CALL')
     calls.dial('08-finale.call')
 
