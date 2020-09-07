@@ -23,7 +23,7 @@ music_controller = music.Controller()
 
 debugger.title('STARTING OPENING THEME')
 music_controller.play(OPENING_THEME, True)
-lights_controller.blink_to(IRADESCENT)
+lights_controller.blink_to(IRADESCENT, time=18)
 
 debugger.title('OPENING THEME FINISHED')
 music_controller.play(BREATHING, False, True)
