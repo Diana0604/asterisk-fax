@@ -80,7 +80,8 @@ def step10_mission():
     debugger.title('MISSION FAX LAUNCHED')
     debugger.title('PLAYING COUHGING')
     music_controller.kill_all_processes()
-    music_controller.play(COUGHING)
+    music_controller.play(COUGHING, True)
+    sleep(60)
     debugger.title('FINISHED PLAYING COUGHING')
     debugger.title('SETTING BREATHING ON BACKGROUND')
     music_controller.play(BREATHING, True, True)
@@ -91,7 +92,7 @@ def step11_consignia():
     calls.dial('06-consignia.call')
     debugger.title('CONSIGNIA CALL LAUNCHED')
     debugger.title('SETTING CHARGE UP ON BACKGROUND')
-    music_controller.play(CHARGING_UP, False, True, 0.3)
+    music_controller.play(CHARGING_UP, True, True, 0.3)
     debugger.title('MACHINE IS CHARGING UP')
     sleep(60)
     lights_controller.pulse()
@@ -125,7 +126,7 @@ def step13_laststeps():
     calls.dial('07-laststeps4.call')
     debugger.title('LAUNCHED LAST STEP 3')
     debugger.title('PLAYING SOUND 14')
-    music_controller.play(SOUND14, True, False, 1)
+    #music_controller.play(SOUND14, True, False, 1)
     music_controller.play(SOUND12, True, True, 1)
 
 def step14_laststeps():
@@ -135,10 +136,12 @@ def step14_laststeps():
 
 def step15_laststeps():
     debugger.title('LAUNCHING LAST STEP 4')
-    calls.dial('07-laststeps5.call')
+    #calls.dial('07-laststeps5.call')
     debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
-    music_controller.play(SOUND15)
+    #music_controller.play(SOUND14)
+    music_controller.play(SOUND15, True)
+    sleep(150)
     t1 = threading.Thread(target = wait_for_button)
     t1.start()
     debugger.title('PLAYING TBL')
