@@ -19,6 +19,7 @@ SOUND15 = CURRENT_PATH + "audios/speaker/08-sound15.mp3"
 TBL_MONOLOGUE = CURRENT_PATH + "audios/speaker/09-tbl.mp3"
 FINALE = CURRENT_PATH + "audios/speaker/10-final.mp3"
 WORMHOLE = CURRENT_PATH + "audios/speaker/11-wormhole.mp3"
+HURRY_UP = CURRENT_PATH + "audios/speaker/helpline_message.mp3"
 
 PURPLE = (0.7,0,0.3)
 RED = (1,0,0)
@@ -165,6 +166,9 @@ def wait_for_button():
         if button.is_pressed:
             pressed = True
             launch_finale()
+
+def helpline_message():
+    music_controller.play_on_top(HURRY_UP)
 
 music_controller.play(BREATHING, True, True, 0.3)
 lights_controller.change_color(IRADESCENT)

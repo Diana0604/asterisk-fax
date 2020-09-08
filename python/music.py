@@ -46,4 +46,10 @@ class Controller(object):
                 pygame.mixer.music.play()
                 while pygame.mixer.music.get_busy() == True:
                     continue
+
+    def play_on_top(self, sound):
+        pygame.mixer.init()
+        pygame.mixer.music.load(sound)
+        pygame.mixer.music.set_volume(volume)
+        pygame.mixer.music.play()
         

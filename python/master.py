@@ -34,6 +34,7 @@ def switch_steps(i):
         13: manager.step13_laststeps,
         14: manager.step14_laststeps,
         15: manager.step15_laststeps,
+        50: manager.helpline_message,
         100: manager.exit
     }
     func=switcher.get(i, invalid_step)
@@ -62,6 +63,7 @@ while not ended :
     debugger.log("[13] -> final steps 1 2 and 3 (which are automated)")
     debugger.log("[14] -> step 3.5. ")
     debugger.log("[15] -> final step + finale. We will be on the phone (hopefully). Send it when appropriate. This launches the preprogrammed ending (nothing to do from now on!). ")
+    debugger.log("[50] -> send helpline help")
     option = get_option(raw_input("LET ME KNOW WHAT STEP ARE YOU ON (I only need the number): "))
     debugger.blank_lines() 
     switch_steps(option)
