@@ -136,7 +136,7 @@ def step14_laststeps():
 
 def step15_laststeps():
     debugger.title('LAUNCHING LAST STEP 4')
-    #calls.dial('07-laststeps5.call')
+    calls.dial('07-laststeps5.call')
     debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
     #music_controller.play(SOUND14)
