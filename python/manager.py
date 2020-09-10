@@ -46,7 +46,7 @@ def step3_healthfax2():
     debugger.title('LAUNCHING HEALTHCHECK NUMBER 3')
     calls.dial('00-healthfax2.call')
     debugger.title('HEALTHCHECK NUMBER 3 HAS BEEN LAUNCHED')
-    sleep(45)
+    sleep(120)
     step4_helloworld()
 
 def step4_helloworld():
@@ -139,9 +139,9 @@ def step15_laststeps():
     calls.dial('07-laststeps5.call')
     debugger.title('LAUNCHED LAST STEP 4')
     debugger.title('PLAYING SOUND 15')
-    #music_controller.play(SOUND14)
-    music_controller.play(SOUND15, True)
-    sleep(150)
+    music_controller.play(SOUND14, True)
+    #music_controller.play(SOUND15, True)
+    sleep(360)
     t1 = threading.Thread(target = wait_for_button)
     t1.start()
     debugger.title('PLAYING TBL')
