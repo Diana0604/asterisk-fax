@@ -1,12 +1,13 @@
 from shutil import copyfile
 import shutil
-import debug
+import os
 import time
+import endpoint_status
 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
 
-debugger = debug.Debug(1)
+
 
 NOT_CALLING = False
 
@@ -22,7 +23,12 @@ def remove_files_from(folder):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 def dial(call):
+    while not endpoint_status.fax_free():
+        time.sleep(1)
+    
     call_file = CALLS_PATH + call
     outgoing_call = OUTGOING_PATH + call
     copyfile( call_file, outgoing_call)
+    time.sleep(2)
+    remove_files_from(OUTGOING_PATH)
 
