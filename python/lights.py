@@ -25,7 +25,7 @@ class Controller(object):
         debugger.title('LIGHTS ARE FADING INTO: ' + str(color))
 
     def pulse(self, fade_in_time=1, fade_out_time=1, n=None, background=True):
-        current = (0,0,0)
+        current = self.leds.value
         self.leds.pulse(fade_in_time, fade_out_time, (0, 0, 0), current, n=None, background=True)
         debugger.title('LIGHTS ARE PULSING IN AND OUT OF: ' + str(current))
 
@@ -39,3 +39,4 @@ class Controller(object):
             self.leds.blink(random_time, 0.2-random_time, 0, 0, init, random_color, 1, False)
         random_time = randrange(1,2)*0.1
         self.leds.blink(random_time, 0.2-random_time, 0, 0, init, color, 1, False)
+        debugger.title('LIGHTS FINISH BLINKING')
