@@ -4,7 +4,7 @@ sudo apt-get install python-dev libsdl-image1.2-dev libsdl-mixer1.2-dev libsdl-t
 
 sudo apt autoremove
 
-pip install gpiozero
+pip install gpiozero python-vlc pygame
 
 
 wget https://github.com/elisescu/tty-share/files/4048522/tty-share.arm6-lin.zip

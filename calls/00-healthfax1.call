@@ -1,6 +1,4 @@
-Channel: PJSIP/2000
-MaxRetries: 0
-RetryTime: 60
-WaitTime: 30
+Channel: PJSIP/1000
 Context: healthcheck
 Extension: 0031
+Callerid: 234567

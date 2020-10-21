@@ -1,4 +1,4 @@
-Channel: PJSIP/2000
+Channel: PJSIP/1000
 MaxRetries: 0
 RetryTime: 60
 WaitTime: 30
