@@ -22,13 +22,26 @@ def remove_files_from(folder):
         except Exception as e:
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
-def dial(call):
+def dial(call, time_left_for_call):
     while not endpoint_status.fax_free():
+        print('fax is not free - waiting for it to be free')
         time.sleep(1)
     
     call_file = CALLS_PATH + call
     outgoing_call = OUTGOING_PATH + call
+    print('making call: ' + call)
     copyfile( call_file, outgoing_call)
-    time.sleep(2)
+    while endpoint_status.fax_free():
+        print('fax is free - waiting for it to be busy')
+        time.sleep(1)
     remove_files_from(OUTGOING_PATH)
 
+    while(time_left_for_call > 0):
+        time.sleep(1)
+        print(time_left_for_call)
+        if endpoint_status.fax_free():
+            print('fax is free - need to resend')
+            dial(call, time_left_for_call)
+            return
+        time_left_for_call = time_left_for_call - 1
+   
