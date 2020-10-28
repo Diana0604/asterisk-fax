@@ -1,4 +1,4 @@
-import time
+import time, os
 
 def countdown(secs):
     while(secs > 0):

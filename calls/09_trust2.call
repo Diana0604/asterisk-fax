@@ -2,5 +2,5 @@ Channel: PJSIP/1000
 MaxRetries: 0
 RetryTime: 60
 WaitTime: 30
-Context: healthcheck
-Extension: 0032
+Context: tbl
+Extension: trust2

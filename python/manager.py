@@ -1,8 +1,18 @@
-import calls, endpoint_status, utils
+import calls, asterisk, utils
 
-calls.dial('00-healthcall.call', 163)
-utils.countdown(5) # IMPORTANT: this time is taking into account we will add extra beeping. Remember to update if we don't do that in the end
-calls.dial('00-healthfax1.call', 82)
-print('fax  dialed')
+call_time = asterisk.get_timings()
+call_wait = asterisk.get_waits()
 
-print('END OF PROGRAM')
+while True:
+    current_step = asterisk.check_current_step()
+    print("we're on step: " + current_step)
+    call_file = calls.get_call_file(current_step)
+    print(call_file)
+    if call_file != None:
+        print('dialing call: ' + call_file)
+        calls.dial(call_file, call_time[current_step])
+        if call_wait[current_step] != None:
+            utils.countdown(call_wait[current_step])
+    
+
+#print('END OF PROGRAM')

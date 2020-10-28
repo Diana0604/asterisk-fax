@@ -2,14 +2,22 @@ from shutil import copyfile
 import shutil
 import os
 import time
-import endpoint_status
+import asterisk
 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
 
-
-
 NOT_CALLING = False
+
+
+
+def get_call_file(step):
+    call_files = os.listdir(CALLS_PATH)
+    print(call_files)
+    for call_file in call_files:
+        if call_file.startswith(step):
+            print('we have to make a phone call')
+            return call_file
 
 def remove_files_from(folder):
     for filename in os.listdir(folder):
@@ -23,7 +31,7 @@ def remove_files_from(folder):
             print('Failed to delete %s. Reason: %s' % (file_path, e))
 
 def dial(call, time_left_for_call):
-    while not endpoint_status.fax_free():
+    while not asterisk.fax_free():
         print('fax is not free - waiting for it to be free')
         time.sleep(1)
     
@@ -31,7 +39,7 @@ def dial(call, time_left_for_call):
     outgoing_call = OUTGOING_PATH + call
     print('making call: ' + call)
     copyfile( call_file, outgoing_call)
-    while endpoint_status.fax_free():
+    while asterisk.fax_free():
         print('fax is free - waiting for it to be busy')
         time.sleep(1)
     remove_files_from(OUTGOING_PATH)
@@ -39,7 +47,7 @@ def dial(call, time_left_for_call):
     while(time_left_for_call > 0):
         time.sleep(1)
         print(time_left_for_call)
-        if endpoint_status.fax_free():
+        if asterisk.fax_free():
             print('fax is free - need to resend')
             dial(call, time_left_for_call)
             return
