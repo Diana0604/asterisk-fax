@@ -54,5 +54,5 @@ def get_waits():
         if time.isdigit():
             call_wait[step] = int(time)
         else:
-            call_wait[step] = 0
+            call_wait[step] = 15
     return call_wait
