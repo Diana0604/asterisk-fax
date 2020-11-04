@@ -10,9 +10,7 @@ while True:
     print(call_file)
     if call_file != None:
         print('dialing call: ' + call_file)
-        calls.dial(call_file, call_time[current_step])
-        if call_wait[current_step] != None:
-            utils.countdown(call_wait[current_step])
+        calls.dial(call_file)
     
 
 #print('END OF PROGRAM')
