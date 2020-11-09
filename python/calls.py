@@ -5,15 +5,21 @@ import time
 import asterisk
 import utils
 
+#OUTGOING_PATH = 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
+call_files = os.listdir(CALLS_PATH)
 
 NOT_CALLING = False
 
-
+def manage_calls(step):
+    call_file = get_call_file(step)
+    print(call_file)
+    if call_file != None:
+        print('dialing call: ' + call_file)
+        dial(call_file)
 
 def get_call_file(step):
-    call_files = os.listdir(CALLS_PATH)
     for call_file in call_files:
         if call_file.startswith(step):
             return call_file
@@ -63,5 +69,3 @@ def dial(call):
             return
 
     utils.countdown(20)
-
-   
