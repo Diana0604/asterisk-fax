@@ -14,7 +14,6 @@ NOT_CALLING = False
 
 def manage_calls(step):
     call_file = get_call_file(step)
-    print(call_file)
     if call_file != None:
         print('dialing call: ' + call_file)
         dial(call_file)
@@ -53,7 +52,7 @@ def dial(call):
         time.sleep(1)
         error = asterisk.error()
         if error:
-            time.sleep(10)
+            utils.countdown(10)
             dial(call)
             print('resending: ' + call)
             return
@@ -64,8 +63,7 @@ def dial(call):
         time.sleep(1)
         error = asterisk.error()
         if error:
-            time.sleep(10)
+            utils.countdown(10)
             dial(call)
             return
-
     utils.countdown(20)

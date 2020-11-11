@@ -1,5 +1,6 @@
-import calls, asterisk, utils, vlc, sounds
-
+import calls, asterisk, utils, sounds, alsaaudio
+alsaaudio.Mixer(control="Headphone").setvolume(100)
+#alsaaudio.Mixer(control="Headphone").setvolume(100)
 call_time = asterisk.get_timings()
 call_wait = asterisk.get_waits()
 
