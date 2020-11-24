@@ -33,6 +33,21 @@ def fax_free():
                 return False
         i = i + 1
 
+def fax_ringing():
+    stream = os.popen("asterisk -rx 'pjsip list endpoints'")
+    output = stream.read()
+    splited_output = output.split()
+    i = 0
+    while i < len(splited_output):
+        element = splited_output[i]
+        if element == '1000/1000':
+            element_info = splited_output[i+1]
+            if element_info == 'Ringing':
+                return True
+            else:
+                return False
+        i = i + 1
+
 def get_database_value(output):
     return output.split()[1]
 
@@ -87,3 +102,9 @@ def error():
     return False
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Call failed to go through, reason (3) Remote end Ringing
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Queued call to PJSIP/1000 expired without completion after 0 attempts
+
+def add_to_database(key, value): 
+    # equivalent terminal command: 'asterisk -rx "database put WESTILLFAX key value"'
+    command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
+    print(command)
+    os.system(command)
