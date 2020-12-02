@@ -1,4 +1,4 @@
-import calls, asterisk, utils, sounds, alsaaudio, lights, buttons
+import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 #sounds.update_database()
 
@@ -8,6 +8,7 @@ while True:
     calls.launch_call(current_step)
     sounds.launch_sounds(current_step)
     lights.launch_diegetic_lights(current_step)
+    smoke.launch_smoke(current_step)
     #finish diegetic lights and send background
     lights.finish_diegetic_lights()
     lights.launch_background_lights(current_step)

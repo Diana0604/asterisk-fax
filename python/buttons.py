@@ -1,5 +1,5 @@
 from gpiozero import Button
-import os
+import os, asterisk
 
 #reboot
 reboot_button = Button(23)
@@ -26,4 +26,7 @@ rescue_button.when_pressed = rescue
 wormhole_button = Button(16)
 
 def wormhole():
+    print('wormhole')
     asterisk.add_to_database('step', '24')
+
+wormhole_button.when_pressed = wormhole

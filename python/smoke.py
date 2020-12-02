@@ -3,14 +3,21 @@ from time import sleep
 
 led = LED(26)
 
+current_step = None
+
 led.off()
 
-#sleep(10)
-
-while True:
-    print('led on')
+def start_smoke():
     led.on()
-    sleep(5)
-    print('led off')
+    sleep(10)
     led.off()
-    sleep(5)
+
+def launch_smoke(step):
+    print('step')
+    global current_step
+    if(step == current_step):
+        return
+    if step == '24':
+        print('smoke')
+        start_smoke()
+    current_step = step
