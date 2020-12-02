@@ -1,4 +1,4 @@
-import calls, asterisk, utils, sounds, alsaaudio, lights
+import calls, asterisk, utils, sounds, alsaaudio, lights, buttons
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 #sounds.update_database()
 

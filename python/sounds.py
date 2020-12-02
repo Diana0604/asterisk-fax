@@ -81,9 +81,9 @@ def launch_sounds(step):
     if background_sound != None:
         if background_sound == 'silence':
             stop_background()
-            return
-        print(background_sound)
-        background_sound = BACKGROUND_SOUNDS_PATH + background_sound
-        play_sound(sound = background_sound, background = True)
+        else :
+            print(background_sound)
+            background_sound = BACKGROUND_SOUNDS_PATH + background_sound
+            play_sound(sound = background_sound, background = True)
     print('updateing last step to: ' + str(step))
     previous_step = step
