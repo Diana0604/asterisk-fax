@@ -22,14 +22,18 @@ def get_diegetic_sound(step):
     return None
 
 def get_background_sound(step):
+    found = False
     for sound in background_sounds:
         initial_step = sound[0] + sound[1]
         last_step = sound[3]+sound[4]
         if initial_step <= step and last_step >= step:
+            found = True
             if background_player.is_playing() == 0:
                 return sound
             if initial_step == step and previous_step != step:
                 return sound
+    if not found:
+        return 'silence'
     return None
             
 def get_button_sound(step):
@@ -46,10 +50,9 @@ def play_sound(sound, background):
         return
     diegetic_player = vlc.MediaPlayer()
     diegetic_player.set_media(media)
+    background_player.audio_set_volume(50)
     diegetic_player.play()
-    print(diegetic_player)
     diegetic_players.append(diegetic_player)
-    print(diegetic_players)
 
 def finish_diegetic_sounds():
     global diegetic_players
@@ -57,7 +60,11 @@ def finish_diegetic_sounds():
     for diegetic_player in diegetic_players:
         while diegetic_player.is_playing():
             utils.countdown(1)
+    background_player.audio_set_volume(100)
     diegetic_players = []
+
+def stop_background():
+    background_player.stop()
 
 def launch_sounds(step):
     print('managing sound')
@@ -72,6 +79,9 @@ def launch_sounds(step):
     background_sound = get_background_sound(step)
     print('we found this background sound' + str(background_sound))
     if background_sound != None:
+        if background_sound == 'silence':
+            stop_background()
+            return
         print(background_sound)
         background_sound = BACKGROUND_SOUNDS_PATH + background_sound
         play_sound(sound = background_sound, background = True)

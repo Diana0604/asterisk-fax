@@ -56,6 +56,24 @@ def check_current_step():
     return get_database_value(database_output)
 
 def update_step():
+    if check_current_step() == '21':
+        add_to_database('step', '22')
+        return
+    if check_current_step() == '20':
+        add_to_database('step', '21')
+        return
+    if check_current_step() == '19':
+        add_to_database('step', '20')
+        return
+    if check_current_step() == '18':
+        add_to_database('step', '19')
+        return
+    if check_current_step() == '15':
+        add_to_database('step', '16')
+        return
+    if check_current_step() == '13':
+        add_to_database('step', '14')
+        return
     if check_current_step() == '01':
         add_to_database('step', '02')
         return
