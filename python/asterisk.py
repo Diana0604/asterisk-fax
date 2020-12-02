@@ -55,6 +55,14 @@ def check_current_step():
     database_output = os.popen("asterisk -rx 'database get WESTILLFAX step'").read()
     return get_database_value(database_output)
 
+def update_step():
+    if check_current_step() == '01':
+        add_to_database('step', '02')
+        return
+    if check_current_step() == '00':
+        add_to_database('step', '01')
+        return
+
 def get_timings():
     call_times = {}
     for i in range(0,30):

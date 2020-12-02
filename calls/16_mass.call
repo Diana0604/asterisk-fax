@@ -3,4 +3,4 @@ MaxRetries: 0
 RetryTime: 60
 WaitTime: 30
 Context: tbl
-Extension: spies
+Extension: mass
