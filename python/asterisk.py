@@ -1,5 +1,5 @@
 # Program to run "asterisk -rx 'pjsip list endpoints'" and check status of endpoinds
-import os
+import os, time
 
 ASTLOGS = '/var/log/asterisk/full'
 LASTLINE  = ''
@@ -33,6 +33,20 @@ def fax_free():
                 return False
         i = i + 1
 
+def wait_for_fax_free():
+    while not fax_free():
+        time.sleep(1)
+    if error():
+        return False
+    return True
+
+def wait_for_fax_busy():
+    while fax_free():
+        time.sleep(1)
+        if error():
+            return False
+    return True
+
 def fax_ringing():
     stream = os.popen("asterisk -rx 'pjsip list endpoints'")
     output = stream.read()
@@ -56,6 +70,9 @@ def check_current_step():
     return get_database_value(database_output)
 
 def update_step():
+    if check_current_step() == '26':
+        add_to_database('step', '27')
+        return
     if check_current_step() == '25':
         add_to_database('step', '26')
         return
@@ -140,3 +157,13 @@ def add_to_database(key, value):
     command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
     print(command)
     os.system(command)
+
+def get_from_database(key):
+    command = "asterisk -rx 'database get WESTILLFAX " + key + "'"
+    stream = os.popen(command)
+    return stream.read().split()[1]
+
+def database_exists(key):
+    if get_from_database(key) == "entry":
+        return False
+    return True
