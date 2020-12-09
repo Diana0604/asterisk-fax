@@ -12,7 +12,7 @@ while True:
         break
     LASTLINE = line
 
-def fax_free():
+def check_fax_status():
     stream = os.popen("asterisk -rx 'pjsip list endpoints'")
     output = stream.read()
     splited_output = output.split()
@@ -20,12 +20,14 @@ def fax_free():
     while i < len(splited_output):
         element = splited_output[i]
         if element == '1000/1000':
-            element_info = splited_output[i+1]
-            if element_info == 'Not':
-                return True
-            else:
-                return False
+            return splited_output[i+1]
         i = i + 1
+
+
+def fax_free():
+    if check_fax_status() == "Not":
+        return True
+    return False
 
 def wait_for_fax_free():
     while not fax_free():
@@ -42,20 +44,14 @@ def wait_for_fax_busy():
     return True
 
 def fax_ringing():
-    stream = os.popen("asterisk -rx 'pjsip list endpoints'")
-    output = stream.read()
-    splited_output = output.split()
-    i = 0
-    while i < len(splited_output):
-        element = splited_output[i]
-        if element == '1000/1000':
-            element_info = splited_output[i+1]
-            if element_info == 'Ringing':
-                return True
-            else:
-                return False
-        i = i + 1
+    if check_fax_status() == 'Ringing':
+        return True
+    return False
 
+def wait_fax_not_ringing():
+    while fax_ringing():
+        time.sleep(1)
+    
 def get_database_value(output):
     return output.split()[1]
 

@@ -48,6 +48,7 @@ def play_sound(sound, background):
         background_player.set_media(media)
         background_player.play()
         return
+    asterisk.wait_fax_not_ringing()
     diegetic_player = vlc.MediaPlayer()
     diegetic_player.set_media(media)
     background_player.audio_set_volume(50)
