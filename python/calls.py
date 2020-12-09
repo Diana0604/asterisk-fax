@@ -1,9 +1,7 @@
 from shutil import copyfile
-import shutil
 import os
 import time
-import asterisk
-import utils
+import utils, asterisk
 
 #OUTGOING_PATH = 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'

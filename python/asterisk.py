@@ -4,19 +4,13 @@ import os, time
 ASTLOGS = '/var/log/asterisk/full'
 LASTLINE  = ''
 
-def set_last_line(line):
-    global LASTLINE
-    LASTLINE = line
-def get_last_line():
-    global LASTLINE
-    return LASTLINE
-
+#clean all residual errors
 f = open(ASTLOGS, 'r')
 while True:
     line = f.readline()
     if not line:
         break
-    set_last_line(line)
+    LASTLINE = line
 
 def fax_free():
     stream = os.popen("asterisk -rx 'pjsip list endpoints'")
@@ -137,17 +131,18 @@ def get_waits():
     return call_wait
 
 def error():
+    global LASTLINE
     f = open(ASTLOGS, 'r')
     lines = f.readlines()
     i = len(lines) - 1
     next_line = lines[i]
-    while next_line != get_last_line():
+    while next_line != LASTLINE:
         if 'Call failed to go through' in next_line:
-            set_last_line(lines[len(lines) - 1])
+            LASTLINE = lines[len(lines) - 1]
             return True
         i = i - 1
         next_line = lines[i]
-    set_last_line(lines[len(lines) - 1])
+    LASTLINE = lines[len(lines) - 1]
     return False
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Call failed to go through, reason (3) Remote end Ringing
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Queued call to PJSIP/1000 expired without completion after 0 attempts
