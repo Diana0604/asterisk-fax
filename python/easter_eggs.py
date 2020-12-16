@@ -1,26 +1,31 @@
-import asterisk, calls, sounds
-import time
-
-def check_easter_eggs():
+import asterisk
+def start_easter_eggs():
     egg = 'egg'
-    egg_number = 1
-    new_egg = egg + str(egg_number)
-    while asterisk.database_exists(new_egg):
-        print('testing egg: ' + new_egg)
-        print(asterisk.get_from_database(new_egg))
-        if  asterisk.get_from_database(new_egg) == "YES":
-            print('found egg' + str(egg_number))
-            execute_egg(egg_number)
-            asterisk.add_to_database(new_egg, "NO")
-        egg_number = egg_number + 1
+    for egg_number in range(1, 25):
+        new_egg = egg + str(egg_number)
+        asterisk.add_to_database(new_egg, "NO")
         new_egg = egg + str(egg_number)
 
-def execute_egg(egg_number):
-    print('executing egg ' + str(egg_number))
-    print(egg_number)
+def get_easter_egg_sound(egg_number):
     if egg_number == 1:
-        print('executing egg 1')
-        calls.launch_call('tester.call')
-        calls.finish_call('tester.call')
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_1_countdown.wav'
     if egg_number == 2:
-        sounds.play_sound('/fax/sounds/speaker/phone_call/08_achieve_levelone.wav', False)
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_2_potatoes.wav'
+    if egg_number == 3:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_3_feast.wav'
+    if egg_number == 4:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_4_terraform.wav'
+    if egg_number == 5:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_5_hopeless.wav'
+    if egg_number == 6:
+        return '/fax/sounds/speaker/phone_call/08_achieve_levelone.wav'
+    if egg_number == 7:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_7_errormessage.wav'
+    if egg_number == 23:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_23_errormessage.wav'
+    if egg_number == 24:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_24_errormessage.wav'
+    if egg_number == 9:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_9_Birthday.wav'
+    if egg_number == 11:
+        return '/fax/sounds/speaker/phone_call/08_achieve_levelone.wav'

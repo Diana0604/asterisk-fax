@@ -12,6 +12,8 @@ while True:
         break
     LASTLINE = line
 
+#FAX STATUS
+
 def check_fax_status():
     stream = os.popen("asterisk -rx 'pjsip list endpoints'")
     output = stream.read()
@@ -23,7 +25,6 @@ def check_fax_status():
             return splited_output[i+1]
         i = i + 1
 
-
 def fax_free():
     if check_fax_status() == "Not":
         return True
@@ -32,6 +33,7 @@ def fax_free():
 def wait_for_fax_free():
     while not fax_free():
         time.sleep(1)
+        print('waiting for fax free')
     if error():
         return False
     return True
@@ -51,7 +53,25 @@ def fax_ringing():
 def wait_fax_not_ringing():
     while fax_ringing():
         time.sleep(1)
-    
+
+#DATABASE
+
+def add_to_database(key, value): 
+    # equivalent terminal command: 'asterisk -rx "database put WESTILLFAX key value"'
+    command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
+    print(command)
+    os.system(command)
+
+def get_from_database(key):
+    command = "asterisk -rx 'database get WESTILLFAX " + key + "'"
+    stream = os.popen(command)
+    return stream.read().split()[1]
+
+def database_exists(key):
+    if get_from_database(key) == "entry":
+        return False
+    return True
+
 def get_database_value(output):
     return output.split()[1]
 
@@ -94,38 +114,6 @@ def update_step():
         add_to_database('step', '01')
         return
 
-def get_timings():
-    call_times = {}
-    for i in range(0,30):
-        if i < 10:
-            step = "0" + str(i)
-        else:
-            step = str(i)
-        command = "asterisk -rx 'database get WESTILLFAX/call_time " + step + "'"
-        database_output = os.popen(command).read()
-        time = get_database_value(database_output)
-        if time.isdigit():
-            call_times[step] = int(time)
-        else:
-            call_times[step] = 0
-    return call_times
-
-def get_waits():
-    call_wait = {}
-    for i in range(0,30):
-        if i < 10:
-            step = "0" + str(i)
-        else:
-            step = str(i)
-        command = "asterisk -rx 'database get WESTILLFAX/call_wait " + step + "'"
-        database_output = os.popen(command).read()
-        time = get_database_value(database_output)
-        if time.isdigit():
-            call_wait[step] = int(time)
-        else:
-            call_wait[step] = 15
-    return call_wait
-
 def error():
     global LASTLINE
     f = open(ASTLOGS, 'r')
@@ -143,18 +131,6 @@ def error():
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Call failed to go through, reason (3) Remote end Ringing
     #   [appropriate time] NOTICE[4247] pbx_spool.c: Queued call to PJSIP/1000 expired without completion after 0 attempts
 
-def add_to_database(key, value): 
-    # equivalent terminal command: 'asterisk -rx "database put WESTILLFAX key value"'
-    command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
-    print(command)
-    os.system(command)
-
-def get_from_database(key):
-    command = "asterisk -rx 'database get WESTILLFAX " + key + "'"
-    stream = os.popen(command)
-    return stream.read().split()[1]
-
-def database_exists(key):
     if get_from_database(key) == "entry":
         return False
     return True

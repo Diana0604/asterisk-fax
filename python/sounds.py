@@ -1,4 +1,4 @@
-import os, utils, vlc, asterisk
+import os, utils, vlc, asterisk, easter_eggs
 
 SOUNDS_PATH = '/fax/sounds/speaker/'
 DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
@@ -10,6 +10,7 @@ background_player = vlc.MediaPlayer()
 previous_step = None
 
 diegetic_players = []
+easter_egg_players = []
 
 def get_diegetic_sound(step):
     #if diegetic sound has already played do not play again
@@ -40,6 +41,7 @@ def get_background_sound(step):
             
 def play_diegetic_sound(sound):
     asterisk.wait_fax_not_ringing()
+    media = vlc.Media(sound)
     diegetic_player = vlc.MediaPlayer()
     diegetic_player.set_media(media)
     background_player.audio_set_volume(50)
@@ -51,6 +53,27 @@ def play_background_sound(sound):
     background_player.stop()
     background_player.set_media(media)
     background_player.play()
+
+def check_easter_eggs(diegetic_sound):
+    egg = 'egg'
+    egg_number = 1
+    new_egg = egg + str(egg_number)
+    while asterisk.database_exists(new_egg):
+        if  asterisk.get_from_database(new_egg) == "YES":
+            if diegetic_sound == None:
+                play_easter_egg(easter_eggs.get_easter_egg_sound(egg_number))
+            asterisk.add_to_database(new_egg, "NO")
+        egg_number = egg_number + 1
+        new_egg = egg + str(egg_number)
+
+def play_easter_egg(sound):
+    asterisk.wait_fax_not_ringing()
+    media = vlc.Media(sound)
+    easter_egg_player = vlc.MediaPlayer()
+    easter_egg_player.set_media(media)
+    background_player.audio_set_volume(50)
+    easter_egg_player.play()
+    easter_egg_players.append(easter_egg_player)
 
 def launch_sounds(step):
     global previous_step
@@ -67,8 +90,27 @@ def launch_sounds(step):
         else :
             background_sound = BACKGROUND_SOUNDS_PATH + background_sound
             play_background_sound(sound = background_sound)
+    #play easter eggs
+    check_easter_eggs(diegetic_sound)
     #update step so we do not replay sounds
     previous_step = step
+
+def finish_easter_eggs_sounds():
+    global easter_egg_players
+    found = False
+    for easter_egg_player in easter_egg_players:
+        if easter_egg_player.is_playing():
+            found = True
+    if not found : 
+        return
+    utils.countdown(1)
+    asterisk.wait_for_fax_free()
+    for easter_egg_player in easter_egg_players:
+        while easter_egg_player.is_playing():
+            easter_egg_player.stop()
+    background_player.audio_set_volume(100)
+    easter_egg_players = []
+
 
 def finish_diegetic_sounds():
     global diegetic_players

@@ -17,7 +17,7 @@ def launch_smoke(step):
     global current_step
     if(step == current_step):
         return
-    if step == '24':
+    if step == '30':
         print('smoke')
         start_smoke()
     current_step = step

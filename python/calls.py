@@ -67,3 +67,5 @@ def finish_call(call):
         utils.countdown(3)
         launch_call(call)
         return
+
+#def launch_easter_eggs():
