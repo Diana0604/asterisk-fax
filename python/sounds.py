@@ -19,7 +19,14 @@ def get_diegetic_sound(step):
     #look for diegetic sound in this step
     for sound in diegetic_sounds:
         if sound.startswith(step):
-            return sound
+            if step == '15':
+                print('GETTING STEP 15 SOUND')
+                print('checking sound: ' + sound)
+                print(asterisk.get_from_database('agent'))
+                if sound.endswith(asterisk.get_from_database('agent') + '.wav'):
+                    return sound
+            else :
+                return sound
     return None
 
 def get_background_sound(step):
@@ -45,6 +52,7 @@ def play_diegetic_sound(sound):
     diegetic_player = vlc.MediaPlayer()
     diegetic_player.set_media(media)
     background_player.audio_set_volume(50)
+    diegetic_player.audio_set_volume(100)
     diegetic_player.play()
     diegetic_players.append(diegetic_player)
 
@@ -55,16 +63,17 @@ def play_background_sound(sound):
     background_player.play()
 
 def check_easter_eggs(diegetic_sound):
-    egg = 'egg'
-    egg_number = 1
-    new_egg = egg + str(egg_number)
-    while asterisk.database_exists(new_egg):
-        if  asterisk.get_from_database(new_egg) == "YES":
-            if diegetic_sound == None:
-                play_easter_egg(easter_eggs.get_easter_egg_sound(egg_number))
-            asterisk.add_to_database(new_egg, "NO")
-        egg_number = egg_number + 1
-        new_egg = egg + str(egg_number)
+    egg_number = int(asterisk.get_from_database("soundegg"))
+    print('found egg number')
+    print(egg_number)
+    if egg_number == 0:
+        return
+    sound = easter_eggs.get_easter_egg_sound(egg_number)
+    if sound == None:
+        return
+    play_easter_egg(sound)
+    print ('is playing')
+    asterisk.add_to_database("soundegg", "0")
 
 def play_easter_egg(sound):
     asterisk.wait_fax_not_ringing()
@@ -72,6 +81,7 @@ def play_easter_egg(sound):
     easter_egg_player = vlc.MediaPlayer()
     easter_egg_player.set_media(media)
     background_player.audio_set_volume(50)
+    easter_egg_player.audio_set_volume(100)
     easter_egg_player.play()
     easter_egg_players.append(easter_egg_player)
 
@@ -110,7 +120,6 @@ def finish_easter_eggs_sounds():
             easter_egg_player.stop()
     background_player.audio_set_volume(100)
     easter_egg_players = []
-
 
 def finish_diegetic_sounds():
     global diegetic_players

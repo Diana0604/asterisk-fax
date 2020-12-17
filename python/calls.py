@@ -1,7 +1,7 @@
 from shutil import copyfile
 import os
 import time
-import utils, asterisk
+import utils, asterisk, easter_eggs
 
 #OUTGOING_PATH = 
 OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
@@ -68,4 +68,40 @@ def finish_call(call):
         launch_call(call)
         return
 
-#def launch_easter_eggs():
+def launch_easter_eggs():
+    egg_number = int(asterisk.get_from_database("faxegg"))
+    print('found egg number')
+    print(egg_number)
+    if egg_number == 0:
+        return
+    call = easter_eggs.get_easter_egg_call(egg_number)
+    if call == None:
+        return
+    call_file = '/fax/calls/eastereggs/' + call
+    #wait for fax to be ready to receive
+    print('waiting for fax to be free')
+    asterisk.wait_for_fax_free()
+    print('getting paths')
+    #get call paths
+    #call_file = CALLS_PATH + call
+    outgoing_call = OUTGOING_PATH + call
+    #get rid of residual error
+    asterisk.error()
+
+    #make call
+    copyfile( call_file, outgoing_call)
+    #wait for call to begin
+    print('waiting for fax to be busy')
+    success = asterisk.wait_for_fax_busy()
+
+    #check if error
+    if not success:
+        utils.countdown(3)
+        launch_easter_eggs()
+        return
+
+    #remove file from outgoing folder
+    utils.remove_files_from(OUTGOING_PATH)
+    
+    easter_eggs.call_made(egg_number)
+    asterisk.add_to_database('faxegg', '0')

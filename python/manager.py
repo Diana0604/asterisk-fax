@@ -2,11 +2,12 @@ import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke, easter
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 #sounds.update_database()
 easter_eggs.start_easter_eggs()
+previous_step = 0
 while True:
     current_step = asterisk.check_current_step()
     #INIT
     calls.launch_main_call(current_step)
-    #calls.launch_easter_eggs()
+    calls.launch_easter_eggs()
     sounds.launch_sounds(current_step)
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
@@ -21,7 +22,9 @@ while True:
     sounds.finish_diegetic_sounds()
     
     #UPDATE
-    asterisk.update_step()
+    if previous_step == current_step:
+        asterisk.update_step()
+    previous_step = current_step
 
     
 
