@@ -80,14 +80,12 @@ def check_current_step():
     return get_database_value(database_output)
 
 def update_step():
+    print('updating step: ' + check_current_step())
     if check_current_step() == '26':
         add_to_database('step', '27')
         return
     if check_current_step() == '25':
         add_to_database('step', '26')
-        return
-    if check_current_step() == '24':
-        add_to_database('step', '25')
         return
     if check_current_step() == '22':
         add_to_database('step', '23')

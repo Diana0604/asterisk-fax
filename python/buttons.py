@@ -27,6 +27,6 @@ wormhole_button = Button(16)
 
 def wormhole():
     print('wormhole')
-    asterisk.add_to_database('step', '24')
+    asterisk.add_to_database('step', '25')
 
 wormhole_button.when_pressed = wormhole

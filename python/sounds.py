@@ -8,7 +8,7 @@ diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
 
 background_player = vlc.MediaPlayer()
 previous_step = None
-
+background_player.audio_set_volume(100)
 diegetic_players = []
 easter_egg_players = []
 

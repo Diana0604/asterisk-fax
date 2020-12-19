@@ -106,6 +106,7 @@ def launch_background_lights(step):
         return
     instructions = get_background_lights(step)
     if instructions == None:
+        previous_step = step
         return
     instructions = read_file(BACKGROUND_LIGHTS_PATH + instructions)
     if instructions[0] == 'pulse':

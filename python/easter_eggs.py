@@ -15,11 +15,11 @@ def get_easter_egg_sound(egg_number):
     if egg_number == 5:
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_5_hopeless.wav'
     if egg_number == 61:
-        return '/fax/sounds/speaker/phone_call/Easter_Egg_6_1_bodies.wav'
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_6_1_bodies.wav'
     if egg_number == 62:
-        return '/fax/sounds/speaker/phone_call/Easter_Egg_6_2_animals.wav'
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_6_2_animals.wav'
     if egg_number == 63:
-        return '/fax/sounds/speaker/phone_call/Easter_Egg_6_3_hair.wav'
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_6_3_hair.wav'
     if egg_number == 7:
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_7_errormessage.wav'
     if egg_number == 23:
