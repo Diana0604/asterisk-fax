@@ -113,7 +113,6 @@ def finish_easter_eggs_sounds():
             found = True
     if not found : 
         return
-    utils.countdown(1)
     asterisk.wait_for_fax_free()
     for easter_egg_player in easter_egg_players:
         while easter_egg_player.is_playing():
