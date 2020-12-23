@@ -1,5 +1,14 @@
-import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke, easter_eggs
+import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke, easter_eggs, datetime, os
 alsaaudio.Mixer(control="Headphone").setvolume(100)
+
+now = datetime.datetime.now()
+## yyyy/mm/dd/hh/mm
+show_date = datetime.datetime(2020, 1, 7, 14, 30) 
+
+if show_date > now:
+    sounds.play_pre_show()
+    os.system('poweroff')
+
 #sounds.update_database()
 easter_eggs.start_easter_eggs()
 previous_step = '00'

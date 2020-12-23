@@ -128,3 +128,12 @@ def finish_diegetic_sounds():
             utils.countdown(1)
     background_player.audio_set_volume(100)
     diegetic_players = []
+
+def play_pre_show():
+    player = vlc.MediaPlayer()
+    media = vlc.Media('/fax/sounds/speaker/pre_show_message.wav')
+    player.set_media(media)
+    player.play()
+    utils.countdown(1)
+    duration = media.get_duration()/1000
+    utils.countdown(duration)
