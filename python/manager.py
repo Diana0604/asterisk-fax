@@ -31,7 +31,7 @@ while True:
     sounds.finish_diegetic_sounds()
     
     #UPDATE
-    asterisk.wait_for_fax_free()
+    #asterisk.wait_for_fax_free()
     current_step = asterisk.check_current_step()
     if previous_step == current_step:
         asterisk.update_step()
