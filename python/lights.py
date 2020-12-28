@@ -13,10 +13,8 @@ led = RGBLED(Red, Green, Blue)
 LIGHTS_PATH = '/fax/lights/'
 DIEGETIC_LIGHTS_PATH = LIGHTS_PATH + 'diegetic/'
 BACKGROUND_LIGHTS_PATH = LIGHTS_PATH + 'background/'
-BUTTON_LIGHTS_PATH = LIGHTS_PATH + 'button/'
 background_lights = os.listdir(BACKGROUND_LIGHTS_PATH)
 diegetic_lights = os.listdir(DIEGETIC_LIGHTS_PATH)
-button_lights = os.listdir(BUTTON_LIGHTS_PATH)
 
 
 led.color = (0,0,0)
