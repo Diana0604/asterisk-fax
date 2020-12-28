@@ -132,5 +132,3 @@ def error():
 
 if not database_exists('step'):
     add_to_database('step', '00')
-add_to_database('faxegg','00')
-add_to_database('soundegg', '00')

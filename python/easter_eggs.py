@@ -1,7 +1,7 @@
 import asterisk
-def start_easter_eggs():
-    asterisk.add_to_database("soundegg","0")
-    asterisk.add_to_database("faxegg","0")
+
+asterisk.add_to_database("soundegg","0")
+asterisk.add_to_database("faxegg","0")
 
 def get_easter_egg_sound(egg_number):
     if egg_number == 1:
