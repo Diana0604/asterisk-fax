@@ -1,8 +1,5 @@
 import asterisk
 
-asterisk.add_to_database("soundegg","0")
-asterisk.add_to_database("faxegg","0")
-
 def get_easter_egg_sound(egg_number):
     if egg_number == 1:
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_1_countdown.wav'
@@ -70,3 +67,9 @@ def get_easter_egg_call(egg_number):
         return '22_proposal.call'
 def call_made(egg_number):
     done_faxes.append(egg_number)
+
+def reset():
+    asterisk.add_to_database("soundegg","0")
+    asterisk.add_to_database("faxegg","0")
+
+reset()

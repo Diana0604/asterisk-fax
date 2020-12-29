@@ -46,6 +46,8 @@ while True:
     #wait for every process to be done
     calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds()
+
+    easter_eggs.reset()
     
     #UPDATE
     current_step = asterisk.check_current_step()
