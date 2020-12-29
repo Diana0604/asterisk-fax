@@ -20,7 +20,10 @@ while True:
     current_step = asterisk.check_current_step()
     #INIT
     #make sure background sound is playing
-    sounds.launch_background_sounds(current_step)
+    looped_background = sounds.launch_background_loop_sounds(current_step)
+    unlooped_background = sounds.launch_background_unloop_sounds(current_step)
+    if looped_background == 'silence' and not unlooped_background:
+        sounds.background_player.stop()
     #if we're on new step -> launch diegetics
     launch_diegetic = False
     if previous_step != current_step:
@@ -47,6 +50,7 @@ while True:
     #wait for every process to be done
     calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds()
+    sounds.finish_background_sounds(current_step)
 
     easter_eggs.reset()
     

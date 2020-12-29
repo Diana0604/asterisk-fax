@@ -3,7 +3,10 @@ import os, utils, vlc, asterisk, easter_eggs
 SOUNDS_PATH = '/fax/sounds/speaker/'
 DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
 BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
-background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
+BACKGROUND_LOOP_SOUNDS_PATH = BACKGROUND_SOUNDS_PATH + "loop/"
+BACKGROUND_UNLOOP_SOUNDS_PATH = BACKGROUND_SOUNDS_PATH + "unloop/"
+background_loop_sounds = os.listdir(BACKGROUND_LOOP_SOUNDS_PATH)
+background_unloop_sounds = os.listdir(BACKGROUND_UNLOOP_SOUNDS_PATH)
 diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
 
 background_player = vlc.MediaPlayer()
@@ -29,9 +32,9 @@ def get_diegetic_sound(step):
                 return sound
     return None
 
-def get_background_sound(step):
+def get_background_sound_loop(step):
     global previous_step
-    for sound in background_sounds:
+    for sound in background_loop_sounds:
         initial_step = sound[0] + sound[1]
         last_step = sound[3]+sound[4]
         #check if step has background sound assigned
@@ -46,7 +49,19 @@ def get_background_sound(step):
             return None
     #no background sound found -> silence
     return 'silence'
-            
+
+def get_background_sound_unloop(step):
+    global previous_step
+    for sound in background_unloop_sounds:
+        initial_step = sound[0] + sound[1]
+        last_step = sound[3]+sound[4]
+        #check if step has background sound assigned
+        if initial_step == step and previous_step != step:
+            return sound
+        if initial_step <= step and last_step >= step:
+            return 'playing'
+    return None
+
 def play_diegetic_sound(sound):
     asterisk.wait_fax_not_ringing()
     media = vlc.Media(sound)
@@ -87,15 +102,34 @@ def play_easter_egg(sound):
     easter_egg_player.play()
     easter_egg_players.append(easter_egg_player)
 
-def launch_background_sounds(step):
+def launch_background_loop_sounds(step):
     #background sounds
-    background_sound = get_background_sound(step)
+    background_sound = get_background_sound_loop(step)
     if background_sound != None:
         if background_sound == 'silence':
-            background_player.stop()
-            return
-        background_sound = BACKGROUND_SOUNDS_PATH + background_sound
+            return 'silence'
+        background_sound = BACKGROUND_LOOP_SOUNDS_PATH + background_sound
         play_background_sound(sound = background_sound)
+
+def launch_background_unloop_sounds(step):
+    background_sound = get_background_sound_unloop(step)
+    if background_sound == 'playing':
+        return True
+    if background_sound != None :
+        play_background_sound(BACKGROUND_UNLOOP_SOUNDS_PATH + background_sound)
+        return True
+    return False
+
+def finish_background_sounds(step):
+    global previous_step
+    for sound in background_unloop_sounds:
+        initial_step = sound[0] + sound[1]
+        last_step = sound[3]+sound[4]
+        #check if step has background sound assigned
+        if last_step == step:
+            while background_player.is_playing():
+                utils.countdown(1)
+
 
 def launch_diegetic_sounds(step):
     global previous_step
