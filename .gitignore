@@ -1,3 +1,4 @@
 *.img
 *.pyc
 python/__pycache__
+python/gpiozero.py
