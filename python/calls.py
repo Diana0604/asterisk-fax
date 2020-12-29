@@ -74,17 +74,14 @@ def launch_easter_eggs():
     print('found egg number')
     print(egg_number)
     if egg_number == 0:
-        return
+        return False
     call = easter_eggs.get_easter_egg_call(egg_number)
     if call == None:
-        return
+        return False
     call_file = '/fax/calls/eastereggs/' + call
     #wait for fax to be ready to receive
-    print('waiting for fax to be free')
     asterisk.wait_for_fax_free()
-    print('getting paths')
     #get call paths
-    #call_file = CALLS_PATH + call
     outgoing_call = OUTGOING_PATH + call
     #get rid of residual error
     asterisk.error()
@@ -106,3 +103,5 @@ def launch_easter_eggs():
     
     easter_eggs.call_made(egg_number)
     asterisk.add_to_database('faxegg', '0')
+    
+    return True

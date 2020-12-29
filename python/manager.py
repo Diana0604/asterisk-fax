@@ -31,7 +31,13 @@ while True:
             launch_diegetic = True
         if smoke.launch_smoke(current_step):
             launch_diegetic = True
-    #calls.launch_easter_eggs()
+    
+    if not launch_diegetic:
+        sounds.launch_easter_eggs()
+        if calls.launch_easter_eggs():
+            #TODO: make it into a wait
+            asterisk.wait_for_fax_free()
+        sounds.finish_easter_eggs_sounds()
     
     #FINISH
     #finish diegetic lights and send background
@@ -39,7 +45,6 @@ while True:
     lights.launch_background_lights(current_step)
     #wait for every process to be done
     #calls.finish_main_call(current_step)
-    sounds.finish_easter_eggs_sounds()
     sounds.finish_diegetic_sounds()
     
     #UPDATE

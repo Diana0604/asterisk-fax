@@ -64,7 +64,7 @@ def play_background_sound(sound):
     background_player.play()
     utils.countdown(1)
 
-def check_easter_eggs(diegetic_sound):
+def launch_easter_eggs():
     egg_number = int(asterisk.get_from_database("soundegg"))
     print('found egg number')
     print(egg_number)
@@ -107,10 +107,6 @@ def launch_diegetic_sounds(step):
         utils.countdown(1)
         previous_step = step
         return True
-    
-    #play easter eggs
-    #check_easter_eggs(diegetic_sound)
-    #update step so we do not replay sounds
     previous_step = step
     return False
 
@@ -121,6 +117,7 @@ def finish_easter_eggs_sounds():
         if easter_egg_player.is_playing():
             found = True
     if not found : 
+        easter_egg_players = []
         return
     asterisk.wait_for_fax_free()
     for easter_egg_player in easter_egg_players:
