@@ -30,6 +30,7 @@ def get_diegetic_sound(step):
     return None
 
 def get_background_sound(step):
+    global previous_step
     for sound in background_sounds:
         initial_step = sound[0] + sound[1]
         last_step = sound[3]+sound[4]
@@ -61,6 +62,7 @@ def play_background_sound(sound):
     background_player.stop()
     background_player.set_media(media)
     background_player.play()
+    utils.countdown(1)
 
 def check_easter_eggs(diegetic_sound):
     egg_number = int(asterisk.get_from_database("soundegg"))
@@ -85,23 +87,26 @@ def play_easter_egg(sound):
     easter_egg_player.play()
     easter_egg_players.append(easter_egg_player)
 
-def launch_sounds(step):
+def launch_background_sounds(step):
+    #background sounds
+    background_sound = get_background_sound(step)
+    if background_sound != None:
+        if background_sound == 'silence':
+            background_player.stop()
+            return
+        background_sound = BACKGROUND_SOUNDS_PATH + background_sound
+        play_background_sound(sound = background_sound)
+
+def launch_diegetic_sounds(step):
     global previous_step
     #diegetic sounds
     diegetic_sound = get_diegetic_sound(step)
     if diegetic_sound != None:
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
         play_diegetic_sound(sound = diegetic_sound)
-    #background sounds
-    background_sound = get_background_sound(step)
-    if background_sound != None:
-        if background_sound == 'silence':
-            background_player.stop()
-        else :
-            background_sound = BACKGROUND_SOUNDS_PATH + background_sound
-            play_background_sound(sound = background_sound)
+    
     #play easter eggs
-    check_easter_eggs(diegetic_sound)
+    #check_easter_eggs(diegetic_sound)
     #update step so we do not replay sounds
     previous_step = step
 

@@ -18,9 +18,15 @@ if len(previous_step) == 1:
 while True:
     current_step = asterisk.check_current_step()
     #INIT
+    
+    sounds.launch_background_sounds(current_step)
+
     #calls.launch_main_call(current_step)
+    
+    sounds.launch_diegetic_sounds(current_step)
+    
     #calls.launch_easter_eggs()
-    sounds.launch_sounds(current_step)
+    
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
     
