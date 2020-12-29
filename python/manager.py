@@ -21,12 +21,16 @@ while True:
     #make sure background sound is playing
     sounds.launch_background_sounds(current_step)
     #if we're on new step -> launch diegetics
+    launch_diegetic = False
     if previous_step != current_step:
-        print('new step: starting sounds')
-        #calls.launch_main_call(current_step)
-        sounds.launch_diegetic_sounds(current_step)
-        lights.launch_diegetic_lights(current_step)
-        smoke.launch_smoke(current_step)
+        if calls.launch_main_call(current_step):
+            launch_diegetic = True
+        if sounds.launch_diegetic_sounds(current_step):
+            launch_diegetic = True
+        if lights.launch_diegetic_lights(current_step):
+            launch_diegetic = True
+        if smoke.launch_smoke(current_step):
+            launch_diegetic = True
     #calls.launch_easter_eggs()
     
     #FINISH

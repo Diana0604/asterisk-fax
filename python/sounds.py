@@ -105,11 +105,14 @@ def launch_diegetic_sounds(step):
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
         play_diegetic_sound(sound = diegetic_sound)
         utils.countdown(1)
+        previous_step = step
+        return True
     
     #play easter eggs
     #check_easter_eggs(diegetic_sound)
     #update step so we do not replay sounds
     previous_step = step
+    return False
 
 def finish_easter_eggs_sounds():
     global easter_egg_players

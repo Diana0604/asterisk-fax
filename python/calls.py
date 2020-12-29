@@ -19,9 +19,10 @@ def launch_main_call(step):
     #get call file
     call = get_call_file(step)
     if call == None:
-        return
+        return False
     #launch call
     launch_call(call)
+    return True
 
 def finish_main_call(step):
     #get call file

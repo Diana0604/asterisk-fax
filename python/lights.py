@@ -52,10 +52,10 @@ def launch_diegetic_lights(step):
     print(previous_step)
     print(step)
     if(previous_step == step):
-        return
+        return False
     lights_file = get_diegetic_lights(step)
     if lights_file == None:
-        return
+        return False
     instructions = read_file(DIEGETIC_LIGHTS_PATH + lights_file)
     print(instructions)
     if instructions[0] == 'transition':
@@ -94,9 +94,7 @@ def launch_diegetic_lights(step):
         process = Process(target=utils.countdown, args=(2*n,))
         process.start()
         diegetic_processes.append(process)
-
-        
-    print('TODO')
+    return True
     
 def launch_background_lights(step):
     global previous_step
