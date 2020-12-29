@@ -1,5 +1,6 @@
 import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke, easter_eggs, datetime, os
-alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
+#alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
+alsaaudio.Mixer(control="Headphone").setvolume(100)
 
 now = datetime.datetime.now()
 ## yyyy/mm/dd/hh/mm
@@ -50,7 +51,7 @@ while True:
     easter_eggs.reset()
     
     #UPDATE
-    current_step = asterisk.check_current_step()
+    #current_step = asterisk.check_current_step()
     if previous_step == current_step:
         asterisk.update_step()
     previous_step = current_step
