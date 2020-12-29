@@ -18,17 +18,16 @@ if len(previous_step) == 1:
 while True:
     current_step = asterisk.check_current_step()
     #INIT
-    
+    #make sure background sound is playing
     sounds.launch_background_sounds(current_step)
-
-    #calls.launch_main_call(current_step)
-    
-    sounds.launch_diegetic_sounds(current_step)
-    
+    #if we're on new step -> launch diegetics
+    if previous_step != current_step:
+        print('new step: starting sounds')
+        #calls.launch_main_call(current_step)
+        sounds.launch_diegetic_sounds(current_step)
+        lights.launch_diegetic_lights(current_step)
+        smoke.launch_smoke(current_step)
     #calls.launch_easter_eggs()
-    
-    lights.launch_diegetic_lights(current_step)
-    smoke.launch_smoke(current_step)
     
     #FINISH
     #finish diegetic lights and send background
