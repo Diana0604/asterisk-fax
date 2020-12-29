@@ -1,5 +1,5 @@
 import calls, asterisk, utils, sounds, alsaaudio, lights, buttons, smoke, easter_eggs, datetime, os
-alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(60)
+alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
 
 now = datetime.datetime.now()
 ## yyyy/mm/dd/hh/mm
