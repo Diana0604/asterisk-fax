@@ -44,11 +44,10 @@ while True:
     lights.finish_diegetic_lights()
     lights.launch_background_lights(current_step)
     #wait for every process to be done
-    #calls.finish_main_call(current_step)
+    calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds()
     
     #UPDATE
-    #asterisk.wait_for_fax_free()
     current_step = asterisk.check_current_step()
     if previous_step == current_step:
         asterisk.update_step()
