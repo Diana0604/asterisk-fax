@@ -13,7 +13,6 @@ def start_smoke():
     led.off()
 
 def launch_smoke(step):
-    print('step')
     global current_step
     if(step == current_step):
         return False
