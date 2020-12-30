@@ -33,16 +33,14 @@ while True:
     #if we're on new step -> launch diegetics
     launch_diegetic = False
     if previous_step != current_step:
-        #calls.launch_main_call(current_step)
+        calls.launch_main_call(current_step)
         sounds.launch_diegetic_sounds(current_step)
         lights.launch_diegetic_lights(current_step)
         smoke.launch_smoke(current_step)
     
     if not diegetics_running():
+        calls.launch_easter_eggs()
         sounds.launch_easter_eggs()
-        if calls.launch_easter_eggs():
-            #TODO: make it into a wait
-            asterisk.wait_for_fax_free()
         sounds.finish_easter_eggs_sounds()
     
     #FINISH
@@ -53,10 +51,10 @@ while True:
     calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds(current_step)
 
+    asterisk.wait_for_fax_free()
     easter_eggs.reset()
     
     #UPDATE
-    current_step = asterisk.check_current_step()
     if previous_step == current_step:
         asterisk.update_step(current_step)
     previous_step = current_step
