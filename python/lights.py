@@ -76,6 +76,33 @@ class TwinkleLights:
         led.blink(on_time=1, off_time=1, fade_in_time=0, fade_out_time=0, on_color=self.on_color, off_color=self.off_color, n=int(self.time/2), background=True)
         return self.time
 
+class PulsingLights:
+    def __init__(self, instructions):
+        i = 1
+        while i < len(instructions):
+            if instructions[i] == "color":
+                Red = float(instructions[i+1])
+                Green = float(instructions[i+1])
+                Blue = float(instructions[i+3])
+                self.color = (Red, Green, Blue)
+                i = i + 3
+            i = i + 1
+    def start(self):
+        led.pulse(fade_in_time=10, fade_out_time=10, on_color=self.color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
+
+class ConstantLights:
+    def __init__(self, instructions):
+        i = 1
+        while i < len(instructions):
+            if instructions[i] == "color":
+                Red = instructions[i+1]
+                Green = instructions[i+2]
+                Blue = instructions[i+3]
+                self.color = (Red, Green, Blue)
+                i = i + 3
+            i = i + 1
+    def start(self):
+        led.color = self.color
 
 def instructions_to_lights(instructions):
     if instructions[0] == "transition":
@@ -84,6 +111,10 @@ def instructions_to_lights(instructions):
         return BlinkingLights(instructions)
     if instructions[0] == "twinkle":
         return TwinkleLights(instructions)
+    if instructions[0] == "pulse":
+        return PulsingLights(instructions)
+    if instructions [0] == "constant":
+        return ConstantLights(instructions)
 
 LIGHTS_PATH = '/fax/lights/'
 DIEGETIC_LIGHTS_PATH = LIGHTS_PATH + 'diegetic/'
@@ -149,17 +180,14 @@ def launch_background_lights(step):
     if instructions == None:
         previous_step = step
         return
+    print('read instructions')
     instructions = read_file(BACKGROUND_LIGHTS_PATH + instructions)
-    background_lights = instructions_to_lights(instructions)
-    if instructions[0] == 'pulse':
-        print('pulsating')
-        on_color = float(instructions[1]), float(instructions[2]), float(instructions[3])
-        led.pulse(fade_in_time=10, fade_out_time=10, on_color=on_color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
-    else :
-        led.color = (float(instructions[0]), float(instructions[1]), float(instructions[2]))
+    print('get background lights')
+    background_light = instructions_to_lights(instructions)
+    print('start background lights')
+    background_light.start()
+    print('continue')
     previous_step = step
-    print('previous_step ' + previous_step)
-    print('step' + step)
 
     
 def finish_diegetic_lights():
