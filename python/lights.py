@@ -16,6 +16,7 @@ BACKGROUND_LIGHTS_PATH = LIGHTS_PATH + 'background/'
 background_lights = os.listdir(BACKGROUND_LIGHTS_PATH)
 diegetic_lights = os.listdir(DIEGETIC_LIGHTS_PATH)
 
+DIEGETIC_LIGHTS_ON = False
 
 led.color = (0,0,0)
 
@@ -94,7 +95,8 @@ def launch_diegetic_lights(step):
         process = Process(target=utils.countdown, args=(2*n,))
         process.start()
         diegetic_processes.append(process)
-    return True
+    global DIEGETIC_LIGHTS_ON
+    DIEGETIC_LIGHTS_ON = True
     
 def launch_background_lights(step):
     global previous_step
@@ -118,6 +120,8 @@ def launch_background_lights(step):
     
 def finish_diegetic_lights():
     global diegetic_processes
+    global DIEGETIC_LIGHTS_ON
     for process in diegetic_processes:
         process.join()
     diegetic_processes = []
+    DIEGETIC_LIGHTS_ON = False

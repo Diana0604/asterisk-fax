@@ -8,7 +8,7 @@ OUTGOING_PATH = '/var/spool/asterisk/outgoing/'
 CALLS_PATH = '/fax/calls/'
 call_files = os.listdir(CALLS_PATH)
 
-NOT_CALLING = False
+DIEGETIC_CALLS_ON = False
 
 def get_call_file(step):
     for call_file in call_files:
@@ -16,21 +16,25 @@ def get_call_file(step):
             return call_file
 
 def launch_main_call(step):
+    global DIEGETIC_CALLS_ON
     #get call file
     call = get_call_file(step)
     if call == None:
         return False
     #launch call
+    DIEGETIC_CALLS_ON = True
     launch_call(call)
     return True
 
 def finish_main_call(step):
+    global DIEGETIC_CALLS_ON
     #get call file
     call = get_call_file(step)
     if call == None:
         return
     #finish call
     finish_call(call)
+    DIEGETIC_CALLS_ON = False
 
 def launch_call(call):
     #wait for fax to be ready to receive
