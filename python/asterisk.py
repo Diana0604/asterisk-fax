@@ -79,33 +79,33 @@ def check_current_step():
     database_output = os.popen("asterisk -rx 'database get WESTILLFAX step'").read()
     return get_database_value(database_output)
 
-def update_step():
+def update_step(current_step):
     print('updating step: ' + check_current_step())
-    if check_current_step() == '29':
+    if current_step == '29':
         add_to_database('step', '30')
         return
-    if check_current_step() == '22':
+    if current_step == '22':
         add_to_database('step', '23')
         return
-    if check_current_step() == '20':
+    if current_step == '20':
         add_to_database('step', '21')
         return
-    if check_current_step() == '19':
+    if current_step == '19':
         add_to_database('step', '20')
         return
-    if check_current_step() == '18':
+    if current_step == '18':
         add_to_database('step', '19')
         return
-    if check_current_step() == '15':
+    if current_step == '15':
         add_to_database('step', '16')
         return
-    if check_current_step() == '13':
+    if current_step == '13':
         add_to_database('step', '14')
         return
-    if check_current_step() == '01':
+    if current_step == '01':
         add_to_database('step', '02')
         return
-    if check_current_step() == '00':
+    if current_step == '00':
         add_to_database('step', '01')
         return
 

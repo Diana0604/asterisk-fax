@@ -57,7 +57,7 @@ while True:
     #UPDATE
     #current_step = asterisk.check_current_step()
     if previous_step == current_step:
-        asterisk.update_step()
+        asterisk.update_step(current_step)
     previous_step = current_step
 
     
