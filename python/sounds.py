@@ -24,7 +24,8 @@ def get_diegetic_sound(step):
             if step == '15':
                 if sound.endswith(asterisk.get_from_database('agent') + '.wav'):
                     return sound
-            return sound
+            else:
+                return sound
     return None
 
 def get_background_sound(step):
