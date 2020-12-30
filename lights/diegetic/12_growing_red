@@ -1,4 +1,4 @@
 twinkle
-1 0 0.2
-1 0 0
-40
+on_color 1 0 0.2
+off_color 1 0 0
+time 80

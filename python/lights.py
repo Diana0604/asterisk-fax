@@ -9,6 +9,81 @@ Blue = 27
 
 led = RGBLED(Red, Green, Blue)
 
+class TransitioningLights:
+    def __init__(self, instructions):
+        i = 1
+        while i < len(instructions):
+            if instructions[i] == "from":
+                Red = float(instructions[i+1])
+                Green = float(instructions[i+2])
+                Blue = float(instructions[i+3])
+                self.init = (Red, Green, Blue)
+                i = i + 3
+            if instructions[i] == "to":
+                Red = float(instructions[i+1])
+                Green = float(instructions[i+2])
+                Blue = float(instructions[i+3])
+                self.final = (Red, Green, Blue)
+                i = i + 3
+            if instructions[i] == "time":
+                self.time = float(instructions[i+1])
+                i = i + 1
+            i = i + 1
+    def start(self):
+        led.pulse(fade_in_time=0, fade_out_time=self.time, on_color=self.init, off_color=self.final, n=1, background=True)
+        return self.time
+
+class BlinkingLights:
+    def __init__(self, instructions):
+        i = 1
+        while i < len(instructions):
+            if instructions[i] == "color":
+                Red = float(instructions[i+1])
+                Green = float(instructions[i+2])
+                Blue = float(instructions[i+3])
+                self.color = (Red, Green, Blue)
+                i = i + 3
+            if instructions[i] == "times":
+                self.times = int(instructions[i+1])
+                self.time = 4*self.times
+                i = i + 1
+            i = i + 1
+    def start(self):
+        led.blink(on_time=3, off_time=1, fade_in_time=0, fade_out_time=0, on_color=self.color, off_color=led.color, n=self.times, background=True)
+        return self.time
+
+class TwinkleLights:
+    def __init__(self, instructions):
+        i = 1
+        while i < len(instructions):
+            if instructions[i] == "on_color":
+                on_Red = float(instructions[i+1])
+                on_Green = float(instructions[i+2])
+                on_Blue = float(instructions[i+3])
+                self.on_color = (on_Red, on_Green, on_Blue)
+                i = i + 3
+            if instructions[i] == "off_color":
+                off_Red = float(instructions[i+1])
+                off_Green = float(instructions[i+2])
+                off_Blue = float(instructions[i+3])
+                self.off_color = (off_Red, off_Green, off_Blue)
+                i = i + 3
+            if instructions[i] == "time":
+                self.time = float(instructions[i+1])
+                i = i + 1
+            i = i + 1
+    def start(self):
+        led.blink(on_time=1, off_time=1, fade_in_time=0, fade_out_time=0, on_color=self.on_color, off_color=self.off_color, n=int(self.time/2), background=True)
+        return self.time
+
+
+def instructions_to_lights(instructions):
+    if instructions[0] == "transition":
+        return TransitioningLights(instructions)
+    if instructions[0] == "blink":
+        return BlinkingLights(instructions)
+    if instructions[0] == "twinkle":
+        return TwinkleLights(instructions)
 
 LIGHTS_PATH = '/fax/lights/'
 DIEGETIC_LIGHTS_PATH = LIGHTS_PATH + 'diegetic/'
@@ -58,43 +133,11 @@ def launch_diegetic_lights(step):
     if lights_file == None:
         return False
     instructions = read_file(DIEGETIC_LIGHTS_PATH + lights_file)
-    print(instructions)
-    if instructions[0] == 'transition':
-        print('transitioning')
-        init_red = float(instructions[1])
-        init_green = float(instructions[2])
-        init_blue = float(instructions[3])
-        final_red = float(instructions[4])
-        final_green = float(instructions[5])
-        final_blue = float(instructions[6])
-        led.color = (1, 0, 0)
-        led.pulse(fade_in_time=0, fade_out_time=int(instructions[7]), on_color=(init_red, init_green, init_blue), off_color=(final_red, final_green, final_blue), n=1, background=True)
-        process = Process(target=utils.countdown, args=(int(instructions[7]),))
-        process.start()
-        diegetic_processes.append(process)
-    if instructions[0] == 'blink':
-        print('blinking')
-        blink_red = float(instructions[1])
-        blink_green = float(instructions[2])
-        blink_blue = float(instructions[3])
-        n = int(instructions[4])
-        led.blink(on_time=3, off_time=1, fade_in_time=0, fade_out_time=0, on_color=(blink_red, blink_green, blink_blue), off_color=led.color, n=n, background=True)
-        process = Process(target=utils.countdown, args=(4*n,))
-        process.start()
-        diegetic_processes.append(process)
-    if instructions[0] == 'twinkle':
-        print('blinking')
-        on_red = float(instructions[1])
-        on_green = float(instructions[2])
-        on_blue = float(instructions[3])
-        off_red = float(instructions[4])
-        off_green = float(instructions[5])
-        off_blue = float(instructions[6])
-        n = int(instructions[7])
-        led.blink(on_time=1, off_time=1, fade_in_time=0, fade_out_time=0, on_color=(on_red, on_green, on_blue), off_color=(off_red, off_green, off_blue), n=n, background=True)
-        process = Process(target=utils.countdown, args=(2*n,))
-        process.start()
-        diegetic_processes.append(process)
+    diegetic_light = instructions_to_lights(instructions)
+    time = diegetic_light.start()
+    process = Process(target=utils.countdown, args=(time,))
+    process.start()
+    diegetic_processes.append(process)
     global DIEGETIC_LIGHTS_ON
     DIEGETIC_LIGHTS_ON = True
     
@@ -107,6 +150,7 @@ def launch_background_lights(step):
         previous_step = step
         return
     instructions = read_file(BACKGROUND_LIGHTS_PATH + instructions)
+    background_lights = instructions_to_lights(instructions)
     if instructions[0] == 'pulse':
         print('pulsating')
         on_color = float(instructions[1]), float(instructions[2]), float(instructions[3])

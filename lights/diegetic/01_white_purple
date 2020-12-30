@@ -1,4 +1,4 @@
 transition
-1 1 1
-1 0 0.2
-8
+from 1 1 1
+to 1 0 0.2
+time 8
