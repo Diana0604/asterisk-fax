@@ -56,19 +56,9 @@ def launch_easter_eggs():
     sound = easter_eggs.get_easter_egg_sound(egg_number)
     if sound == None:
         return
-    play_easter_egg(sound)
+    play_sound(sound = sound, easteregg=True)
     print ('is playing')
     asterisk.add_to_database("soundegg", "0")
-
-def play_easter_egg(sound):
-    global easter_egg_player
-    asterisk.wait_fax_not_ringing()
-    media = vlc.Media(sound)
-    easter_egg_player = vlc.MediaPlayer()
-    easter_egg_player.set_media(media)
-    background_player.audio_set_volume(50)
-    easter_egg_player.audio_set_volume(100)
-    easter_egg_player.play()
 
 def launch_background_sounds(step):
     #background sounds
