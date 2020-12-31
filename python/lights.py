@@ -164,6 +164,8 @@ def launch_diegetic_lights(step):
     if lights_file == None:
         return False
     instructions = read_file(DIEGETIC_LIGHTS_PATH + lights_file)
+    if len(instructions) == 0:
+        return False
     diegetic_light = instructions_to_lights(instructions)
     time = diegetic_light.start()
     process = Process(target=utils.countdown, args=(time,))
