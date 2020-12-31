@@ -62,6 +62,9 @@ while True:
         asterisk.update_step(current_step)
     previous_step = current_step
 
+    #CHECK IF CONNECTED AND RECONNECT OTHERWISE
+    utils.check_for_wifi()
+
     
 
 
