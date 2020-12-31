@@ -16,3 +16,11 @@ def countdown(secs):
         time.sleep(1)
         print(secs)
         secs = secs - 1
+
+def check_for_wifi():
+    stream = os.popen("ifconfig wlan0")
+    time.sleep(1)
+    output = stream.read()
+    if output.find("inet") == -1:
+        print('RECONNECTING')
+        os.popen("wpa_cli -i wlan0 reconfigure")
