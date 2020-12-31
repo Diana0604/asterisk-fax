@@ -46,14 +46,6 @@ def get_background_sound(step):
     #no background sound found -> silence
     return 'silence'
 
-def play_diegetic_sound(sound):
-    asterisk.wait_fax_not_ringing()
-    media = vlc.Media(sound)
-    diegetic_player.set_media(media)
-    background_player.audio_set_volume(50)
-    diegetic_player.audio_set_volume(100)
-    diegetic_player.play()
-
 def play_background_sound(sound):
     media = vlc.Media(sound)
     background_player.stop()
@@ -100,7 +92,9 @@ def launch_diegetic_sounds(step):
     diegetic_sound = get_diegetic_sound(step)
     if diegetic_sound != None:
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
-        play_diegetic_sound(sound = diegetic_sound)
+        background_player.audio_set_volume(50)
+        diegetic_player.audio_set_volume(100)
+        play_sound(sound = diegetic_sound, diegetic = True)
         utils.countdown(1)
     previous_step = step
 
