@@ -109,13 +109,18 @@ def finish_diegetic_sounds(step):
             break
     background_player.audio_set_volume(100)
 
-def play_sound(sound, diegetic = False, background = False):
-    player_wrapper = None
+def get_player_wrapper(diegetic, background, easteregg):
     player_wrapper = [vlc.MediaPlayer()]
+    if easteregg :
+        player_wrapper = [easter_egg_player]
     if diegetic :
         player_wrapper = [diegetic_player]
     if background :
         player_wrapper = [background_player]
+    return player_wrapper
+
+def play_sound(sound, diegetic = False, background = False, easteregg = False):
+    player_wrapper = get_player_wrapper(diegetic, background, easteregg)
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
