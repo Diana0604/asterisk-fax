@@ -113,7 +113,8 @@ def finish_diegetic_sounds(step):
         if last_step == step:
             while diegetic_player.is_playing():
                 utils.countdown(1)
-            return
+            break
+    background_player.audio_set_volume(100)
 
 def play_sound(sound, diegetic = False, background = False):
     player_wrapper = None
