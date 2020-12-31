@@ -121,7 +121,6 @@ def finish_easter_eggs_sounds():
     easter_egg_players = []
 
 def finish_diegetic_sounds(step):
-    global diegetic_players
     for sound in diegetic_sounds:
         last_step = sound[3]+sound[4]
         if last_step == step:
@@ -129,20 +128,27 @@ def finish_diegetic_sounds(step):
                 utils.countdown(1)
             return
 
-def play_pre_show():
-    player = vlc.MediaPlayer()
-    media = vlc.Media('/fax/sounds/speaker/pre_show_message.wav')
-    player.set_media(media)
-    player.play()
+def play_sound(sound, diegetic = False, background = False):
+    player_wrapper = None
+    player_wrapper = [vlc.MediaPlayer()]
+    if diegetic :
+        player_wrapper = [diegetic_player]
+    if background :
+        player_wrapper = [background_player]
+    media = vlc.Media(sound)
+    player_wrapper[0].set_media(media)
+    player_wrapper[0].play()
     utils.countdown(1)
     duration = media.get_duration()/1000
+    return duration
+         
+
+def play_pre_show():
+    sound = '/fax/sounds/speaker/pre_show_message.wav'
+    duration = play_sound(sound)
     utils.countdown(duration)
 
 def play_rescue():
-    player = vlc.MediaPlayer()
-    media = vlc.Media('/fax/sounds/speaker/buttonreboot.wav')
-    player.set_media(media)
-    player.play()
-    utils.countdown(1)
-    duration = media.get_duration()/1000
+    sound = '/fax/sounds/speaker/buttonreboot.wav'
+    duration = play_sound(sound)
     utils.countdown(duration)
