@@ -46,13 +46,6 @@ def get_background_sound(step):
     #no background sound found -> silence
     return 'silence'
 
-def play_background_sound(sound):
-    media = vlc.Media(sound)
-    background_player.stop()
-    background_player.set_media(media)
-    background_player.play()
-    utils.countdown(1)
-
 def launch_easter_eggs():
     egg_number = int(asterisk.get_from_database("soundegg"))
     print('found egg number')
@@ -84,7 +77,7 @@ def launch_background_sounds(step):
             background_player.stop()
             return
         background_sound = BACKGROUND_SOUNDS_PATH + background_sound
-        play_background_sound(sound = background_sound)
+        play_sound(sound = background_sound, background=True)
 
 def launch_diegetic_sounds(step):
     global previous_step
@@ -135,7 +128,6 @@ def play_sound(sound, diegetic = False, background = False):
     utils.countdown(1)
     duration = media.get_duration()/1000
     return duration
-         
 
 def play_pre_show():
     sound = '/fax/sounds/speaker/pre_show_message.wav'
