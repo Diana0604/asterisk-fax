@@ -12,7 +12,8 @@ background_player = vlc.MediaPlayer()
 background_player.audio_set_volume(100)
 diegetic_player = vlc.MediaPlayer()
 diegetic_player.audio_set_volume(100)
-easter_egg_players = []
+easter_egg_player = vlc.MediaPlayer()
+easter_egg_player.audio_set_volume(100)
 
 def get_diegetic_sound(step):
     #if diegetic sound has already played do not play again
@@ -60,6 +61,7 @@ def launch_easter_eggs():
     asterisk.add_to_database("soundegg", "0")
 
 def play_easter_egg(sound):
+    global easter_egg_player
     asterisk.wait_fax_not_ringing()
     media = vlc.Media(sound)
     easter_egg_player = vlc.MediaPlayer()
@@ -67,7 +69,6 @@ def play_easter_egg(sound):
     background_player.audio_set_volume(50)
     easter_egg_player.audio_set_volume(100)
     easter_egg_player.play()
-    easter_egg_players.append(easter_egg_player)
 
 def launch_background_sounds(step):
     #background sounds
@@ -92,20 +93,12 @@ def launch_diegetic_sounds(step):
     previous_step = step
 
 def finish_easter_eggs_sounds():
-    global easter_egg_players
-    found = False
-    for easter_egg_player in easter_egg_players:
-        if easter_egg_player.is_playing():
-            found = True
-    if not found : 
-        easter_egg_players = []
+    global easter_egg_player
+    if not easter_egg_player.is_playing():
         return
     asterisk.wait_for_fax_free()
-    for easter_egg_player in easter_egg_players:
-        while easter_egg_player.is_playing():
-            easter_egg_player.stop()
+    easter_egg_player.stop()
     background_player.audio_set_volume(100)
-    easter_egg_players = []
 
 def finish_diegetic_sounds(step):
     for sound in diegetic_sounds:
