@@ -137,3 +137,12 @@ def play_pre_show():
     utils.countdown(1)
     duration = media.get_duration()/1000
     utils.countdown(duration)
+
+def play_rescue():
+    player = vlc.MediaPlayer()
+    media = vlc.Media('/fax/sounds/speaker/buttonreboot.wav')
+    player.set_media(media)
+    player.play()
+    utils.countdown(1)
+    duration = media.get_duration()/1000
+    utils.countdown(duration)
