@@ -95,9 +95,9 @@ class ConstantLights:
         i = 1
         while i < len(instructions):
             if instructions[i] == "color":
-                Red = instructions[i+1]
-                Green = instructions[i+2]
-                Blue = instructions[i+3]
+                Red = float(instructions[i+1])
+                Green = float(instructions[i+2])
+                Blue = float(instructions[i+3])
                 self.color = (Red, Green, Blue)
                 i = i + 3
             i = i + 1
