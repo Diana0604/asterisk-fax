@@ -16,8 +16,8 @@ previous_step = str(int(asterisk.check_current_step()) - 1)
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
 
-if previous_step != '-1':
-    sounds.play_rescue()
+#if previous_step != '-1':
+    #sounds.play_rescue()
 
 def diegetics_running():
     if sounds.diegetic_player.is_playing():

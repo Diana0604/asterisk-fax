@@ -1,4 +1,4 @@
 transition
-from 1 0.75 0.79
+from 0.8 0 0.5
 to 0 0 0
 time 20
