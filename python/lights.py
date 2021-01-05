@@ -100,8 +100,7 @@ class PulsingLights:
                 i = i + 3
             i = i + 1
     def start(self):
-        led.color = (0,0,0)
-        led.pulse(fade_in_time=4, fade_out_time=4, on_color=self.color, off_color=(0, 0, 0), n=None, background=True)
+        led.pulse(fade_in_time=5, fade_out_time=5, on_color=self.color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
 
 class ConstantLights:
     def __init__(self, instructions):
@@ -215,11 +214,10 @@ def finish_diegetic_lights():
     global DIEGETIC_LIGHTS_ON
     for process in diegetic_processes:
         process.join()
-        utils.sleep(1)
     diegetic_processes = []
     for transition in unfinished_transitions:
         while transition.number > 0:
             time = transition.start()
-            utils.countdown(time + 1)
+            utils.countdown(time)
     unfinished_transitions = []
     DIEGETIC_LIGHTS_ON = False
