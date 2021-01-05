@@ -1,4 +1,9 @@
-twinkle
-on_color 1 0 0.2
-off_color 1 1 1
-time 80
+transition
+number 3
+from 0.8 0 0.5
+to 0 0 1
+from 0 0 1
+to 1 0 0.2
+from 1 0 0.2
+to 1 1 1
+time 99
