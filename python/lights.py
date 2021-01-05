@@ -94,7 +94,7 @@ class PulsingLights:
         while i < len(instructions):
             if instructions[i] == "color":
                 Red = float(instructions[i+1])
-                Green = float(instructions[i+1])
+                Green = float(instructions[i+2])
                 Blue = float(instructions[i+3])
                 self.color = (Red, Green, Blue)
                 i = i + 3
