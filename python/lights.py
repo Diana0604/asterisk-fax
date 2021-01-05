@@ -12,25 +12,37 @@ led = RGBLED(Red, Green, Blue)
 class TransitioningLights:
     def __init__(self, instructions):
         i = 1
-        while i < len(instructions):
+        self.number = 1
+        if instructions[i] == "number":
+            self.number = int(instructions[i+1])
+            i = i + 2
+        if instructions[i] == "time":
+            self.time = float(instructions[i+1])/float(self.number)
+            i = i + 2
+        self.iterations = []
+        for n in range(0, self.number):
+            new_transition = {}
             if instructions[i] == "from":
                 Red = float(instructions[i+1])
                 Green = float(instructions[i+2])
                 Blue = float(instructions[i+3])
-                self.init = (Red, Green, Blue)
-                i = i + 3
+                new_transition["init"] = (Red, Green, Blue)
+                i = i + 4
             if instructions[i] == "to":
                 Red = float(instructions[i+1])
                 Green = float(instructions[i+2])
                 Blue = float(instructions[i+3])
-                self.final = (Red, Green, Blue)
+                new_transition["final"] = (Red, Green, Blue)
                 i = i + 3
-            if instructions[i] == "time":
-                self.time = float(instructions[i+1])
-                i = i + 1
+            self.iterations.append(new_transition)
             i = i + 1
+        if instructions[i] == "time":
+            self.time = float(instructions[i+1])/self.number
     def start(self):
-        led.pulse(fade_in_time=0, fade_out_time=self.time, on_color=self.init, off_color=self.final, n=1, background=True)
+        transition = self.iterations[0]
+        led.pulse(fade_in_time=0, fade_out_time=self.time, on_color=transition["init"], off_color=transition["final"], n=1, background=True)
+        self.number = self.number - 1
+        self.iterations.pop(0)
         return self.time
 
 class BlinkingLights:
@@ -128,6 +140,7 @@ led.color = (0,0,0)
 
 previous_step = None
 diegetic_processes = []
+unfinished_transitions = []
 
 def get_diegetic_lights(step):
     if previous_step == step:
@@ -170,6 +183,8 @@ def launch_diegetic_lights(step):
     time = diegetic_light.start()
     process = Process(target=utils.countdown, args=(time,))
     process.start()
+    if diegetic_light.number != None and diegetic_light.number > 0:
+        unfinished_transitions.append(diegetic_light)
     diegetic_processes.append(process)
     global DIEGETIC_LIGHTS_ON
     DIEGETIC_LIGHTS_ON = True
@@ -194,8 +209,14 @@ def launch_background_lights(step):
     
 def finish_diegetic_lights():
     global diegetic_processes
+    global unfinished_transitions
     global DIEGETIC_LIGHTS_ON
     for process in diegetic_processes:
         process.join()
     diegetic_processes = []
+    for transition in unfinished_transitions:
+        while transition.number > 0:
+            time = transition.start()
+            utils.countdown(time)
+    unfinished_transitions = []
     DIEGETIC_LIGHTS_ON = False
