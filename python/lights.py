@@ -88,7 +88,7 @@ class PulsingLights:
                 i = i + 3
             i = i + 1
     def start(self):
-        led.pulse(fade_in_time=10, fade_out_time=10, on_color=self.color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
+        led.pulse(fade_in_time=2, fade_out_time=2, on_color=self.color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
 
 class ConstantLights:
     def __init__(self, instructions):
