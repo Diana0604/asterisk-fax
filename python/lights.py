@@ -169,6 +169,7 @@ from multiprocessing import Process
 
 def launch_diegetic_lights(step):
     global previous_step
+    global diegetic_processes
     print(previous_step)
     print(step)
     if(previous_step == step):
@@ -213,10 +214,11 @@ def finish_diegetic_lights():
     global DIEGETIC_LIGHTS_ON
     for process in diegetic_processes:
         process.join()
+        utils.sleep(1)
     diegetic_processes = []
     for transition in unfinished_transitions:
         while transition.number > 0:
             time = transition.start()
-            utils.countdown(time)
+            utils.countdown(time + 1)
     unfinished_transitions = []
     DIEGETIC_LIGHTS_ON = False
