@@ -13,6 +13,7 @@ if show_date > now:
 
 #sounds.update_database()
 previous_step = str(int(asterisk.check_current_step()) - 1)
+current_step = asterisk.check_current_step()
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
 
@@ -28,7 +29,7 @@ def diegetics_running():
         return True
     return False
 
-while True:
+while current_step != "30":
     current_step = asterisk.check_current_step()
     #INIT
     #make sure background sound is playing
@@ -65,7 +66,17 @@ while True:
     #CHECK IF CONNECTED AND RECONNECT OTHERWISE
     utils.check_for_wifi()
 
-    
+now = datetime.datetime.now()
+finish_time = now + datetime.timedelta(minutes=30)
 
+lights.launch_background_lights(current_step)
 
-#print('END OF PROGRAM')
+while datetime.datetime.now() < finish_time:
+        calls.launch_easter_eggs()
+        sounds.launch_easter_eggs()
+        sounds.finish_easter_eggs_sounds()
+
+lights.launch_diegetic_lights(current_step)
+asterisk.update_step(current_step)
+
+print('END OF PROGRAM')

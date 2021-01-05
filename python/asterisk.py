@@ -81,6 +81,9 @@ def check_current_step():
 
 def update_step(current_step):
     print('updating step: ' + check_current_step())
+    if current_step == '30':
+        add_to_database('step', '00')
+        return
     if current_step == '29':
         add_to_database('step', '30')
         return
