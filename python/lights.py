@@ -94,14 +94,13 @@ class PulsingLights:
         while i < len(instructions):
             if instructions[i] == "color":
                 Red = float(instructions[i+1])
-                Green = float(instructions[i+1])
+                Green = float(instructions[i+2])
                 Blue = float(instructions[i+3])
                 self.color = (Red, Green, Blue)
                 i = i + 3
             i = i + 1
     def start(self):
-        led.color = (0,0,0)
-        led.pulse(fade_in_time=2, fade_out_time=2, on_color=self.color, off_color=(0, 0, 0), n=None, background=True)
+        led.pulse(fade_in_time=5, fade_out_time=5, on_color=self.color, off_color=(0.1, 0.1, 0.1), n=None, background=True)
 
 class ConstantLights:
     def __init__(self, instructions):
@@ -215,11 +214,10 @@ def finish_diegetic_lights():
     global DIEGETIC_LIGHTS_ON
     for process in diegetic_processes:
         process.join()
-        utils.sleep(1)
     diegetic_processes = []
     for transition in unfinished_transitions:
         while transition.number > 0:
             time = transition.start()
-            utils.countdown(time + 1)
+            utils.countdown(time)
     unfinished_transitions = []
     DIEGETIC_LIGHTS_ON = False
