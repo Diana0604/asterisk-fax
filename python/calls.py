@@ -107,6 +107,6 @@ def launch_easter_eggs():
     
     easter_eggs.call_made(egg_number)
     asterisk.add_to_database('faxegg', '0')
-    asterisk.add_to_database('faxegg' + str(egg_number), 'DONE')
+    asterisk.add_to_database('faxegg' + str(egg_number), '1')
     
     return True
