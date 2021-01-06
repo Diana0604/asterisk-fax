@@ -69,7 +69,6 @@ def launch_diegetic_sounds(step):
         background_player.audio_set_volume(50)
         diegetic_player.audio_set_volume(100)
         play_sound(sound = diegetic_sound, diegetic = True)
-        utils.countdown(1)
     previous_step = step
 
 def launch_easter_eggs():
@@ -120,7 +119,6 @@ def play_sound(sound, diegetic = False, background = False, easteregg = False):
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
-    utils.countdown(1)
     duration = media.get_duration()/1000
     return duration
 
