@@ -135,3 +135,6 @@ def error():
 
 if not database_exists('step'):
     add_to_database('step', '00')
+
+def resest_easter_eggs():
+    add_to_database('faxegg11', '0')

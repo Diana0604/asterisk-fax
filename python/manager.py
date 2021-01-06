@@ -17,6 +17,8 @@ current_step = asterisk.check_current_step()
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
 
+asterisk.resest_easter_eggs()
+
 #if previous_step != '-1':
     #sounds.play_rescue()
 
