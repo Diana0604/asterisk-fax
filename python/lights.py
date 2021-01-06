@@ -47,6 +47,7 @@ class TransitioningLights:
 
 class BlinkingLights:
     def __init__(self, instructions):
+        self.number = None
         i = 1
         while i < len(instructions):
             if instructions[i] == "color":
@@ -67,6 +68,7 @@ class BlinkingLights:
 class TwinkleLights:
     def __init__(self, instructions):
         i = 1
+        self.number = None
         while i < len(instructions):
             if instructions[i] == "on_color":
                 on_Red = float(instructions[i+1])
@@ -91,6 +93,7 @@ class TwinkleLights:
 class PulsingLights:
     def __init__(self, instructions):
         i = 1
+        self.number = None
         while i < len(instructions):
             if instructions[i] == "color":
                 Red = float(instructions[i+1])
