@@ -64,6 +64,7 @@ def launch_diegetic_sounds(step):
     #diegetic sounds
     diegetic_sound = get_diegetic_sound(step)
     if diegetic_sound != None:
+        asterisk.wait_fax_not_ringing()
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
         background_player.audio_set_volume(50)
         diegetic_player.audio_set_volume(100)
@@ -80,6 +81,7 @@ def launch_easter_eggs():
     sound = easter_eggs.get_easter_egg_sound(egg_number)
     if sound == None:
         return
+    asterisk.wait_fax_not_ringing()
     play_sound(sound = sound, easteregg=True)
     print ('is playing')
     asterisk.add_to_database("soundegg", "0")
