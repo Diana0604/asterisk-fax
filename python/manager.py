@@ -11,7 +11,6 @@ if show_date > now:
     os.system('poweroff')
     exit()
 
-#sounds.update_database()
 previous_step = str(int(asterisk.check_current_step()) - 1)
 current_step = asterisk.check_current_step()
 if len(previous_step) == 1:
