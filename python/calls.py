@@ -38,9 +38,7 @@ def finish_main_call(step):
 
 def launch_call(call):
     #wait for fax to be ready to receive
-    print('waiting for fax to be free')
     asterisk.wait_for_fax_free()
-    print('getting paths')
     #get call paths
     call_file = CALLS_PATH + call
     outgoing_call = OUTGOING_PATH + call
@@ -50,7 +48,6 @@ def launch_call(call):
     #make call
     copyfile( call_file, outgoing_call)
     #wait for call to begin
-    print('waiting for fax to be busy')
     success = asterisk.wait_for_fax_busy()
 
     #check if error
@@ -89,7 +86,6 @@ def launch_easter_eggs():
     outgoing_call = OUTGOING_PATH + call
     #get rid of residual error
     asterisk.error()
-
     #make call
     copyfile( call_file, outgoing_call)
     #wait for call to begin
@@ -101,12 +97,10 @@ def launch_easter_eggs():
         utils.countdown(3)
         return launch_easter_eggs()
         
-
     #remove file from outgoing folder
     utils.remove_files_from(OUTGOING_PATH)
     
     easter_eggs.call_made(egg_number)
     asterisk.add_to_database('faxegg', '0')
     asterisk.add_to_database('faxegg' + str(egg_number), '1')
-    
     return True

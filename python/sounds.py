@@ -73,18 +73,16 @@ def launch_diegetic_sounds(step):
 
 def launch_easter_eggs(fax = False):
     egg_number = int(asterisk.get_from_database("soundegg"))
+    if egg_number == 0:
+         return
     if not fax and easter_eggs.is_fax(egg_number):
         return
-    print('found egg number')
     print(egg_number)
-    if egg_number == 0:
-        return
     sound = easter_eggs.get_easter_egg_sound(egg_number)
     if sound == None:
         return
     asterisk.wait_fax_not_ringing()
     play_sound(sound = sound, easteregg=True)
-    print ('is playing')
     asterisk.add_to_database("soundegg", "0")
 
 #FINISH
