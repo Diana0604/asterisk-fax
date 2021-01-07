@@ -44,7 +44,8 @@ while current_step != "30":
         smoke.launch_smoke(current_step)
     
     if not diegetics_running():
-        if calls.launch_easter_eggs() :
+        call_made = calls.launch_easter_eggs()
+        if call_made :
             sounds.launch_easter_eggs(fax = True)
         else :
             sounds.launch_easter_eggs(fax = False)
@@ -75,8 +76,10 @@ finish_time = now + datetime.timedelta(minutes=30)
 lights.launch_background_lights(current_step)
 
 while datetime.datetime.now() < finish_time:
-        calls.launch_easter_eggs()
-        sounds.launch_easter_eggs()
+        if calls.launch_easter_eggs():
+            sounds.launch_easter_eggs(fax = True)
+        else:
+            sounds.launch_easter_eggs(fax = False)
         sounds.finish_easter_eggs_sounds()
 
 lights.launch_diegetic_lights(current_step)
