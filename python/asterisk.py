@@ -138,3 +138,9 @@ if not database_exists('step'):
 
 def resest_easter_eggs():
     add_to_database('faxegg11', '0')
+    add_to_database('faxegg12', '0')
+    add_to_database('faxegg14', '0')
+    add_to_database('faxegg19', '0')
+    add_to_database('faxegg22', '0')
+    add_to_database('faxegg25', '0')
+    add_to_database('faxegg26', '0')
