@@ -44,8 +44,10 @@ while current_step != "30":
         smoke.launch_smoke(current_step)
     
     if not diegetics_running():
-        calls.launch_easter_eggs()
-        sounds.launch_easter_eggs()
+        if calls.launch_easter_eggs() :
+            sounds.launch_easter_eggs(fax = True)
+        else :
+            sounds.launch_easter_eggs(fax = False)
         sounds.finish_easter_eggs_sounds()
     
     #FINISH

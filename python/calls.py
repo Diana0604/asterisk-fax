@@ -99,8 +99,8 @@ def launch_easter_eggs():
     #check if error
     if not success:
         utils.countdown(3)
-        launch_easter_eggs()
-        return
+        return launch_easter_eggs()
+        
 
     #remove file from outgoing folder
     utils.remove_files_from(OUTGOING_PATH)

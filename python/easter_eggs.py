@@ -68,6 +68,13 @@ def get_easter_egg_call(egg_number):
 def call_made(egg_number):
     done_faxes.append(egg_number)
 
+FAXES = [11, 12, 14, 19, 22]
+
+def is_fax(egg_number):
+    if egg_number in FAXES:
+        return True
+    return False
+
 def reset():
     asterisk.add_to_database("soundegg","0")
     asterisk.add_to_database("faxegg","0")
