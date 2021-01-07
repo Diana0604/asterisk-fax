@@ -36,6 +36,12 @@ def launch_diegetics():
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
 
+def launch_easter_eggs():
+    if calls.launch_easter_eggs():
+        sounds.launch_easter_eggs(fax = True)
+    else:
+        sounds.launch_easter_eggs(fax = False)
+    sounds.finish_easter_eggs_sounds()
 
 while current_step != "30":
     current_step = asterisk.check_current_step()
@@ -48,12 +54,7 @@ while current_step != "30":
         launch_diegetics()
 
     if not diegetics_running():
-        call_made = calls.launch_easter_eggs()
-        if call_made :
-            sounds.launch_easter_eggs(fax = True)
-        else :
-            sounds.launch_easter_eggs(fax = False)
-        sounds.finish_easter_eggs_sounds()
+        launch_easter_eggs()
     
     #FINISH
     #finish diegetic lights and send background
@@ -80,11 +81,7 @@ finish_time = now + datetime.timedelta(minutes=30)
 lights.launch_background_lights(current_step)
 
 while datetime.datetime.now() < finish_time:
-        if calls.launch_easter_eggs():
-            sounds.launch_easter_eggs(fax = True)
-        else:
-            sounds.launch_easter_eggs(fax = False)
-        sounds.finish_easter_eggs_sounds()
+    launch_easter_eggs()
 
 lights.launch_diegetic_lights(current_step)
 lights.finish_diegetic_lights()
