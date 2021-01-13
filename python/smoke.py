@@ -4,14 +4,19 @@ import utils
 
 led = LED(26)
 
+charger = LED(5)
+charger.on()
+
 current_step = None
 
 led.off()
 
 def start_smoke():
+    charger.off()
     led.on()
     sleep(10)
     led.off()
+    charger.on()
 
 def launch_smoke(step):
     global current_step
