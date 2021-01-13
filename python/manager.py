@@ -1,57 +1,28 @@
-print("begin imports")
-import calls
-print("calls")
-import asterisk
-print("asterisk")
-import utils
-print("utils")
-import sounds
-print("sounds")
-import alsaaudio
-print('alsaaudio')
-import lights
-print("lights")
-import buttons
-print("buttons")
-import smoke
-print("smoke")
-import easter_eggs
-print("easter eggs")
-import datetime
-print("datetime")
-import os
-print("os")
-print ("end imports")
+import calls, asterisk, utils, sounds, lights, buttons, smoke, easter_eggs
+import alsaaudio, datetime, os
+
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
-print("start mixer")
 alsaaudio.Mixer(control="Headphone").setvolume(100)
-print("end mixer")
-print("get time")
+
 now = datetime.datetime.now()
-print("time gotten")
-print("show date")
+
 ## yyyy/mm/dd/hh/mm
 show_date = datetime.datetime(2020, 1, 7, 14, 30) 
-print("got show date")
-print("check if accureate dates")
+
 if show_date > now:
     sounds.play_pre_show()
     os.system('poweroff')
     exit()
-print("accurate dates")
-print("get previous step and compare")
+
 previous_step = str(int(asterisk.check_current_step()) - 1)
-print("got previous step")
 current_step = asterisk.check_current_step()
-print("got current step")
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
-print("got length of steps")
 asterisk.resest_easter_eggs()
-print("asterisk resetted easter eggs")
+
 #if previous_step != '-1':
     #sounds.play_rescue()
-print("def some funcs")
+
 def diegetics_running():
     if sounds.diegetic_player.is_playing():
         return True
@@ -74,8 +45,6 @@ def launch_easter_eggs():
         sounds.launch_easter_eggs(fax = False)
     sounds.finish_easter_eggs_sounds()
 
-
-print("start while")
 while current_step != "30":
     current_step = asterisk.check_current_step()
     #INIT
