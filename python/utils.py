@@ -1,5 +1,11 @@
 import time, os
 
+DEBUG = 1
+
+def debug(message):
+    if DEBUG > 0:
+        print(message)
+
 def remove_files_from(folder):
     for filename in os.listdir(folder):
         file_path = os.path.join(folder, filename)

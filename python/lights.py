@@ -150,7 +150,7 @@ def get_diegetic_lights(step):
         return None
     for lights in diegetic_lights:
         if lights.startswith(step):
-            print('found: ' + lights)
+            utils.debug('found: ' + lights)
             return lights
     return None
 
@@ -173,8 +173,8 @@ from multiprocessing import Process
 def launch_diegetic_lights(step):
     global previous_step
     global diegetic_processes
-    print(previous_step)
-    print(step)
+    utils.debug(previous_step)
+    utils.debug(step)
     if(previous_step == step):
         return False
     lights_file = get_diegetic_lights(step)
@@ -201,13 +201,13 @@ def launch_background_lights(step):
     if instructions == None:
         previous_step = step
         return
-    print('read instructions')
+    utils.debug('read instructions')
     instructions = read_file(BACKGROUND_LIGHTS_PATH + instructions)
-    print('get background lights')
+    utils.debug('get background lights')
     background_light = instructions_to_lights(instructions)
-    print('start background lights')
+    utils.debug('start background lights')
     background_light.start()
-    print('continue')
+    utils.debug('continue')
     previous_step = step
 
     

@@ -1,11 +1,11 @@
 from gpiozero import Button
-import os, asterisk
+import os, asterisk, utils
 
 #reboot
 reboot_button = Button(23)
 def reboot():
     os.system('reboot')
-    print('rebooting')
+    utils.debug('rebooting')
 reboot_button.when_pressed = reboot
 
 #rescue
@@ -16,9 +16,8 @@ def rescue():
     os.system('tmate -S /tmp/tmate.sock wait tmate-ready')
     #get web session
     stream = os.popen("tmate -S /tmp/tmate.sock display -p '#{tmate_web}' ")
-    #print(stream)
     output = stream.readline()
-    print(output)
+    utils.debug(output)
     os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
 rescue_button.when_pressed = rescue
@@ -26,7 +25,7 @@ rescue_button.when_pressed = rescue
 wormhole_button = Button(16)
 
 def wormhole():
-    print('wormhole')
+    utils.debug('wormhole')
     asterisk.add_to_database('step', '25')
 
 wormhole_button.when_pressed = wormhole
