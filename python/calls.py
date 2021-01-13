@@ -64,16 +64,16 @@ def finish_call(call):
     success = asterisk.wait_for_fax_free()
     #check if error
     if not success:
-        print('found error')
-        print('success: ' + str(success))
+        utils.debug('found error')
+        utils.debug('success: ' + str(success))
         utils.countdown(3)
         launch_call(call)
         return
 
 def launch_easter_eggs():
     egg_number = int(asterisk.get_from_database("faxegg"))
-    print('found egg number')
-    print(egg_number)
+    utils.debug('found egg number')
+    utils.debug(egg_number)
     if egg_number == 0:
         return False
     call = easter_eggs.get_easter_egg_call(egg_number)
@@ -89,7 +89,7 @@ def launch_easter_eggs():
     #make call
     copyfile( call_file, outgoing_call)
     #wait for call to begin
-    print('waiting for fax to be busy')
+    utils.debug('waiting for fax to be busy')
     success = asterisk.wait_for_fax_busy()
 
     #check if error
