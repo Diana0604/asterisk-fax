@@ -14,8 +14,15 @@ if show_date > now:
     os.system('poweroff')
     exit()
 
-previous_step = str(int(asterisk.check_current_step()) - 1)
 current_step = asterisk.check_current_step()
+if current_step == "30":
+    if asterisk.database_exists("finish_time"):
+        finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time"), '%Y-%m-%d %H:%M:%S.%f')
+        if finish_time + datetime.timedelta(minutes=30) < now:
+            asterisk.update_step(current_step)
+
+previous_step = str(int(current_step) - 1)
+
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
 asterisk.resest_easter_eggs()
@@ -78,7 +85,10 @@ while current_step != "30":
     utils.check_for_wifi()
 
 now = datetime.datetime.now()
+
+#get finish time and store to database
 finish_time = now + datetime.timedelta(minutes=30)
+asterisk.add_to_database("finish_time" , str(finish_time))
 
 lights.launch_background_lights(current_step)
 
