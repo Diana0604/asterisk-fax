@@ -77,7 +77,7 @@ def launch_easter_eggs(fax = False):
          return
     if not fax and easter_eggs.is_fax(egg_number):
         return
-    print(egg_number)
+    utils.debug(egg_number)
     sound = easter_eggs.get_easter_egg_sound(egg_number)
     if sound == None:
         return
