@@ -89,4 +89,4 @@ lights.launch_diegetic_lights(current_step)
 lights.finish_diegetic_lights()
 asterisk.update_step(current_step)
 
-print('END OF PROGRAM')
+utils.debug('END OF PROGRAM')
