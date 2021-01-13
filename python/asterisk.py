@@ -1,5 +1,6 @@
 # Program to run "asterisk -rx 'pjsip list endpoints'" and check status of endpoinds
 import os, time
+import utils
 
 ASTLOGS = '/var/log/asterisk/full'
 LASTLINE  = ''
@@ -33,7 +34,7 @@ def fax_free():
 def wait_for_fax_free():
     while not fax_free():
         time.sleep(1)
-        print('waiting for fax free')
+        utils.debug('waiting for fax free')
     if error():
         return False
     return True
@@ -59,7 +60,7 @@ def wait_fax_not_ringing():
 def add_to_database(key, value): 
     # equivalent terminal command: 'asterisk -rx "database put WESTILLFAX key value"'
     command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
-    print(command)
+    utils.debug(command)
     os.system(command)
 
 def get_from_database(key):
@@ -80,7 +81,7 @@ def check_current_step():
     return get_database_value(database_output)
 
 def update_step(current_step):
-    print('updating step: ' + check_current_step())
+    utils.debug('updating step: ' + check_current_step())
     if current_step == '30':
         add_to_database('step', '00')
         return
