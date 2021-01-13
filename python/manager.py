@@ -98,7 +98,7 @@ while current_step != "30":
     sounds.finish_diegetic_sounds(current_step)
 
     asterisk.wait_for_fax_free()
-    easter_eggs.reset()
+    #easter_eggs.reset()
     
     #UPDATE
     if previous_step == current_step:
