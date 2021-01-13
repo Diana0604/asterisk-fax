@@ -1,5 +1,6 @@
 from gpiozero import LED
 from time import sleep
+import utils
 
 led = LED(26)
 
@@ -17,7 +18,7 @@ def launch_smoke(step):
     if(step == current_step):
         return False
     if step == '25':
-        print('smoke')
+        utils.debug('smoke')
         start_smoke()
         current_step = step
         return True
