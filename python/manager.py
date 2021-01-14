@@ -40,7 +40,6 @@ def diegetics_running():
     return False
 
 def launch_diegetics():
-    calls.launch_main_call(current_step)
     sounds.launch_diegetic_sounds(current_step)
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
@@ -59,6 +58,7 @@ while current_step != "30":
     sounds.launch_background_sounds(current_step)
     #if we're on new step -> launch diegetics
     launch_diegetic = False
+    calls.launch_main_call(current_step)
     if previous_step != current_step:
         launch_diegetics()
 
