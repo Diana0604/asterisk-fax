@@ -1,3 +1,4 @@
+mkdir /var/lib/asterisk/sounds/en/faxmachine
 rm /var/lib/asterisk/sounds/en/faxmachine/eastereggs/*
 rmdir /var/lib/asterisk/sounds/en/faxmachine/eastereggs
 rm /var/lib/asterisk/sounds/en/faxmachine/*
