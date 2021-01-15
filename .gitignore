@@ -3,3 +3,5 @@
 python/__pycache__
 python/gpiozero.py
 .DS_Store
+*/.DS_Store
+__pycache__
