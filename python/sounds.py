@@ -10,10 +10,8 @@ previous_step = None
 
 background_player = vlc.MediaPlayer()
 background_player.audio_set_volume(100)
-diegetic_player1 = vlc.MediaPlayer()
-diegetic_player1.audio_set_volume(100)
-diegetic_player2 = vlc.MediaPlayer()
-diegetic_player2.audio_set_volume(100)
+diegetic_player = vlc.MediaPlayer()
+diegetic_player.audio_set_volume(100)
 easter_egg_player = vlc.MediaPlayer()
 easter_egg_player.audio_set_volume(100)
 
@@ -69,13 +67,8 @@ def launch_diegetic_sounds(step):
         asterisk.wait_fax_not_ringing()
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
         background_player.audio_set_volume(50)
-        if step != '26':
-            diegetic_player1.audio_set_volume(100)
-            play_sound(sound = diegetic_sound, diegetic = True)
-        else : 
-            diegetic_player2.audio_set_volume(100)
-            play_sound(sound = diegetic_sound, diegetic = True, diegetic2 = True)
-        
+        diegetic_player.audio_set_volume(100)
+        play_sound(sound = diegetic_sound, diegetic = True)
     previous_step = step
 
 def launch_easter_eggs(fax = False):
@@ -97,11 +90,7 @@ def finish_diegetic_sounds(step):
     for sound in diegetic_sounds:
         last_step = sound[3]+sound[4]
         if last_step == step:
-            while diegetic_player1.is_playing():
-                utils.countdown(1)
-            break
-
-            while diegetic_player2.is_playing():
+            while diegetic_player.is_playing():
                 utils.countdown(1)
             break
     background_player.audio_set_volume(100)
@@ -115,21 +104,18 @@ def finish_easter_eggs_sounds():
     background_player.audio_set_volume(100)
 
 #COMMON METHODS
-def get_player_wrapper(diegetic, background, easteregg, diegetic2):
+def get_player_wrapper(diegetic, background, easteregg):
     player_wrapper = [vlc.MediaPlayer()]
     if easteregg :
         player_wrapper = [easter_egg_player]
     if diegetic :
-        if not diegetic2 :
-            player_wrapper = [diegetic_player1]
-        else :
-            player_wrapper = [diegetic_player2]
+        player_wrapper = [diegetic_player]
     if background :
         player_wrapper = [background_player]
     return player_wrapper
 
-def play_sound(sound, diegetic = False, background = False, easteregg = False, diegetic2 = False):
-    player_wrapper = get_player_wrapper(diegetic, background, easteregg, diegetic2)
+def play_sound(sound, diegetic = False, background = False, easteregg = False):
+    player_wrapper = get_player_wrapper(diegetic, background, easteregg)
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
