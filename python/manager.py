@@ -31,7 +31,7 @@ if utils.DEBUG < 2 and previous_step != '-1':
     sounds.play_rescue()
 
 def diegetics_running():
-    if sounds.diegetic_player.is_playing():
+    if sounds.diegetic_player1.is_playing() or sounds.diegetic_player2.is_playing():
         return True
     if calls.DIEGETIC_CALLS_ON:
         return True
