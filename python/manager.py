@@ -24,9 +24,10 @@ previous_step = str(int(current_step) - 1)
 
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
+
 asterisk.resest_easter_eggs()
 
-if utils.DEBUG < 1 and previous_step != '-1':
+if utils.DEBUG < 2 and previous_step != '-1':
     sounds.play_rescue()
 
 def diegetics_running():
