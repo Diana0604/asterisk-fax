@@ -1,5 +1,6 @@
 import calls, asterisk, utils, sounds, lights, buttons, smoke, easter_eggs
 import alsaaudio, datetime, os
+
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 
@@ -31,7 +32,7 @@ if utils.DEBUG < 2 and previous_step != '-1':
     sounds.play_rescue()
 
 def diegetics_running():
-    if sounds.diegetic_player1.is_playing() or sounds.diegetic_player2.is_playing():
+    if sounds.diegetic_player.is_playing():
         return True
     if calls.DIEGETIC_CALLS_ON:
         return True
@@ -50,6 +51,7 @@ def launch_easter_eggs():
     else:
         sounds.launch_easter_eggs(fax = False)
     sounds.finish_easter_eggs_sounds()
+
 while current_step != "30":
     current_step = asterisk.check_current_step()
     #INIT
