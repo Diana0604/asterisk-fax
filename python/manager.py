@@ -73,8 +73,8 @@ while current_step != "30":
     #wait for every process to be done
     calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds(current_step)
-
-    asterisk.wait_for_fax_free()
+    if diegetics_running():
+        asterisk.wait_for_fax_free()
     #easter_eggs.reset()
     
     #UPDATE
