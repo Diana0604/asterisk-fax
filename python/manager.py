@@ -89,6 +89,7 @@ now = datetime.datetime.now()
 
 #get finish time and store to database
 finish_time = now + datetime.timedelta(minutes=30)
+print('ADDING; ' + str(finish_time).replace(' ', 'SPACE'))
 asterisk.add_to_database("finish_time" , str(finish_time).replace(' ', 'SPACE'))
 
 lights.launch_background_lights(current_step)
