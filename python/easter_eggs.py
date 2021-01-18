@@ -58,7 +58,7 @@ def get_easter_egg_sound(egg_number):
     if egg_number == 30:
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_30_universe.mp3'
     if egg_number == 31:
-        return '/fax/sounds/speaker/eastereggs/Easter_Egg_31_Helpline.mp3'
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_31_Helpline.wav'
 
 done_faxes = []
 

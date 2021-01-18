@@ -145,3 +145,4 @@ def resest_easter_eggs():
     add_to_database('faxegg22', '0')
     add_to_database('faxegg25', '0')
     add_to_database('faxegg26', '0')
+    add_to_database('faxegg30', '0')
