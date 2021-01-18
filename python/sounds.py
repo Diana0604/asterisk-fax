@@ -84,8 +84,11 @@ def launch_easter_eggs(fax = False):
     asterisk.wait_fax_not_ringing()
     play_sound(sound = sound, easteregg=True)
     asterisk.add_to_database("soundegg", "0")
-    if egg_number = 100:
+    if egg_number == 100:
+        while not asterisk.fax_free():
+            utils.countdown(1)
         asterisk.add_to_database("step", '05')
+
 
 #FINISH
 def finish_diegetic_sounds(step):
