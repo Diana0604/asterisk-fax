@@ -20,7 +20,9 @@ def rescue():
     utils.debug(output)
     os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
-rescue_button.when_pressed = rescue
+def launch_buttons(step):
+    if step == '24':
+        rescue_button.when_pressed = rescue
 
 wormhole_button = Button(16)
 

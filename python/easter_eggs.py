@@ -59,6 +59,8 @@ def get_easter_egg_sound(egg_number):
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_30_universe.mp3'
     if egg_number == 31:
         return '/fax/sounds/speaker/eastereggs/Easter_Egg_31_Helpline.wav'
+    if egg_number == 32:
+        return '/fax/sounds/speaker/eastereggs/Easter_Egg_32_Artefact.wav'
     if egg_number == 100:
         return '/fax/sounds/speaker/diegetic/healthcheck_receive.wav'
 
@@ -77,10 +79,12 @@ def get_easter_egg_call(egg_number):
         return '22_proposal.call'
     if egg_number == 30 and 30 not in done_faxes:
         return '30_universe.call'
+    if egg_number == 32 and 32 not in done_faxes:
+        return '32_Artefact.call'
 def call_made(egg_number):
     done_faxes.append(egg_number)
 
-FAXES = [11, 12, 14, 19, 22, 30]
+FAXES = [11, 12, 14, 19, 22, 30, 32]
 
 def is_fax(egg_number):
     if egg_number in FAXES:
