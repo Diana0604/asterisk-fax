@@ -41,6 +41,7 @@ def diegetics_running():
     return False
 
 def launch_diegetics():
+    buttons.launch_buttons(current_step)
     sounds.launch_diegetic_sounds(current_step)
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
