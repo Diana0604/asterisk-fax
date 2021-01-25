@@ -15,7 +15,7 @@ if show_date > now:
     exit()
 
 current_step = asterisk.check_current_step()
-if current_step == "30":
+if current_step == "31":
     if asterisk.database_exists("finish_time"):
         finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time").replace('SPACE', ' '), '%Y-%m-%d %H:%M:%S.%f')
         if finish_time + datetime.timedelta(minutes=30) < now:
@@ -53,7 +53,7 @@ def launch_easter_eggs():
         sounds.launch_easter_eggs(fax = False)
     sounds.finish_easter_eggs_sounds()
 
-while current_step != "30":
+while current_step != "31":
     current_step = asterisk.check_current_step()
     #INIT
     #make sure background sound is playing

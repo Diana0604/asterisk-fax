@@ -1,0 +1,89 @@
+[1mdiff --cc extensions_custom.conf[m
+[1mindex 23af4ce,744cad3..0000000[m
+[1m--- a/extensions_custom.conf[m
+[1m+++ b/extensions_custom.conf[m
+[36m@@@ -125,11 -125,11 +125,16 @@@[m [msame => n,Hangup([m
+  [m
+  [from-internal-custom][m
+  exten => 2019ok,1,Playback(faxmachine/09_describe_world)[m
+[32m++<<<<<<< HEAD[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'RECORDING 2019' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,MixMonitor(/var/lib/asterisk/sounds/en/faxmachine/26_recording.wav)[m
+[32m++=======[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'RECORDING 2019' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m+ same => n,MixMonitor(/var/lib/asterisk/sounds/en/faxmachine/27_recording.wav)[m
+[32m++>>>>>>> 013486f31145693449fc9ffb7c31dba03faf840e[m
+  same => n,Set(DB(WESTILLFAX/step)=10)[m
+  same => n,Wait(20)[m
+[31m -same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'FINISHED recording 2019' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'FINISHED recording 2019' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+  same => n,Return()[m
+  [m
+  [m
+[36m@@@ -259,36 -251,36 +264,66 @@@[m [msame => n,Hangup([m
+  ;mashup1[m
+  [tbl][m
+  exten => mashup1,1,Verbose(1, Starting mashup)[m
+[32m++<<<<<<< HEAD[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'STARTING mashup 1 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,SendFax(/fax/tifs/25_calls_fax_1.tif)[m
+[32m +same => n,Set(DB(WESTILLFAX/step)=26)[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'FINISHED mashup 1 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++=======[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'STARTING mashup 1 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m+ same => n,SendFax(/fax/tifs/26_calls_fax_1.tif)[m
+[32m+ same => n,Set(DB(WESTILLFAX/step)=27)[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'FINISHED mashup 1 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++>>>>>>> 013486f31145693449fc9ffb7c31dba03faf840e[m
+  same => n,Hangup()[m
+  [m
+  ;mashup2[m
+  [tbl][m
+[32m++<<<<<<< HEAD[m
+[32m +exten => mashup2,1,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'STARTING mashup 2 - recording playback' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,Playback(faxmachine/26_recording)[m
+[32m +same => n,Set(DB(WESTILLFAX/step)=27)[m
+[32m +same => n,Playback(faxmachine/26_recording)[m
+[32m +same => n,Playback(faxmachine/26_recording)[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'FINISHED mashup 2 - recording playback' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++=======[m
+[32m+ exten => mashup2,1,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'STARTING mashup 2 - recording playback' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m+ same => n,Playback(faxmachine/27_recording)[m
+[32m+ same => n,Set(DB(WESTILLFAX/step)=28)[m
+[32m+ same => n,Playback(faxmachine/27_recording)[m
+[32m+ same => n,Playback(faxmachine/27_recording)[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'FINISHED mashup 2 - recording playback' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++>>>>>>> 013486f31145693449fc9ffb7c31dba03faf840e[m
+  same => n,Hangup()[m
+  [m
+  ;mashup3[m
+  [tbl][m
+[32m++<<<<<<< HEAD[m
+[32m +exten => mashup3,1,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'STARTING mashup 3 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,SendFax(/fax/tifs/27_calls_fax_3.tif)[m
+[32m +same => n,Set(DB(WESTILLFAX/step)=28)[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'FINISHED mashup 3 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++=======[m
+[32m+ exten => mashup3,1,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'STARTING mashup 3 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m+ same => n,SendFax(/fax/tifs/28_calls_fax_3.tif)[m
+[32m+ same => n,Set(DB(WESTILLFAX/step)=29)[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'FINISHED mashup 3 - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++>>>>>>> 013486f31145693449fc9ffb7c31dba03faf840e[m
+  same => n,Hangup()[m
+  [m
+  ;LAST FAX[m
+  [ants][m
+[32m++<<<<<<< HEAD[m
+[32m +exten => credits,1,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'STARTING credits - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m +same => n,SendFax(/fax/tifs/28_credits.tif)[m
+[32m +same => n,Set(DB(WESTILLFAX/step)=29)[m
+[32m +same => n,System(sendemail -f diana.vallverdu@gmail.com -t helpline.wsf.4@gmail.com -m 'FINISHING credits - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++=======[m
+[32m+ exten => credits,1,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'STARTING credits - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m+ same => n,SendFax(/fax/tifs/29_credits.tif)[m
+[32m+ same => n,Set(DB(WESTILLFAX/step)=30)[m
+[32m+ same => n,System(sendemail -f diana.vallverdu@gmail.com -t antsonstiltstheatre@gmail.com -m 'FINISHING credits - fax' -u 'Machine ${MACHINE}' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com)[m
+[32m++>>>>>>> 013486f31145693449fc9ffb7c31dba03faf840e[m
+  same => n,Hangup()[m
+  [m
+  [from-internal-custom][m
