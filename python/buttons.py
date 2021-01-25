@@ -6,6 +6,7 @@ reboot_button = Button(13)
 def reboot():
     utils.debug('rebooting')
     os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.4@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' - xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    utils.coutdown(10)
     os.system('reboot')
     
 reboot_button.when_pressed = reboot
