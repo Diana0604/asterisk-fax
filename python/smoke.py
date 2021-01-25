@@ -22,7 +22,7 @@ def launch_smoke(step):
     global current_step
     if(step == current_step):
         return False
-    if step == '25':
+    if step == '26':
         utils.debug('smoke')
         start_smoke()
         current_step = step

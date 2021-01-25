@@ -7,6 +7,7 @@ def reboot():
     os.system('reboot')
     utils.debug('rebooting')
 reboot_button.when_pressed = reboot
+os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
 #rescue
 rescue_button = Button(24)
@@ -20,14 +21,14 @@ def rescue():
     utils.debug(output)
     os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
-def launch_buttons(step):
-    if step == '24':
-        rescue_button.when_pressed = rescue
+rescue_button.when_pressed = rescue
 
 wormhole_button = Button(16)
 
+def launch_buttons(step):
+    if step == '24' or step =='25':
+        wormhole_button.when_pressed = wormhole
+
 def wormhole():
     utils.debug('wormhole')
-    asterisk.add_to_database('step', '25')
-
-wormhole_button.when_pressed = wormhole
+    asterisk.add_to_database('step', '26')
