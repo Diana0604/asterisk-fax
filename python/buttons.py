@@ -2,10 +2,10 @@ from gpiozero import Button
 import os, asterisk, utils
 
 #reboot
-reboot_button = Button(23)
+reboot_button = Button(13)
 def reboot():
     utils.debug('rebooting')
-    os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.4@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.4@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' - xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
     os.system('reboot')
     
 reboot_button.when_pressed = reboot
@@ -22,7 +22,7 @@ def rescue():
     output = stream.readline()
     utils.debug(output)
     os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.4@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
-
+    
 rescue_button.when_pressed = rescue
 
 wormhole_button = Button(16)
