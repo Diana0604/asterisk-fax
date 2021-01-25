@@ -5,7 +5,8 @@ import os, asterisk, utils
 reboot_button = Button(23)
 def reboot():
     utils.debug('rebooting')
-    os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.1@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    utils.countdown(10)
     os.system('reboot')
 
 reboot_button.when_pressed = reboot
@@ -20,7 +21,7 @@ def rescue():
     stream = os.popen("tmate -S /tmp/tmate.sock display -p '#{tmate_web}' ")
     output = stream.readline()
     utils.debug(output)
-    os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system("sendemail -f diana.valverdu@gmail.com -t helpline.wsf.1@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
 rescue_button.when_pressed = rescue
 
