@@ -29,6 +29,7 @@ wormhole_button = Button(16)
 wormhole_button_active = False
 
 def launch_buttons(step):
+    global wormhole_button_active
     if (step == '24' or step =='25') and not wormhole_button_active:
         wormhole_button.when_pressed = wormhole
         wormhole_button_active = True
