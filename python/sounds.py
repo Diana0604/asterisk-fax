@@ -124,6 +124,8 @@ def play_sound(sound, diegetic = False, background = False, easteregg = False):
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
+    if ((not diegetic_player and not background and not easteregg)):
+        utils.countdown(1)
     duration = media.get_duration()/1000
     return duration
 
