@@ -15,9 +15,9 @@ if show_date > now:
     exit()
 
 current_step = asterisk.check_current_step()
-if current_step == "30":
+if current_step == "31":
     if asterisk.database_exists("finish_time"):
-        finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time"), '%Y-%m-%d %H:%M:%S.%f')
+        finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time").replace('SPACE', ' '), '%Y-%m-%d %H:%M:%S.%f')
         if finish_time + datetime.timedelta(minutes=30) < now:
             asterisk.update_step(current_step)
 
@@ -41,6 +41,7 @@ def diegetics_running():
     return False
 
 def launch_diegetics():
+    buttons.launch_buttons(current_step)
     sounds.launch_diegetic_sounds(current_step)
     lights.launch_diegetic_lights(current_step)
     smoke.launch_smoke(current_step)
@@ -52,7 +53,7 @@ def launch_easter_eggs():
         sounds.launch_easter_eggs(fax = False)
     sounds.finish_easter_eggs_sounds()
 
-while current_step != "30":
+while current_step != "31":
     current_step = asterisk.check_current_step()
     #INIT
     #make sure background sound is playing
@@ -89,7 +90,8 @@ now = datetime.datetime.now()
 
 #get finish time and store to database
 finish_time = now + datetime.timedelta(minutes=30)
-asterisk.add_to_database("finish_time" , str(finish_time))
+print('ADDING; ' + str(finish_time).replace(' ', 'SPACE'))
+asterisk.add_to_database("finish_time" , str(finish_time).replace(' ', 'SPACE'))
 
 lights.launch_background_lights(current_step)
 
