@@ -55,6 +55,18 @@ def wait_fax_not_ringing():
     while fax_ringing():
         time.sleep(1)
 
+def fax_available():
+    if check_fax_status() == 'Unavailable':
+        return False
+    return True
+
+def wait_fax_available():
+    for i in range(0,10):
+        time.sleep(1)
+        if fax_available:
+            return True
+    return False
+
 #DATABASE
 
 def add_to_database(key, value): 
