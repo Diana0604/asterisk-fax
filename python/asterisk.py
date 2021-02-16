@@ -140,6 +140,7 @@ def error():
     while next_line != LASTLINE:
         if 'Call failed to go through' in next_line:
             LASTLINE = lines[len(lines) - 1]
+            utils.sendemail('ERROR: Call failed to go through', 'ERROR')
             return True
         i = i - 1
         next_line = lines[i]
