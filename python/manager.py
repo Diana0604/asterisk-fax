@@ -1,4 +1,5 @@
-import calls, asterisk, utils, sounds, lights, buttons, smoke, easter_eggs
+import buttons
+import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
 import alsaaudio, datetime, os
 
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
