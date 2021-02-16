@@ -2,6 +2,8 @@ import buttons
 import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
 import alsaaudio, datetime, os
 
+utils.send_email('machine is on, show has begun')
+
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 
