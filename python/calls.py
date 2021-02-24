@@ -37,6 +37,8 @@ def finish_main_call(step):
     DIEGETIC_CALLS_ON = False
 
 def launch_call(call):
+    if not asterisk.fax_available():
+        asterisk.wait_fax_available()
     #wait for fax to be ready to receive
     asterisk.wait_for_fax_free()
     #get call paths
