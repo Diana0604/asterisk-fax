@@ -32,4 +32,5 @@ def check_for_wifi():
         os.popen("wpa_cli -i wlan0 reconfigure")
 
 def send_email(message, subject = 'GENERIC'):
+    message = message + ' '
     os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u '" + subject + "' -m '" + message + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")

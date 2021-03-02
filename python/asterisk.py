@@ -140,7 +140,11 @@ def error():
     while next_line != LASTLINE:
         if 'Call failed to go through' in next_line:
             LASTLINE = lines[len(lines) - 1]
-            utils.sendemail('ERROR: Call failed to go through', 'ERROR')
+            utils.send_email('ERROR: Call failed to go through', 'ERROR')
+            return True
+        if 'error reading frame while generating CNG' in next_line:
+            LASTLINE = lines[len(lines) - 1]
+            utils.send_email('ERROR: Someone pressed STOP or picked up a fax call', 'ERROR')
             return True
         i = i - 1
         next_line = lines[i]
