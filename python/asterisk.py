@@ -55,6 +55,21 @@ def wait_fax_not_ringing():
     while fax_ringing():
         time.sleep(1)
 
+def fax_available():
+    availability = check_fax_status()
+    if availability == 'Unavailable':
+        return False
+    print('availability: ' + availability)
+    return True
+
+def wait_fax_available():
+    for i in range(0,10):
+        time.sleep(1)
+        if fax_available():
+            return True
+    utils.send_email('fax not available')
+    return False
+
 #DATABASE
 
 def add_to_database(key, value): 
@@ -125,6 +140,11 @@ def error():
     while next_line != LASTLINE:
         if 'Call failed to go through' in next_line:
             LASTLINE = lines[len(lines) - 1]
+            utils.send_email('ERROR: Call failed to go through', 'ERROR')
+            return True
+        if 'error reading frame while generating CNG' in next_line:
+            LASTLINE = lines[len(lines) - 1]
+            utils.send_email('ERROR: Someone pressed STOP or picked up a fax call', 'ERROR')
             return True
         i = i - 1
         next_line = lines[i]
