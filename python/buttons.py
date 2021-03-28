@@ -20,7 +20,7 @@ def rescue():
     stream = os.popen("tmate -S /tmp/tmate.sock display -p '#{tmate_web}' ")
     output = stream.readline()
     utils.debug(output)
-    os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
 rescue_button.when_pressed = rescue
 
