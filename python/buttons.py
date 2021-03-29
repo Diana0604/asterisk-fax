@@ -5,7 +5,7 @@ import os, asterisk, utils
 reboot_button = Button(23)
 def reboot():
     utils.debug('rebooting')
-    os.system("sendemail -f diana.valverdu@gmail.com -t diana.vallverdu@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
     os.system('reboot')
 
 reboot_button.when_pressed = reboot
