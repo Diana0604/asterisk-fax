@@ -4,12 +4,13 @@ import smoke
 
 smoke.start_smoke()
 
-question = raw_input("Write OK if you see smoke. Write anything else otherwise. ")
+from signal import pause
 
+question = raw_input("Write OK if you saw smoke. Write anything else otherwise. ")
 
 if question != "OK":
     print('ERROR => SMOKE FAILED!')
     sys.exit()
 
 
-print('======================================= CALLS - SUCCESS! ============================')
+print('======================================= SMOKE - SUCCESS! ============================')
