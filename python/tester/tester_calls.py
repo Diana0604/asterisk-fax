@@ -2,8 +2,8 @@ import sys
 sys.path.insert(1, '/fax/python')
 import calls
 
-#calls.launch_main_call('02')
-#calls.finish_main_call('02')
+calls.launch_main_call('02')
+calls.finish_main_call('02')
 
 question = raw_input("Write OK if you have received 'Please dial your access code to begin'. Write anything else otherwise. ")
 
@@ -11,8 +11,8 @@ if question != "OK":
     print('ERROR => CALL FAILED!')
     sys.exit()
 
-#calls.launch_main_call('03')
-#calls.finish_main_call('03')
+calls.launch_main_call('03')
+calls.finish_main_call('03')
 
 question = raw_input("Write OK if you have received HEALTHCHECK 2. Write anything else otherwise. ")
 
