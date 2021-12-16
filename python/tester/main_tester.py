@@ -22,4 +22,5 @@ while question != "exit":
         import tester_buttons
         continue
     
-    print("did not understand what you are trying to test. Please check your spelling and try again.")
+    if(question != 'exit'):
+        print("did not understand what you are trying to test. Please check your spelling and try again.")
