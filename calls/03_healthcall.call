@@ -3,4 +3,4 @@ MaxRetries: 0
 RetryTime: 10
 WaitTime: 30
 Context: healthchecks
-Extension: 00
+Extension: 03
