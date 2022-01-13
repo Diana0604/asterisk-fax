@@ -1,4 +1,0 @@
-Channel: PJSIP/1000
-Context: healthchecks
-Extension: 04
-Callerid: 234567
