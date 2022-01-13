@@ -65,7 +65,6 @@ while current_step != "31":
     launch_diegetic = False
     if(calls.launch_main_call(current_step)):
         asterisk.wait_fax_ringing()
-    time.sleep(1)
     asterisk.wait_fax_not_ringing()
     if previous_step != current_step:
         launch_diegetics()
