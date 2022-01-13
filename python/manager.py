@@ -64,8 +64,11 @@ while current_step != "31":
     #if we're on new step -> launch diegetics
     launch_diegetic = False
     if(calls.launch_main_call(current_step)):
+        print("we have launched calls, therefore must wait for fax ringing")
         asterisk.wait_fax_ringing()
+    print("we are now waiting for fax not ringing")
     asterisk.wait_fax_not_ringing()
+    print("now launching diegetics")
     if previous_step != current_step:
         launch_diegetics()
 
