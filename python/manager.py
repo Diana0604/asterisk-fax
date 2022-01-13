@@ -78,11 +78,11 @@ while current_step != "31":
     lights.finish_diegetic_lights()
     lights.launch_background_lights(current_step)
     #wait for every process to be done
-    if not launched_main_call:
-        calls.finish_main_call(current_step)
+    #if not launched_main_call:
+        #calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds(current_step)
-    if diegetics_running():
-        asterisk.wait_for_fax_free()
+    #if diegetics_running():
+    #    asterisk.wait_for_fax_free()
     #easter_eggs.reset()
     
     #UPDATE
