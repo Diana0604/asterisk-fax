@@ -1,0 +1,4 @@
+Channel: PJSIP/1000
+Context: tbl
+Extension: helloworld
+Callerid: 234567
