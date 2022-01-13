@@ -54,6 +54,7 @@ def fax_ringing():
 
 def wait_fax_ringing():
     while not fax_ringing():
+        print("fax is not ringing, continuing wait")
         time.sleep(1)
 
 def wait_fax_not_ringing():
