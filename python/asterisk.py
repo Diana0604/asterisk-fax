@@ -97,11 +97,11 @@ def check_current_step():
 
 def update_step(current_step):
     utils.debug('updating step: ' + check_current_step())
+    if current_step == '03':
+        add_to_database('step', '04')
+        return
     if current_step == '02':
         add_to_database('step', '03')
-        return
-    if current_step == '01':
-        add_to_database('step', '02')
         return
 
 def error():
