@@ -47,9 +47,14 @@ def wait_for_fax_busy():
     return True
 
 def fax_ringing():
-    if check_fax_status() == 'Ringing':
+    if "Ring" in check_fax_status():
         return True
     return False
+
+
+def wait_fax_ringing():
+    while not fax_ringing():
+        time.sleep(1)
 
 def wait_fax_not_ringing():
     while fax_ringing():

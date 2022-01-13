@@ -63,7 +63,8 @@ while current_step != "31":
     sounds.launch_background_sounds(current_step)
     #if we're on new step -> launch diegetics
     launch_diegetic = False
-    calls.launch_main_call(current_step)
+    if(calls.launch_main_call(current_step)):
+        asterisk.wait_fax_ringing()
     time.sleep(1)
     asterisk.wait_fax_not_ringing()
     if previous_step != current_step:
