@@ -97,33 +97,6 @@ def check_current_step():
 
 def update_step(current_step):
     utils.debug('updating step: ' + check_current_step())
-    if current_step == '31':
-        add_to_database('step', '00')
-        return
-    if current_step == '30':
-        add_to_database('step', '31')
-        return
-    if current_step == '24':
-        add_to_database('step', '25')
-        return
-    if current_step == '22':
-        add_to_database('step', '23')
-        return
-    if current_step == '20':
-        add_to_database('step', '21')
-        return
-    if current_step == '19':
-        add_to_database('step', '20')
-        return
-    if current_step == '18':
-        add_to_database('step', '19')
-        return
-    if current_step == '15':
-        add_to_database('step', '16')
-        return
-    if current_step == '13':
-        add_to_database('step', '14')
-        return
     if current_step == '02':
         add_to_database('step', '03')
         return
