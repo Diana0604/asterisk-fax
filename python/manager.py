@@ -63,7 +63,7 @@ while current_step != "31":
     sounds.launch_background_sounds(current_step)
     #if we're on new step -> launch diegetics
     launch_diegetic = False
-    if(calls.launch_main_call(current_step)):
+    launched_main_call = calls.launch_main_call(current_step):
         print("we have launched calls, therefore must wait for fax ringing")
         asterisk.wait_fax_ringing()
     print("we are now waiting for fax not ringing")
@@ -80,7 +80,8 @@ while current_step != "31":
     lights.finish_diegetic_lights()
     lights.launch_background_lights(current_step)
     #wait for every process to be done
-    calls.finish_main_call(current_step)
+    if not launched_main_call:
+        calls.finish_main_call(current_step)
     sounds.finish_diegetic_sounds(current_step)
     if diegetics_running():
         asterisk.wait_for_fax_free()
