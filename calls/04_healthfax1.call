@@ -1,4 +1,4 @@
 Channel: PJSIP/1000
-Context: tbl
-Extension: intro
+Context: healthchecks
+Extension: 04
 Callerid: 234567
