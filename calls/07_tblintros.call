@@ -1,4 +1,4 @@
 Channel: PJSIP/1000
 Context: tblintro
-Extension: 04
+Extension: intro
 Callerid: 234567
