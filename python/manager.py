@@ -1,6 +1,8 @@
 #import buttons
 #import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
 #import alsaaudio, datetime, os, time
+import asterisk
+import alsaaudio
 import utils
 import state_machine
 
@@ -48,6 +50,7 @@ if utils.DEBUG < 2 and previous_step != '-1':
 #        sounds.launch_easter_eggs(fax = False)
 #    sounds.finish_easter_eggs_sounds()
 
+print("init state machine with step: " + current_step)
 state_machine = state_machine.StateMachine(current_step)
 
 while current_step != "31":

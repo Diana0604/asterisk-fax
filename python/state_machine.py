@@ -1,6 +1,6 @@
 import utils
 import asterisk
-import lights, sound
+import lights, sounds
 
 
 PRE_IDLE = 0
@@ -17,10 +17,10 @@ class StateMachine:
 
   def __init__(self,step):
     global STEP_TO_STATE
-    if(STEP_TO_STATE[int(steps)] == PRE_IDLE):
+    if(STEP_TO_STATE[int(step)] == PRE_IDLE):
       self.pre_idle(step)
       return
-    if(STEP_TO_STATE[int(steps)] == IDLE):
+    if(STEP_TO_STATE[int(step)] == IDLE):
       self.idle(step)
       return
 
@@ -40,6 +40,3 @@ class StateMachine:
     sounds.launch_background_sounds(step)
     while(asterisk.check_current_step == step):
       utils.debug("idle state: awaiting for next step")
-  
-
-

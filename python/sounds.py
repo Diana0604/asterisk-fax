@@ -1,10 +1,10 @@
 import os, utils, vlc, asterisk, easter_eggs
 
-SOUNDS_FAX_PATH_BASE = '/fax/sounds/fax/'
+#SOUNDS_FAX_PATH_BASE = '/fax/sounds/'
 SOUNDS_PATH = '/fax/sounds/speaker/'
 DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
 BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
-FAX_SOUNDS_PATH = SOUNDS_FAX_PATH_BASE + 'fax/'
+FAX_SOUNDS_PATH = SOUNDS_PATH  + 'fax/'
 background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
 diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
 fax_sounds = os.listdir(FAX_SOUNDS_PATH)
