@@ -9,14 +9,6 @@ alsaaudio.Mixer(control="Headphone").setvolume(100)
 
 now = datetime.datetime.now()
 
-## yyyy/mm/dd/hh/mm
-show_date = datetime.datetime(2020, 1, 7, 14, 30) 
-
-if show_date > now:
-    sounds.play_pre_show()
-    os.system('poweroff')
-    exit()
-
 current_step = asterisk.check_current_step()
 if current_step == "31":
     if asterisk.database_exists("finish_time"):
@@ -57,46 +49,36 @@ def launch_easter_eggs():
     sounds.finish_easter_eggs_sounds()
 
 while current_step != "31":
+    #get current step
     current_step = asterisk.check_current_step()
-    #INIT
+
     #make sure background sound is playing
     sounds.launch_background_sounds(current_step)
+
+    #launch main call
+    calls.launch_main_call(current_step)
+
     #if we're on new step -> launch diegetics
-    launch_diegetic = False
-    launched_main_call = calls.launch_main_call(current_step)
-    print("launched main call")
-    
     if previous_step != current_step:
         launch_diegetics()
-    print("check prev step")
 
     if not diegetics_running():
         launch_easter_eggs()
-    print("checked easter eggs")
     
     #FINISH
     #finish diegetic lights and send background
     lights.finish_diegetic_lights()
-    print("lights")
     lights.launch_background_lights(current_step)
-    #wait for every process to be done
-    #if not launched_main_call:
-        #calls.finish_main_call(current_step)
+    #finish diegetic sounds
     sounds.finish_diegetic_sounds(current_step)
-    print("sounds")
-    #if diegetics_running():
-    #    asterisk.wait_for_fax_free()
-    #easter_eggs.reset()
     
     #UPDATE
     if previous_step == current_step:
         asterisk.update_step(current_step)
     previous_step = current_step
-    print("updated step")
 
     #CHECK IF CONNECTED AND RECONNECT OTHERWISE
     utils.check_for_wifi()
-    print("checked for wifi")
 
 now = datetime.datetime.now()
 

@@ -42,7 +42,6 @@ def launch_call(call):
     #wait for fax to be ready to receive
     if(not asterisk.fax_free()):
         return
-    #asterisk.wait_for_fax_free()
     #get call paths
     call_file = CALLS_PATH + call
     outgoing_call = OUTGOING_PATH + call
