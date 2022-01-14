@@ -17,6 +17,9 @@ class StateMachine:
 
   def __init__(self,step):
     global STEP_TO_STATE
+    print("found step: " + step)
+    print("needs state: " + str(STEP_TO_STATE[int(step)]))
+    print("to compare with: " + str(PRE_IDLE) + " and " + str(IDLE))
     if(STEP_TO_STATE[int(step)] == PRE_IDLE):
       self.pre_idle(step)
       return
@@ -28,15 +31,19 @@ class StateMachine:
   def pre_idle(self, step):
     self.state = PRE_IDLE
     lights.launch_background_lights(step)
-    while(asterisk.check_current_step == step):
-      utils.debug("pre_idle state: awaiting for next step")
+    utils.debug("set state: pre_idle")
+    while(asterisk.check_current_step() == step):
+      #utils.debug("pre_idle state: awaiting for next step")
+      continue
     #at end of pre_idle always goes to idle
-    self.idle(asterisk.check_current_step)
+    #self.idle(asterisk.check_current_step)
 
 
   def idle(self, step):
     self.state = IDLE
     lights.launch_background_lights(step)
     sounds.launch_background_sounds(step)
+    utils.debug("set state: idle")
     while(asterisk.check_current_step == step):
-      utils.debug("idle state: awaiting for next step")
+      #utils.debug("idle state: awaiting for next step")
+      continue
