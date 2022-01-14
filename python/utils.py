@@ -1,6 +1,6 @@
 import time, os
 
-DEBUG = 1
+DEBUG = 2
 
 def debug(message):
     if DEBUG > 0:
