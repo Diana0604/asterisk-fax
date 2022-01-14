@@ -24,20 +24,20 @@ class StateMachine:
       self.idle(step)
       return
 
-  def start_backgorund(self, step):
+  def start_background(self, step):
     lights.launch_background_lights(step)
     sounds.launch_background_sounds(step)
-  
+
   def keep_background_alive(self,step):
     while(asterisk.check_current_step() == step):
-      self.start_backgorund(step)
+      self.start_background(step)
       time.sleep(1)
       continue
 
   def pre_idle(self, step):
     utils.debug("state: pre_idle")
     self.state = PRE_IDLE
-    self.keep_background_alive()
+    self.start_background(step)
     utils.countdown(10)
     asterisk.add_one_to_step(step)
     self.incoming_call(asterisk.check_current_step())
@@ -47,11 +47,11 @@ class StateMachine:
     utils.debug("state: idle")
     self.state = IDLE
     self.keep_background_alive(step)
-    self.keep_background_alive(step)
+    #self.keep_background_alive(step)
 
   def incoming_call(self, step):
     utils.debug("state: incoming call")
     calls.launch_main_call(step)
-    self.keep_background_alive(step)
+    self.start_background(step)
     calls.launch_main_call(step)
     self.keep_background_alive(step)

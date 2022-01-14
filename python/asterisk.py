@@ -111,7 +111,7 @@ def update_step(current_step):
         return
 
 def add_one_to_step(current_step):
-    add_to_database('step', int(current_step) + 1)
+    add_to_database('step', str(int(current_step) + 1))
 
 def error():
     global LASTLINE
