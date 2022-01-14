@@ -110,6 +110,9 @@ def update_step(current_step):
         add_to_database('step', '03')
         return
 
+def add_one_to_step(current_step):
+    add_to_database('step', int(current_step) + 1)
+
 def error():
     global LASTLINE
     f = open(ASTLOGS, 'r')

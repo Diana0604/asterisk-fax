@@ -1,4 +1,4 @@
-import utils
+import utils, time
 import asterisk
 import lights, sounds
 
@@ -17,9 +17,6 @@ class StateMachine:
 
   def __init__(self,step):
     global STEP_TO_STATE
-    print("found step: " + step)
-    print("needs state: " + str(STEP_TO_STATE[int(step)]))
-    print("to compare with: " + str(PRE_IDLE) + " and " + str(IDLE))
     if(STEP_TO_STATE[int(step)] == PRE_IDLE):
       self.pre_idle(step)
       return
@@ -27,23 +24,34 @@ class StateMachine:
       self.idle(step)
       return
 
+  def start_backgorund(self, step):
+    lights.launch_background_lights(step)
+    sounds.launch_background_sounds(step)
+  
+  def keep_background_alive(self,step):
+    while(asterisk.check_current_step() == step):
+      self.start_backgorund(step)
+      time.sleep(1)
+      continue
 
   def pre_idle(self, step):
+    utils.debug("state: pre_idle")
     self.state = PRE_IDLE
-    lights.launch_background_lights(step)
-    utils.debug("set state: pre_idle")
-    while(asterisk.check_current_step() == step):
-      #utils.debug("pre_idle state: awaiting for next step")
-      continue
-    #at end of pre_idle always goes to idle
-    #self.idle(asterisk.check_current_step)
+    self.keep_background_alive()
+    utils.countdown(10)
+    asterisk.add_one_to_step(step)
+    self.incoming_call(asterisk.check_current_step())
 
 
   def idle(self, step):
+    utils.debug("state: idle")
     self.state = IDLE
-    lights.launch_background_lights(step)
-    sounds.launch_background_sounds(step)
-    utils.debug("set state: idle")
-    while(asterisk.check_current_step == step):
-      #utils.debug("idle state: awaiting for next step")
-      continue
+    self.keep_background_alive(step)
+    self.keep_background_alive(step)
+
+  def incoming_call(self, step):
+    utils.debug("state: incoming call")
+    calls.launch_main_call(step)
+    self.keep_background_alive(step)
+    calls.launch_main_call(step)
+    self.keep_background_alive(step)
