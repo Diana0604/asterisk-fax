@@ -3,8 +3,10 @@ import os, utils, vlc, asterisk, easter_eggs
 SOUNDS_PATH = '/fax/sounds/speaker/'
 DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
 BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
+FAX_SOUNDS_PATH = SOUNDS_PATH + 'fax/'
 background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
 diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
+fax_sounds = os.listdir(FAX_SOUNDS_PATH)
 
 previous_step = None
 
@@ -14,6 +16,8 @@ diegetic_player = vlc.MediaPlayer()
 diegetic_player.audio_set_volume(100)
 easter_egg_player = vlc.MediaPlayer()
 easter_egg_player.audio_set_volume(100)
+fax_player = vlc.MediaPlayer()
+fax_player.audio_set_volume(100)
 
 #GET SOUNDS FROM FOLDER
 def get_background_sound(step):
@@ -48,6 +52,13 @@ def get_diegetic_sound(step):
                 return sound
     return None
 
+def get_fax_sound(step):
+    for sound in fax_sounds:
+        if sound.startswith(step):
+            return sound
+    return None
+
+
 #LAUNCHERS
 def launch_background_sounds(step):
     #background sounds
@@ -58,6 +69,24 @@ def launch_background_sounds(step):
             return
         background_sound = BACKGROUND_SOUNDS_PATH + background_sound
         play_sound(sound = background_sound, background=True)
+
+def launch_fax_sounds(step):
+    if(asterisk.get_from_database("sound") == "off"):
+        return
+    if(asterisk.get_from_database("call") == "off"):
+        asterisk.add_to_database("sound", "off")
+        fax_player.stop()
+        background_player.audio_set_volume(100)
+        return
+
+
+    fax_sound = get_fax_sound(step)
+    if fax_sound != None:
+        fax_sound = FAX_SOUND_PATH + fax_sound
+        background_player.audio_set_volume(50)
+        fax_player.audio_set_volume(100)
+        play_sound(sound = fax_sound, diegetic = True)
+        
 
 def launch_diegetic_sounds(step):
     global previous_step
