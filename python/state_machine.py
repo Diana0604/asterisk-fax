@@ -5,13 +5,15 @@ import lights, sounds, calls
 
 PRE_IDLE = 0
 IDLE = 1
+INCOMING_CALL = 2
 
 
-STEP_TO_STATE = [PRE_IDLE, IDLE]
+STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL]
 
 class StateMachine:
   global PRE_IDLE
   global IDLE
+  global INCOMING_CALL
   state = PRE_IDLE
   #will need status has changed for diegetics launching only once but not implemented yet
 
@@ -22,6 +24,9 @@ class StateMachine:
       return
     if(STEP_TO_STATE[int(step)] == IDLE):
       self.idle(step)
+      return
+    if(STEP_TO_STATE[int(step)] == INCOMING_CALL):
+      self.incoming_call(step)
       return
 
   def start_background(self, step):
@@ -51,7 +56,8 @@ class StateMachine:
 
   def incoming_call(self, step):
     utils.debug("state: incoming call")
-    calls.launch_main_call(step)
+    self.state = INCOMING_CALL
+    utils.debug("launching call for step: " + step)
     self.start_background(step)
     calls.launch_main_call(step)
     self.keep_background_alive(step)
