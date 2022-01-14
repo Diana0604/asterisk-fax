@@ -1,6 +1,6 @@
 import utils, time
 import asterisk
-import lights, sounds
+import lights, sounds, calls
 
 
 PRE_IDLE = 0
