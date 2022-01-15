@@ -1,17 +1,26 @@
 #import buttons
 #import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
 #import alsaaudio, datetime, os, time
-import asterisk
-import alsaaudio
+#utils.debug("import utils")
 import utils
+utils.debug("import asterisk")
+import asterisk
+utils.debug("import alsaaudio")
+import alsaaudio
+utils.debug("import state machine")
 import state_machine
 
-utils.send_email('machine is on')
+#utils.send_email('machine is on')
 
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
+
 alsaaudio.Mixer(control="Headphone").setvolume(100)
 
+utils.debug("alsa audio set")
+
 current_step = asterisk.check_current_step()
+
+utils.debug("getting previous step")
 #if current_step == "31":
 #    if asterisk.database_exists("finish_time"):
 #        finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time").replace('SPACE', ' '), '%Y-%m-%d %H:%M:%S.%f')
@@ -23,6 +32,8 @@ if len(previous_step) == 1:
     previous_step = '0' + previous_step
 
 #asterisk.resest_easter_eggs()
+
+utils.debug("sound play rescue")
 
 if utils.DEBUG < 2 and previous_step != '-1':
     sounds.play_rescue()

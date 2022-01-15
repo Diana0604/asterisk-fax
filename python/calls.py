@@ -23,14 +23,12 @@ def launch_main_call(step):
         return False
     #launch call
     #DIEGETIC_CALLS_ON = True
-    asterisk.add_to_database("call","on")
     launch_call(call)
     return True
 
 def call_is_ongoing():
     global DIEGETIC_CALLS_ON
     if(asterisk.fax_free()):
-        asterisk.add_to_database("call","off")
         return False
         #DIEGETIC_CALLS_ON = False
     return True

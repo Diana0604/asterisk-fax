@@ -54,7 +54,6 @@ def fax_ringing():
 
 def wait_fax_ringing():
     while not fax_ringing():
-        print("fax is not ringing, continuing wait")
         time.sleep(1)
 
 def wait_fax_not_ringing():
@@ -75,6 +74,38 @@ def wait_fax_available():
             return True
     utils.send_email('fax not available')
     return False
+
+def call_on():
+    utils.debug("we can see: ")
+    utils.debug(get_from_database("call"))
+    if(get_from_database("call") == "on"):
+        return True
+    return False
+
+
+def call_off():
+    if(get_from_database("call") == "off"):
+        return True
+    return False
+
+def wait_call_on():
+    while not call_on():
+        time.sleep(1)
+        if error():
+            return False
+    return True
+
+
+def wait_call_off():
+    while not call_off():
+        time.sleep(1)
+        if error():
+            return False
+    return True
+
+def set_call_off():
+    add_to_database("call", "off")
+
 
 #DATABASE
 
