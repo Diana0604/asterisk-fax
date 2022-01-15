@@ -3,10 +3,12 @@ import os, utils, vlc, asterisk, easter_eggs
 SOUNDS_PATH = '/fax/sounds/speaker/'
 CONNECTED_CALL_PATH = SOUNDS_PATH + 'connected_call/'
 POST_CALL_PATH = SOUNDS_PATH + 'post_call/'
+PRE_CALL_PATH = SOUNDS_PATH + 'pre_call/'
 BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
 
 CONNECTED_CALL_SOUNDS = os.listdir(CONNECTED_CALL_PATH)
 POST_CALL_SOUNDS = os.listdir(POST_CALL_PATH)
+PRE_CALL_SOUNDS = os.listdir(PRE_CALL_PATH)
 background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
 
 
@@ -25,6 +27,7 @@ def get_call_sound(step, path):
 
 def launch_connected_call_sound(step):
     connected_call_sound = get_call_sound(step, CONNECTED_CALL_SOUNDS)
+    utils.debug("checking connected call")
     if connected_call_sound != None:
         if(asterisk.wait_call_on()):
             utils.debug("detected connected call on")
@@ -38,12 +41,46 @@ def launch_connected_call_sound(step):
 def launch_post_call_sound(step):
     post_call_sound = get_call_sound(step, POST_CALL_SOUNDS)
     if post_call_sound != None:
-            post_call_sound = POST_CALL_PATH + post_call_sound
-            background_player.audio_set_volume(50)
-            diegetic_player.audio_set_volume(100)
-            play_sound(sound = post_call_sound, diegetic = True)
+        post_call_sound = POST_CALL_PATH + post_call_sound
+        background_player.audio_set_volume(50)
+        diegetic_player.audio_set_volume(100)
+        play_sound(sound = post_call_sound, diegetic = True)
 
+#TO DO - randomize not by step
+def launch_pre_call_sound(step):
+    pre_call_sound = get_call_sound(step, PRE_CALL_SOUNDS)
+    if pre_call_sound != None:
+        pre_call_sound = PRE_CALL_PATH + pre_call_sound
+        background_player.audio_set_volume(50)
+        diegetic_player.audio_set_volume(100)
+        play_sound(sound = pre_call_sound, diegetic = True)
 
+#FINISH
+def finish_diegetic_sounds():
+    while diegetic_player.is_playing():
+        utils.countdown(1)
+    background_player.audio_set_volume(100)
+
+#COMMON METHODS
+def get_player_wrapper(diegetic, background, easteregg):
+    player_wrapper = [vlc.MediaPlayer()]
+    if easteregg :
+        player_wrapper = [easter_egg_player]
+    if diegetic :
+        player_wrapper = [diegetic_player]
+    if background :
+        player_wrapper = [background_player]
+    return player_wrapper
+
+def play_sound(sound, diegetic = False, background = False, easteregg = False):
+    player_wrapper = get_player_wrapper(diegetic, background, easteregg)
+    media = vlc.Media(sound)
+    player_wrapper[0].set_media(media)
+    player_wrapper[0].play()
+    if ((not background and not easteregg)):
+        utils.countdown(1)
+    duration = media.get_duration()/1000
+    return duration
 
 
 ## ========================================= OLD ============================================
@@ -138,15 +175,6 @@ def launch_easter_eggs(fax = False):
 
 
 #FINISH
-def finish_diegetic_sounds(step):
-    for sound in diegetic_sounds:
-        last_step = sound[3]+sound[4]
-        if last_step == step:
-            while diegetic_player.is_playing():
-                utils.countdown(1)
-            break
-    background_player.audio_set_volume(100)
-
 def finish_easter_eggs_sounds():
     global easter_egg_player
     if not easter_egg_player.is_playing():
@@ -155,26 +183,7 @@ def finish_easter_eggs_sounds():
     easter_egg_player.stop()
     background_player.audio_set_volume(100)
 
-#COMMON METHODS
-def get_player_wrapper(diegetic, background, easteregg):
-    player_wrapper = [vlc.MediaPlayer()]
-    if easteregg :
-        player_wrapper = [easter_egg_player]
-    if diegetic :
-        player_wrapper = [diegetic_player]
-    if background :
-        player_wrapper = [background_player]
-    return player_wrapper
 
-def play_sound(sound, diegetic = False, background = False, easteregg = False):
-    player_wrapper = get_player_wrapper(diegetic, background, easteregg)
-    media = vlc.Media(sound)
-    player_wrapper[0].set_media(media)
-    player_wrapper[0].play()
-    if ((not diegetic_player and not background and not easteregg)):
-        utils.countdown(1)
-    duration = media.get_duration()/1000
-    return duration
 
 #SPECIAL SOUNDS
 def play_pre_show():

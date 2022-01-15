@@ -9,9 +9,13 @@ INCOMING_CALL = 2
 CONNECTED_CALL = 3
 POST_CALL = 4
 OUTGOING_CALL = 5
+PRE_CALL = 6
 
-
-STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL]
+#TO DO:
+# 00 => pre idle
+#if call file exists => incoming call
+#else => awaiting call
+STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL]
 
 class StateMachine:
   global PRE_IDLE
@@ -19,6 +23,7 @@ class StateMachine:
   global INCOMING_CALL
   global POST_CALL
   global OUTGOING_CALL
+  global PRE_CALL
 
   state = PRE_IDLE
   current_call = None
@@ -36,6 +41,9 @@ class StateMachine:
       return
     if(STEP_TO_STATE[int(step)] == INCOMING_CALL):
       self.incoming_call(step)
+      return
+    if(STEP_TO_STATE[int(step)] == PRE_CALL):
+      self.pre_call(step)
       return
 
   def start_background(self, step):
@@ -56,13 +64,22 @@ class StateMachine:
     asterisk.add_one_to_step(step)
     self.incoming_call(asterisk.check_current_step())
 
+  def pre_call(self, step):
+    self.state = PRE_CALL
+    utils.debug("we are on pre call")
+    self.start_background(step)
+    sounds.launch_pre_call_sound(step)
+    utils.debug("finishing diegetic")
+    sounds.finish_diegetic_sounds()
+    self.incoming_call(step)
+
 
   def awaiting_call(self, step):
     utils.debug("state: awaiting call")
     self.state = AWAITING_CALL
     self.start_background(step)
     asterisk.wait_for_fax_busy()
-    self.current_call = AWAITING_CALL
+    self.current_call = OUTGOING_CALL
     self.connected_call(step)
 
   def incoming_call(self, step):
@@ -85,24 +102,27 @@ class StateMachine:
     sounds.launch_connected_call_sound(step)
     while(not asterisk.fax_free()):
       self.start_background(step)
+    utils.debug("fax seems free?")
     if(asterisk.call_on()):
       if(self.current_call == INCOMING_CALL):
         self.incoming_call(step)
         return
-      if(self.current_call == OUTGOING_CALL):
-        self.awaiting_call(step)
-        return
-      utils("EROOR - can't figure out what call we are in")
-      return
+      asterisk.set_call_off()
     self.post_call(step)
 
   def post_call(self, step):
     self.state = POST_CALL
+    utils.debug("we are on post call")
     sounds.launch_post_call_sound(step)
+    sounds.finish_diegetic_sounds()
     asterisk.add_one_to_step(step)
     if(self.current_call == INCOMING_CALL):
       self.current_call = None
       self.awaiting_call(asterisk.check_current_step())
+      return
+    if(self.current_call == OUTGOING_CALL):
+      self.current_call = None
+      self.pre_call(asterisk.check_current_step())
       return
 
 
