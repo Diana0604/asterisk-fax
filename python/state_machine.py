@@ -15,7 +15,7 @@ PRE_CALL = 6
 # 00 => pre idle
 #if call file exists => incoming call
 #else => awaiting call
-STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL]
+STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL]
 
 class StateMachine:
   global PRE_IDLE
@@ -108,6 +108,7 @@ class StateMachine:
         self.incoming_call(step)
         return
       asterisk.set_call_off()
+    sounds.finish_diegetic_sounds()
     self.post_call(step)
 
   def post_call(self, step):
