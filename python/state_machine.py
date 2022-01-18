@@ -38,11 +38,12 @@ class StateMachine:
     self.awaiting_call(step)
     
   def start_background(self, step):
+    utils.debug("================================ STARTING BACKGROUNDS ==================================")
     lights.launch_background_lights(step)
     sounds.launch_background_sounds(step)
 
   def keep_background_alive(self,step):
-    while(asterisk.check_current_step() == step):
+    while(not asterisk.fax_available()):
       self.start_background(step)
       time.sleep(1)
       continue
@@ -59,7 +60,6 @@ class StateMachine:
     self.state = PRE_CALL
     utils.debug("we are on pre call")
     self.start_background(step)
-    
     sounds.launch_pre_call_sound(random_player_manager.get_random_number())
     utils.debug("finishing diegetic")
     sounds.finish_diegetic_sounds()
@@ -80,8 +80,8 @@ class StateMachine:
     utils.debug("state: incoming call")
     self.state = INCOMING_CALL
     utils.debug("launching call for step: " + step)
-    self.start_background(step)
-    asterisk.wait_for_fax_free()
+    self.keep_background_alive(step)
+    #asterisk.wait_for_fax_free()
     if(calls.launch_main_call(step)):
       self.connected_call(step)
       return

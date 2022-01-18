@@ -78,9 +78,9 @@ def get_player_wrapper(diegetic, background, easteregg):
 def play_sound(sound, diegetic = False, background = False, easteregg = False):
     
     player_wrapper = get_player_wrapper(diegetic, background, easteregg)
-    if(background):
-        if(player_wrapper[0].is_playing()):
-            return
+    #if(background):
+        #if(player_wrapper[0].is_playing()):
+    #        return
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
@@ -116,9 +116,11 @@ def get_background_sound(step):
         if initial_step <= step and last_step >= step:
             #if background sound is not on return sound
             if background_player.is_playing() == 0:
+                previous_step = step
                 return sound
             #if background sound is on but has to be changed return sound
             if initial_step == step and previous_step != step:
+                previous_step = step
                 return sound
             #correct background sound is playing -> return None
             return None
@@ -143,6 +145,7 @@ def get_diegetic_sound(step):
 def launch_background_sounds(step):
     #background sounds
     background_sound = get_background_sound(step)
+    utils.debug(background_sound)
     if background_sound != None:
         if background_sound == 'silence':
             background_player.stop()
