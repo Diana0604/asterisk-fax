@@ -119,7 +119,7 @@ class StateMachine:
     self.state = POST_CALL
     utils.debug("we are on post call")
     sounds.launch_post_call_sound(step)
-    lights.launch_diegetic_sounds(step)
+    lights.launch_diegetic_lights(step)
     sounds.finish_diegetic_sounds()
     lights.finish_diegetic_lights()
     asterisk.add_one_to_step(step)
