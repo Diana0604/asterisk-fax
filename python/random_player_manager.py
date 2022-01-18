@@ -1,4 +1,4 @@
-import random
+import random, utils
 import asterisk
 list_init = False
 possible_numbers = []
@@ -11,9 +11,11 @@ def init_list():
       possible_numbers.append('0' + str(i))
     else:
       possible_numbers.append(str(i))
+  utils.debug(possible_numbers)
   if(not list_init):
     possible_numbers.remove('01')
-    possible_numbers.remove('04')
+    if('04' in possible_numbers):
+      possible_numbers.remove('04')
     list_init = True
 
 def get_random_number():
