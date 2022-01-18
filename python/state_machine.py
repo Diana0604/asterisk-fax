@@ -128,7 +128,7 @@ class StateMachine:
     self.current_call = None
 
     #if at end of sharing - UNCOMMENT TO TEST AND SEND
-    if(asterisk.check_current_step() == "15"):
+    if(int(asterisk.check_current_step()) >= 15):
       utils.debug('powering off')
       utils.countdown(20)
       asterisk.add_to_database("step", "00")
