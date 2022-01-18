@@ -119,9 +119,17 @@ class StateMachine:
     self.state = POST_CALL
     utils.debug("we are on post call")
     sounds.launch_post_call_sound(step)
+    lights.launch_diegetic_sounds(step)
     sounds.finish_diegetic_sounds()
+    lights.finish_diegetic_lights()
     asterisk.add_one_to_step(step)
     self.current_call = None
+
+    #if at end of sharing - UNCOMMENT TO TEST AND SEND
+    if(asterisk.check_current_step() == "15"):
+      utils.debug('powering off')
+      #os.system('poweroff')
+
     if(calls.step_has_call()):
       utils.countdown(5)
       self.pre_call(asterisk.check_current_step())
