@@ -91,7 +91,7 @@ class StateMachine:
     utils.debug("state: connected call")
     self.state = CONNECTED_CALL
     self.start_background(step)
-    
+
     #quite spagheti - must refactor
     counter = 0
     if(step == '03'):
@@ -123,6 +123,7 @@ class StateMachine:
     asterisk.add_one_to_step(step)
     self.current_call = None
     if(calls.step_has_call()):
+      utils.countdown(5)
       self.pre_call(asterisk.check_current_step())
       return
     self.awaiting_call(asterisk.check_current_step())
