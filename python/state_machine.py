@@ -91,6 +91,16 @@ class StateMachine:
     utils.debug("state: connected call")
     self.state = CONNECTED_CALL
     self.start_background(step)
+    
+    #quite spagheti - must refactor
+    counter = 0
+    if(step == '03'):
+      while(not asterisk.call_on()):
+        time.sleep(1)
+        if(asterisk.init_call_on() and asterisk.fax_free()):
+          self.incoming_call(step)
+          return
+
     sounds.launch_connected_call_sound(step)
     while(not asterisk.fax_free()):
       self.start_background(step)

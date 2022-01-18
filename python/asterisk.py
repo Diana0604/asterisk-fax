@@ -82,6 +82,15 @@ def call_on():
         return True
     return False
 
+def init_call_on():
+    if(get_from_database("init_call") == "on"):
+        return True
+    return False
+
+def init_call_off():
+    if(get_from_database("init_call") == "off"):
+        return True
+    return False
 
 def call_off():
     if(get_from_database("call") == "off"):
@@ -90,6 +99,21 @@ def call_off():
 
 def wait_call_on():
     while not call_on():
+        time.sleep(1)
+        if error():
+            return False
+    return True
+
+
+def wait_init_call_on():
+    while not init_call():
+        time.sleep(1)
+        if error():
+            return False
+    return True
+
+def wait_init_call_off():
+    while not init_call():
         time.sleep(1)
         if error():
             return False
