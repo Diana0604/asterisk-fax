@@ -6,7 +6,7 @@ possible_numbers = []
 def init_list():
   global possible_numbers
   global list_init
-  for i in range(1, int(asterisk.get_from_database('players'))):
+  for i in range(1, 1 + int(asterisk.get_from_database('players'))):
     if(i < 10):
       possible_numbers.append('0' + str(i))
     else:
