@@ -61,6 +61,9 @@ def finish_diegetic_sounds():
         utils.countdown(1)
     background_player.audio_set_volume(100)
 
+def stop_call_sounds():
+    diegetic_player.stop()
+
 #COMMON METHODS
 def get_player_wrapper(diegetic, background, easteregg):
     player_wrapper = [vlc.MediaPlayer()]

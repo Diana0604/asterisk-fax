@@ -94,9 +94,11 @@ class StateMachine:
     sounds.launch_connected_call_sound(step)
     while(not asterisk.fax_free()):
       self.start_background(step)
-    utils.debug("fax seems free?")
+    utils.debug("fax seems free")
     if(asterisk.call_on()):
+      utils.debug("call was on at end")
       if(self.current_call == INCOMING_CALL):
+        sounds.stop_call_sounds()
         self.incoming_call(step)
         return
       asterisk.set_call_off()
