@@ -15,7 +15,7 @@ PRE_CALL = 6
 # 00 => pre idle
 #if call file exists => incoming call
 #else => awaiting call
-STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL]
+STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, PRE_CALL, PRE_CALL, PRE_CALL, PRE_CALL, AWAITING_CALL, AWAITING_CALL]
 
 class StateMachine:
   global PRE_IDLE
@@ -117,14 +117,11 @@ class StateMachine:
     sounds.launch_post_call_sound(step)
     sounds.finish_diegetic_sounds()
     asterisk.add_one_to_step(step)
-    if(self.current_call == INCOMING_CALL):
-      self.current_call = None
-      self.awaiting_call(asterisk.check_current_step())
-      return
-    if(self.current_call == OUTGOING_CALL):
-      self.current_call = None
+    self.current_call = None
+    if(calls.step_has_call()):
       self.pre_call(asterisk.check_current_step())
       return
+    self.awaiting_call(asterisk.check_current_step())
 
 
     #next step

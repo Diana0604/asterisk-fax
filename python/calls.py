@@ -114,3 +114,8 @@ def launch_easter_eggs():
     asterisk.add_to_database('faxegg', '0')
     asterisk.add_to_database('faxegg' + str(egg_number), '1')
     return True
+
+def step_has_call():
+    if(get_call_file(asterisk.check_current_step())):
+        return True
+    return False
