@@ -128,7 +128,8 @@ class StateMachine:
     #if at end of sharing - UNCOMMENT TO TEST AND SEND
     if(asterisk.check_current_step() == "15"):
       utils.debug('powering off')
-      #os.system('poweroff')
+      utils.countdown(20)
+      os.system('poweroff')
 
     if(calls.step_has_call()):
       utils.countdown(5)
