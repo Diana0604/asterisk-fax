@@ -11,12 +11,6 @@ POST_CALL = 4
 OUTGOING_CALL = 5
 PRE_CALL = 6
 
-#TO DO:
-# 00 => pre idle
-#if call file exists => incoming call
-#else => awaiting call
-STEP_TO_STATE = [PRE_IDLE, INCOMING_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, AWAITING_CALL, PRE_CALL, PRE_CALL, PRE_CALL, PRE_CALL, PRE_CALL, AWAITING_CALL, AWAITING_CALL]
-
 class StateMachine:
   global PRE_IDLE
   global AWAITING_CALL
@@ -31,7 +25,6 @@ class StateMachine:
 
   def __init__(self,step):
     utils.debug("init of state machine")
-    global STEP_TO_STATE
     if(step == '00'):
       self.pre_idle(step)
       return
