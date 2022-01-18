@@ -32,7 +32,7 @@ class StateMachine:
     if(step == '01'):
       self.incoming_call(step)
       return
-    if(step == '15'):
+    if(int(step) >= 15):
       self.post_call(step)
     if(calls.step_has_call()):
       self.pre_call(step)
