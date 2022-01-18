@@ -32,6 +32,8 @@ class StateMachine:
     if(step == '01'):
       self.incoming_call(step)
       return
+    if(step == '15'):
+      self.post_call(step)
     if(calls.step_has_call()):
       self.pre_call(step)
       return
@@ -129,6 +131,7 @@ class StateMachine:
     if(asterisk.check_current_step() == "15"):
       utils.debug('powering off')
       utils.countdown(20)
+      asterisk.add_to_database("step", "00")
       os.system('poweroff')
 
     if(calls.step_has_call()):
