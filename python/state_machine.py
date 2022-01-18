@@ -32,20 +32,17 @@ class StateMachine:
   def __init__(self,step):
     utils.debug("init of state machine")
     global STEP_TO_STATE
-    if(STEP_TO_STATE[int(step)] == PRE_IDLE):
-      utils.debug("we are in pre idle")
+    if(step == '00'):
       self.pre_idle(step)
       return
-    if(STEP_TO_STATE[int(step)] == AWAITING_CALL):
-      self.awaiting_call(step)
-      return
-    if(STEP_TO_STATE[int(step)] == INCOMING_CALL):
+    if(step == '01'):
       self.incoming_call(step)
       return
-    if(STEP_TO_STATE[int(step)] == PRE_CALL):
+    if(calls.step_has_call()):
       self.pre_call(step)
       return
-
+    self.awaiting_call(step)
+    
   def start_background(self, step):
     lights.launch_background_lights(step)
     sounds.launch_background_sounds(step)
