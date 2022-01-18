@@ -1,6 +1,7 @@
 import utils, time
 import asterisk
 import lights, sounds, calls
+import random_player_manager
 
 
 PRE_IDLE = 0
@@ -58,7 +59,8 @@ class StateMachine:
     self.state = PRE_CALL
     utils.debug("we are on pre call")
     self.start_background(step)
-    sounds.launch_pre_call_sound(step)
+    
+    sounds.launch_pre_call_sound(random_player_manager.get_random_number())
     utils.debug("finishing diegetic")
     sounds.finish_diegetic_sounds()
     self.incoming_call(step)
