@@ -1,7 +1,7 @@
+import version
 question = ""
 while question != "exit":
-    question = raw_input("What do you want to test? Options are: 'lights', 'sound', 'calls', 'smoke', 'buttons' or 'exit' to finish tests. ")
-
+    question = version.get_input("What do you want to test? Options are: 'lights', 'sound', 'calls', 'smoke', 'buttons' or 'exit' to finish tests. ")
     if(question == 'lights'):
         import tester_lights
         continue
