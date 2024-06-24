@@ -2,7 +2,7 @@ from gpiozero import LED
 from time import sleep
 import utils
 
-led = LED(26)
+led = LED(6)
 
 charger = LED(5)
 charger.on()

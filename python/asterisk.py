@@ -2,7 +2,7 @@
 import os, time
 import utils
 
-ASTLOGS = '/var/log/asterisk/full'
+ASTLOGS = '/var/log/asterisk/freepbx.log'
 LASTLINE  = ''
 
 #clean all residual errors

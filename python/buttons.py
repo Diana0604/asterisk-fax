@@ -4,23 +4,26 @@ import os, asterisk, utils
 #reboot
 reboot_button = Button(23)
 def reboot():
+    print('rebooting')
     utils.debug('rebooting')
-    os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
-    os.system('reboot')
+    # os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'REBOOT SESSION' -m 'REBOOT SESSION ' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    os.system('poweroff')
 
 reboot_button.when_pressed = reboot
 
 #rescue
 rescue_button = Button(24)
 def rescue():
-    os.system('tmate -S /tmp/tmate.sock new-session -d')
-    # Blocks until the SSH connection is established
-    os.system('tmate -S /tmp/tmate.sock wait tmate-ready')
-    #get web session
-    stream = os.popen("tmate -S /tmp/tmate.sock display -p '#{tmate_web}' ")
-    output = stream.readline()
-    utils.debug(output)
-    os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
+    print('rescuing')
+    asterisk.add_to_database('step', '00')
+    # os.system('tmate -S /tmp/tmate.sock new-session -d')
+    # # Blocks until the SSH connection is established
+    # os.system('tmate -S /tmp/tmate.sock wait tmate-ready')
+    # #get web session
+    # stream = os.popen("tmate -S /tmp/tmate.sock display -p '#{tmate_web}' ")
+    # output = stream.readline()
+    # utils.debug(output)
+    # os.system("sendemail -f diana.valverdu@gmail.com -t antsonstiltstheatre@gmail.com -u 'RESCUE SESSION' -m 'RESCUE SESSION " + output + "' -xu diana.vallverdu@gmail.com -xp fcnxcntclkxrrxvd -s smtp.gmail.com")
 
 rescue_button.when_pressed = rescue
 

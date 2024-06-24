@@ -1,11 +1,19 @@
 import buttons
 import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
 import alsaaudio, datetime, os
+from gpiozero import MotionSensor
+
+pir = MotionSensor(26)
+pir.wait_for_motion()
+pir.wait_for_no_motion()
+print("no motion!")
+
+
 
 utils.send_email('machine is on, show has begun')
 
 #alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
-alsaaudio.Mixer(control="Headphone").setvolume(100)
+alsaaudio.Mixer(control="PCM").setvolume(100)
 
 now = datetime.datetime.now()
 
@@ -17,22 +25,17 @@ if show_date > now:
     os.system('poweroff')
     exit()
 
+asterisk.add_to_database('step', '00')
+
 current_step = asterisk.check_current_step()
-if current_step == "31":
-    if asterisk.database_exists("finish_time"):
-        finish_time = datetime.datetime.strptime(asterisk.get_from_database("finish_time").replace('SPACE', ' '), '%Y-%m-%d %H:%M:%S.%f')
-        if finish_time + datetime.timedelta(minutes=30) < now:
-            asterisk.update_step(current_step)
 
 previous_step = str(int(current_step) - 1)
+
 
 if len(previous_step) == 1:
     previous_step = '0' + previous_step
 
 asterisk.resest_easter_eggs()
-
-if utils.DEBUG < 2 and previous_step != '-1':
-    sounds.play_rescue()
 
 def diegetics_running():
     if sounds.diegetic_player.is_playing():
@@ -55,6 +58,9 @@ def launch_easter_eggs():
     else:
         sounds.launch_easter_eggs(fax = False)
     sounds.finish_easter_eggs_sounds()
+
+pir.wait_for_motion()
+print('motion detected')
 
 while current_step != "31":
     current_step = asterisk.check_current_step()
