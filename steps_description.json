@@ -1,0 +1,10 @@
+[
+  {
+    "stepName": "infinite_scroll",
+    "callFile": "infinite_scroll.call",
+    "diegeticSound": {
+      "soundFile": "/fax/sounds/speaker/nua/infinite_scroll.mp3",
+      "duration": 90
+    }
+  }
+]

@@ -1,114 +1,74 @@
-import buttons
-import calls, asterisk, utils, sounds, lights, smoke, easter_eggs
+import asterisk, utils, sounds, lights, smoke, easter_eggs
 import alsaaudio, datetime, os
-from gpiozero import MotionSensor
+from gpiozero import MotionSensor, Button
+from Call import Call
+import json
 
-pir = MotionSensor(26)
-pir.wait_for_motion()
-pir.wait_for_no_motion()
-print("no motion!")
+class Manager : 
+    def __init__(self, DEBUG = 0):
+      #general properties
+      self.loop = True
+      self.current_step = 0
+      self.previous_step = -1
+      self.DEBUG = DEBUG
+      
 
+      #audio
+      alsaaudio.Mixer(control="PCM").setvolume(100)
+      
+      #buttons
+      self.reboot_button = Button(23)
+      self.reboot_button.when_pressed = self.reboot
+      
+      #Motion Sensor
+      self.pir = MotionSensor(26)
+      #wait for 1st motion at startup
+      if not self.DEBUG :
+        self.pir.wait_for_motion()
+        self.pir.wait_for_no_motion()
 
-
-utils.send_email('machine is on, show has begun')
-
-#alsaaudio.Mixer(control=alsaaudio.Mixer().mixer()).setvolume(100)
-alsaaudio.Mixer(control="PCM").setvolume(100)
-
-now = datetime.datetime.now()
-
-## yyyy/mm/dd/hh/mm
-show_date = datetime.datetime(2020, 1, 7, 14, 30) 
-
-if show_date > now:
-    sounds.play_pre_show()
-    os.system('poweroff')
-    exit()
-
-asterisk.add_to_database('step', '00')
-
-current_step = asterisk.check_current_step()
-
-previous_step = str(int(current_step) - 1)
-
-
-if len(previous_step) == 1:
-    previous_step = '0' + previous_step
-
-asterisk.resest_easter_eggs()
-
-def diegetics_running():
-    if sounds.diegetic_player.is_playing():
-        return True
-    if calls.DIEGETIC_CALLS_ON:
-        return True
-    if lights.DIEGETIC_LIGHTS_ON:
-        return True
-    return False
-
-def launch_diegetics():
-    buttons.launch_buttons(current_step)
-    sounds.launch_diegetic_sounds(current_step)
-    lights.launch_diegetic_lights(current_step)
-    smoke.launch_smoke(current_step)
-
-def launch_easter_eggs():
-    if calls.launch_easter_eggs():
-        sounds.launch_easter_eggs(fax = True)
-    else:
-        sounds.launch_easter_eggs(fax = False)
-    sounds.finish_easter_eggs_sounds()
-
-pir.wait_for_motion()
-print('motion detected')
-
-while current_step != "31":
-    current_step = asterisk.check_current_step()
-    #INIT
-    #make sure background sound is playing
-    sounds.launch_background_sounds(current_step)
-    #if we're on new step -> launch diegetics
-    launch_diegetic = False
-    calls.launch_main_call(current_step)
-    if previous_step != current_step:
-        launch_diegetics()
-
-    if not diegetics_running():
-        launch_easter_eggs()
+    #reboot button stops loop
+    def reboot(self):
+       self.loop = False
     
-    #FINISH
-    #finish diegetic lights and send background
-    lights.finish_diegetic_lights()
-    lights.launch_background_lights(current_step)
-    #wait for every process to be done
-    calls.finish_main_call(current_step)
-    sounds.finish_diegetic_sounds(current_step)
-    if diegetics_running():
-        asterisk.wait_for_fax_free()
-    #easter_eggs.reset()
+    #start show
+    def startShow(self):
+      if not self.DEBUG :
+        self.pir.wait_for_motion()
+      print('starting show')
+      while(self.loop):
+        self.loop_step()
     
-    #UPDATE
-    if previous_step == current_step:
-        asterisk.update_step(current_step)
-    previous_step = current_step
+    #loop continuously running
+    def loop_step(self):
+      
+      
+      global step_info
+      with open('steps_description.json') as f:
+          json_data = json.load(f)
+          if(self.current_step >= len(json_data)) :
+            self.loop = False
+            return
+          step_info = json_data[self.current_step]
+      
+      #print(step_info)
+      
+      #check call
+      if("callFile" in step_info) :
+        current_call = Call(step_info["callFile"])
+        current_call.launch_call()
+      
+      #check sound
+      if("diegeticSound" in step_info) : 
+        sound_info = step_info["diegeticSound"]
+        duration = sounds.play_sound(sound_info["soundFile"], diegetic=True)
+        print(duration)
+        utils.countdown(sound_info["duration"])
+        
+      
+      self.current_step += 1
+        
 
-    #CHECK IF CONNECTED AND RECONNECT OTHERWISE
-    utils.check_for_wifi()
+manager = Manager(1)
 
-now = datetime.datetime.now()
-
-#get finish time and store to database
-finish_time = now + datetime.timedelta(minutes=30)
-print('ADDING; ' + str(finish_time).replace(' ', 'SPACE'))
-asterisk.add_to_database("finish_time" , str(finish_time).replace(' ', 'SPACE'))
-
-lights.launch_background_lights(current_step)
-
-while datetime.datetime.now() < finish_time:
-    launch_easter_eggs()
-
-lights.launch_diegetic_lights(current_step)
-lights.finish_diegetic_lights()
-asterisk.update_step(current_step)
-
-utils.debug('END OF PROGRAM')
+manager.startShow()

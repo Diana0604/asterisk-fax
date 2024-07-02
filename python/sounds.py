@@ -126,6 +126,7 @@ def play_sound(sound, diegetic = False, background = False, easteregg = False):
     player_wrapper[0].play()
     if ((not diegetic_player and not background and not easteregg)):
         utils.countdown(1)
+    print(media.get_duration())
     duration = media.get_duration()/1000
     return duration
 
