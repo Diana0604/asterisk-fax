@@ -75,16 +75,11 @@ class Manager :
         #loop through list of sounds
         for sound_info in all_sounds :
           
-          print('next sound is')
-          print(sound_info)
-          
           #start playing sound and obtain duration in seconds
           duration = sounds.play_sound(sound_info["sound"], diegetic=True)
           
           #if there is no condition to stop sound, play until end
           if not "nextSoundIf" in sound_info :
-            print('countdown is needed')
-            print(duration)
             utils.countdown(duration)
             continue
           
@@ -99,8 +94,6 @@ class Manager :
             
             #condition is checked on the asterisk databse
             value = asterisk.get_from_database(sound_info["nextSoundIf"]["key"])
-            print('obtained value', value)
-            print('checking if', sound_info["nextSoundIf"]["value"])
             if value == sound_info["nextSoundIf"]["value"] :
               next_step = True
             duration = duration - 1

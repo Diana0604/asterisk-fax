@@ -81,10 +81,7 @@ def add_to_database(key, value):
 def get_from_database(key):
     command = "asterisk -rx 'database get DRHA " + key + "'"
     stream = os.popen(command)
-    red = stream.read()
-    print('have red in total')
-    print(red)
-    return red.split()[1]
+    return stream.read().split()[1]
 
 def database_exists(key):
     if get_from_database(key) == "entry":
