@@ -47,7 +47,7 @@ def wait_for_fax_busy():
     return True
 
 def fax_ringing():
-    if check_fax_status() == 'Ringing':
+    if check_fax_status() == 'Ringing' or check_fax_status() =='Ring+Inuse':
         return True
     return False
 
@@ -73,15 +73,18 @@ def wait_fax_available():
 #DATABASE
 
 def add_to_database(key, value): 
-    # equivalent terminal command: 'asterisk -rx "database put WESTILLFAX key value"'
-    command = "asterisk -rx 'database put WESTILLFAX " + key + " " + value + "'"
+    # equivalent terminal command: 'asterisk -rx "database put DRHA key value"'
+    command = "asterisk -rx 'database put DRHA " + key + " " + value + "'"
     utils.debug(command)
     os.system(command)
 
 def get_from_database(key):
-    command = "asterisk -rx 'database get WESTILLFAX " + key + "'"
+    command = "asterisk -rx 'database get DRHA " + key + "'"
     stream = os.popen(command)
-    return stream.read().split()[1]
+    red = stream.read()
+    print('have red in total')
+    print(red)
+    return red.split()[1]
 
 def database_exists(key):
     if get_from_database(key) == "entry":
@@ -92,7 +95,7 @@ def get_database_value(output):
     return output.split()[1]
 
 def check_current_step():
-    database_output = os.popen("asterisk -rx 'database get WESTILLFAX step'").read()
+    database_output = os.popen("asterisk -rx 'database get DRHA step'").read()
     return get_database_value(database_output)
 
 def update_step(current_step):

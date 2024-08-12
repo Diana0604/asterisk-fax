@@ -33,6 +33,8 @@ class Call:
         if not success:
             utils.countdown(3)
             return self.launch_call()
+        
+        asterisk.wait_fax_not_ringing()
 
         #remove file from outgoing folder
         utils.remove_files_from(OUTGOING_PATH)
@@ -49,4 +51,3 @@ class Call:
             utils.countdown(3)
             return self.launch_call()
         return True
-            

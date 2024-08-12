@@ -5,10 +5,10 @@ from Call import Call
 import json
 
 class Manager : 
-    def __init__(self, DEBUG = 0):
+    def __init__(self, DEBUG = 0, current_step = 0):
       #general properties
       self.loop = True
-      self.current_step = 0
+      self.current_step = current_step
       self.previous_step = -1
       self.DEBUG = DEBUG
       
@@ -44,7 +44,7 @@ class Manager :
       
       
       global step_info
-      with open('steps_description.json') as f:
+      with open('performance.json') as f:
           json_data = json.load(f)
           if(self.current_step >= len(json_data)) :
             self.loop = False
@@ -54,21 +54,60 @@ class Manager :
       #print(step_info)
       
       #check call
-      if("callFile" in step_info) :
-        current_call = Call(step_info["callFile"])
+      if("call" in step_info) :
+        call_info = step_info["call"]
+        current_call = Call(call_info["call"])
         current_call.launch_call()
+        
+        #wait time according to json instrucitons
+        #1. manual wait -> wait for that time
+        #2. no manual wait -> wait until call done
+        if("wait" in call_info):
+          utils.countdown(call_info["wait"])
+        else :
+          current_call.finish_call()
       
       #check sound
-      if("diegeticSound" in step_info) : 
-        sound_info = step_info["diegeticSound"]
-        duration = sounds.play_sound(sound_info["soundFile"], diegetic=True)
-        print(duration)
-        utils.countdown(sound_info["duration"])
+      if("diegeticSounds" in step_info) :
+        #get list of diegetic sounds from json
+        all_sounds = step_info["diegeticSounds"]
         
-      
+        #loop through list of sounds
+        for sound_info in all_sounds :
+          
+          print('next sound is')
+          print(sound_info)
+          
+          #start playing sound and obtain duration in seconds
+          duration = sounds.play_sound(sound_info["sound"], diegetic=True)
+          
+          #if there is no condition to stop sound, play until end
+          if not "nextSoundIf" in sound_info :
+            print('countdown is needed')
+            print(duration)
+            utils.countdown(duration)
+            continue
+          
+          #if there is condition to stop sound play until either:
+          # 1. end reached
+          #or
+          #2. condition reached
+          next_step = False
+          while duration > 0 and not next_step:
+            
+            utils.countdown(1)
+            
+            #condition is checked on the asterisk databse
+            value = asterisk.get_from_database(sound_info["nextSoundIf"]["key"])
+            print('obtained value', value)
+            print('checking if', sound_info["nextSoundIf"]["value"])
+            if value == sound_info["nextSoundIf"]["value"] :
+              next_step = True
+            duration = duration - 1
+            
       self.current_step += 1
         
 
-manager = Manager(1)
+manager = Manager(1, 1)
 
 manager.startShow()

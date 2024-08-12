@@ -1,0 +1,113 @@
+[
+  {
+    "stepName": "phoneRinging",
+    "diegeticSounds":[
+      {
+        "sound": "/fax/sounds/speaker/00_phone_rings.wav",
+        "wait": 7
+      }
+    ]
+  },
+  {
+    "stepName": "hello+questionnaireIntro",
+    "call": {
+      "call": "00_hello.call", 
+      "wait": 40
+    },
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/phone/2_Imberna_researching.wav",
+        "wait" : 40
+      },
+      {
+        "sound": "/fax/sounds/phone/3_q_instructions.wav",
+        "wait" : 29
+      }
+    ]
+  },
+  {
+    "stepName": "questionnaire",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/phone/4_movint_too_fast.wav",
+        "nextSoundIf": {
+          "key" : "questionnaire",
+          "value": "2"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/5_servers.wav",
+        "nextSoundIf": {
+          "key" : "questionnaire",
+          "value": "3"
+        }
+      },
+      {
+        "sound": "sounds/phone/6_boy_bands.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "4"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/7_ml_model.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "5"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/8_readULA.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "6"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/9_CO2faxIM.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "7"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/10_VHS.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "8"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/11_emailweight.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "9"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/12_history.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "10"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/13_print_photos.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "11"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/14_ice_cream.wav",
+        "nextSoundIf":  {
+          "key" : "questionnaire",
+          "value": "finished"
+        }
+      },
+      {
+        "sound": "/fax/sounds/phone/15_endQuestionnaire.wav"
+      }
+    ]
+  }
+]

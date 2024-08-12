@@ -2,21 +2,21 @@ from gpiozero import LED
 from time import sleep
 import utils
 
-led = LED(6)
+led = LED(24)
 
-charger = LED(5)
-charger.on()
+#charger = LED(23)
+#charger.on()
 
 current_step = None
 
 led.off()
 
 def start_smoke():
-    charger.off()
+    #charger.off()
     led.on()
     sleep(10)
     led.off()
-    charger.on()
+    #charger.on()
 
 def launch_smoke(step):
     global current_step

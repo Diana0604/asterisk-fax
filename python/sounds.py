@@ -1,10 +1,10 @@
 import os, utils, vlc, asterisk, easter_eggs
 
 SOUNDS_PATH = '/fax/sounds/speaker/'
-DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
-BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
-background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
-diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
+#DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'
+#BACKGROUND_SOUNDS_PATH = SOUNDS_PATH + 'background/'
+#background_sounds = os.listdir(BACKGROUND_SOUNDS_PATH)
+#diegetic_sounds = os.listdir(DIEGETIC_SOUNDS_PATH)
 
 previous_step = None
 
@@ -124,10 +124,11 @@ def play_sound(sound, diegetic = False, background = False, easteregg = False):
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
     player_wrapper[0].play()
+    utils.countdown(1)
     if ((not diegetic_player and not background and not easteregg)):
         utils.countdown(1)
-    print(media.get_duration())
-    duration = media.get_duration()/1000
+    #print(media.get_duration())
+    duration = media.get_duration()/1000 - 1
     return duration
 
 #SPECIAL SOUNDS
