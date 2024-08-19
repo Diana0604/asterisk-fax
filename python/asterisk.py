@@ -157,6 +157,11 @@ def error():
         return False
     return True
 
+def reset_database():
+  add_to_database('questionnaire', '1')
+  add_to_database('answer', '0')
+
+
 if not database_exists('step'):
     add_to_database('step', '00')
 

@@ -1,113 +1,165 @@
 [
   {
-    "stepName": "phoneRinging",
-    "diegeticSounds":[
-      {
-        "sound": "/fax/sounds/speaker/00_phone_rings.wav",
-        "wait": 7
-      }
-    ]
-  },
-  {
     "stepName": "hello+questionnaireIntro",
     "call": {
       "call": "00_hello.call", 
-      "wait": 40
-    },
+      "wait": 90
+    }
+  },
+
+  {
+    "stepName": "q1",
     "diegeticSounds": [
       {
-        "sound": "/fax/sounds/phone/2_Imberna_researching.wav",
-        "wait" : 40
+        "sound": "/fax/sounds/speaker/04_q1.1.wav"
       },
       {
-        "sound": "/fax/sounds/phone/3_q_instructions.wav",
-        "wait" : 29
+        "sound": "/fax/sounds/phone/output/name.wav"
+      },
+      {
+        "sound": "/fax/sounds/speaker/04_q1.2.wav",
+        "nextSoundIf": {
+          "key": "questionnaire",
+          "values": ["2"]
+        }
       }
     ]
   },
+ 
   {
-    "stepName": "questionnaire",
+    "stepName": "a1",
     "diegeticSounds": [
       {
-        "sound": "/fax/sounds/phone/4_movint_too_fast.wav",
-        "nextSoundIf": {
-          "key" : "questionnaire",
-          "value": "2"
+        "sound": "/fax/sounds/speaker/05.a1-1-3.wav",
+        "playIf" : {
+          "key": "answer",
+          "values": ["1", "2", "3"]
         }
       },
       {
-        "sound": "/fax/sounds/phone/5_servers.wav",
-        "nextSoundIf": {
-          "key" : "questionnaire",
-          "value": "3"
+        "sound": "/fax/sounds/speaker/05.a1-4-6.1.wav",
+        "playIf" : {
+          "key": "answer",
+          "values": ["4", "5", "6"]
         }
       },
       {
-        "sound": "sounds/phone/6_boy_bands.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "4"
+        "sound": "/fax/sounds/speaker/05.a1-7-9.1.wav",
+        "playIf" : {
+          "key": "answer",
+          "values": ["7", "8", "9"]
         }
       },
       {
-        "sound": "/fax/sounds/phone/7_ml_model.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "5"
+        "sound": "/fax/sounds/phone/output/name.wav"
+      },
+      {
+        "sound": "/fax/sounds/speaker/05.a1-4-6.2.wav",
+        "playIf" : {
+          "key": "answer",
+          "values": ["4", "5", "6"]
         }
       },
       {
-        "sound": "/fax/sounds/phone/8_readULA.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "6"
+        "sound": "/fax/sounds/speaker/05.a1-7-9.2.wav",
+        "playIf" : {
+          "key": "answer",
+          "values": ["7", "8", "9"]
         }
-      },
-      {
-        "sound": "/fax/sounds/phone/9_CO2faxIM.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "7"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/10_VHS.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "8"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/11_emailweight.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "9"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/12_history.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "10"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/13_print_photos.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "11"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/14_ice_cream.wav",
-        "nextSoundIf":  {
-          "key" : "questionnaire",
-          "value": "finished"
-        }
-      },
-      {
-        "sound": "/fax/sounds/phone/15_endQuestionnaire.wav"
       }
     ]
+  },
+ 
+  {
+    "stepName": "q2",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/06_q2.1.wav"
+      },
+      {
+        "sound": "/fax/sounds/phone/output/name.wav"
+      },
+      {
+        "sound": "/fax/sounds/speaker/06_q2.2.wav",
+        "nextSoundIf": {
+          "key": "questionnaire",
+          "values": ["3"]
+        }
+      }
+    ]
+  },
+  
+  {
+    "stepName": "a2",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/07_a2.1.wav"
+      },
+      {
+        "sound": "/fax/sounds/phone/output/name.wav"
+      },
+      {
+        "sound": "/fax/sounds/speaker/07_a2.2.wav"
+      }
+    ]
+  },
+  
+  {
+    "stepName": "q3",
+    "diegeticSounds": [
+      {"sound": "/fax/sounds/speaker/08_q3.1.wav"},
+      {"sound": "/fax/sounds/phone/output/name.wav"},
+      {
+        "sound": "/fax/sounds/speaker/08_q3.2.wav",
+        "nextSoundIf": {
+          "key": "questionnaire",
+          "values": ["finished"]
+        }
+      }
+    ]
+  },
+  
+  {
+    "stepName": "a3",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/09_a3.1.mp3",
+        "playIf" : {
+          "key": "answer",
+          "values": ["5", "6", "7", "8", "9"]
+        }
+      },
+      {
+        "sound": "/fax/sounds/speaker/09_a3.2.mp3",
+        "playIf" : {
+          "key": "answer",
+          "values": ["1", "2", "3", "4"]
+        }
+      }
+    ]
+  },
+  
+  {
+    "stepName": "sendingFax",
+    "diegeticSounds":[
+      {
+        "sound": "/fax/sounds/speaker/10_sending_fax.mp3"
+      }
+    ]
+  },
+  
+  {
+    "stepName": "faxOutgoing",
+    "call" : {
+      "call": "infinite_scroll.call",
+      "wait": 0
+    },
+    "diegeticSounds":
+      [
+        {
+          "sound": "/fax/sounds/speaker/11_while_printing.wav"
+        }
+      ]
+    
   }
 ]

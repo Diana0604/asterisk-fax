@@ -1,11 +1,12 @@
-import asterisk, utils, sounds, lights, smoke, easter_eggs
-import alsaaudio, datetime, os
+import asterisk, utils, sounds
+import alsaaudio
 from gpiozero import MotionSensor, Button
 from Call import Call
 import json
 
 class Manager : 
     def __init__(self, DEBUG = 0, current_step = 0):
+      asterisk.reset_database()
       #general properties
       self.loop = True
       self.current_step = current_step
@@ -75,6 +76,17 @@ class Manager :
         #loop through list of sounds
         for sound_info in all_sounds :
           
+          
+          #check if needs playing
+          should_play = True
+          if "playIf" in sound_info :
+            value = asterisk.get_from_database(sound_info["playIf"]["key"])
+            if not (value in sound_info["playIf"]["values"]) :
+              should_play = False
+              continue
+          if not should_play:
+            continue
+
           #start playing sound and obtain duration in seconds
           duration = sounds.play_sound(sound_info["sound"], diegetic=True)
           
@@ -91,16 +103,15 @@ class Manager :
           while duration > 0 and not next_step:
             
             utils.countdown(1)
-            
             #condition is checked on the asterisk databse
             value = asterisk.get_from_database(sound_info["nextSoundIf"]["key"])
-            if value == sound_info["nextSoundIf"]["value"] :
+            if value in sound_info["nextSoundIf"]["values"] :
               next_step = True
             duration = duration - 1
             
       self.current_step += 1
         
 
-manager = Manager(1, 1)
+manager = Manager(1,7)
 
 manager.startShow()

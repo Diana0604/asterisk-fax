@@ -11,7 +11,7 @@ previous_step = None
 background_player = vlc.MediaPlayer()
 background_player.audio_set_volume(100)
 diegetic_player = vlc.MediaPlayer()
-diegetic_player.audio_set_volume(100)
+diegetic_player.audio_set_volume(50)
 easter_egg_player = vlc.MediaPlayer()
 easter_egg_player.audio_set_volume(100)
 
