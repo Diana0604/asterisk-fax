@@ -157,9 +157,28 @@
     "diegeticSounds":
       [
         {
+          "sound": "/fax/sounds/speaker/11.0_your_solution.mp3"
+        },
+        {
           "sound": "/fax/sounds/speaker/11_while_printing.wav"
         }
       ]
     
+  },
+  {
+    "stepName": "faxIncomingInstrucitons",
+    "diegeticSounds":
+      [
+        {
+          "sound": "/fax/sounds/speaker/13_sending_instructions.mp3"
+        }
+      ]
+    
+  },
+  {
+    "stepName": "faxIncoming",
+    "incomingCall": {
+      "key": "faxIncoming"
+    }
   }
 ]

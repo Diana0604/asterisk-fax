@@ -158,8 +158,11 @@ def error():
     return True
 
 def reset_database():
-  add_to_database('questionnaire', '1')
-  add_to_database('answer', '0')
+  command = "asterisk -rx 'database deltree DRHA'"
+  utils.debug(command)
+  os.system(command)
+  #add_to_database('questionnaire', '1')
+  #add_to_database('answer', '0')
 
 
 if not database_exists('step'):

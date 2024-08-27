@@ -3,6 +3,7 @@ import alsaaudio
 from gpiozero import MotionSensor, Button
 from Call import Call
 import json
+import threading
 
 class Manager : 
     def __init__(self, DEBUG = 0, current_step = 0):
@@ -18,15 +19,26 @@ class Manager :
       alsaaudio.Mixer(control="PCM").setvolume(100)
       
       #buttons
-      self.reboot_button = Button(23)
+      self.reboot_button = Button(24)
       self.reboot_button.when_pressed = self.reboot
       
       #Motion Sensor
       self.pir = MotionSensor(26)
+      print('motion sensor started')
+      print(self.DEBUG)
       #wait for 1st motion at startup
       if not self.DEBUG :
         self.pir.wait_for_motion()
         self.pir.wait_for_no_motion()
+    
+    def background_sound(self):
+      global run_threads
+      while(run_threads):
+        if(not sounds.background_player.is_playing()):
+          #play bg sound
+          sounds.play_sound('/fax/sounds/background/breathing.wav', background=True)
+        utils.countdown(1)
+      
 
     #reboot button stops loop
     def reboot(self):
@@ -36,7 +48,13 @@ class Manager :
     def startShow(self):
       if not self.DEBUG :
         self.pir.wait_for_motion()
-      print('starting show')
+      
+      #start bg sound
+      self.background_thread = threading.Thread(target=self.background_sound)
+      self.background_thread.start()
+      
+      
+      
       while(self.loop):
         self.loop_step()
     
@@ -45,7 +63,7 @@ class Manager :
       
       
       global step_info
-      with open('performance.json') as f:
+      with open('/fax/performance.json') as f:
           json_data = json.load(f)
           if(self.current_step >= len(json_data)) :
             self.loop = False
@@ -54,7 +72,7 @@ class Manager :
       
       #print(step_info)
       
-      #check call
+      #check call - outgoing
       if("call" in step_info) :
         call_info = step_info["call"]
         current_call = Call(call_info["call"])
@@ -67,6 +85,19 @@ class Manager :
           utils.countdown(call_info["wait"])
         else :
           current_call.finish_call()
+      
+      #check call - incoming
+      if("incomingCall" in step_info) :
+        found = False
+        
+        while(not found) :
+          utils.countdown(1)
+          
+          #condition is checked on the asterisk databse
+          
+          value = asterisk.get_from_database(step_info["incomingCall"]["key"])
+          if (value == 'received') :
+            found = True
       
       #check sound
       if("diegeticSounds" in step_info) :
@@ -112,6 +143,15 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(1,7)
+manager = Manager(1,9)
+
+#startButton = Button(23)
+#startButton.wait_for_press()
+
+run_threads = True
 
 manager.startShow()
+
+run_threads = False
+
+manager.background_thread.join()
