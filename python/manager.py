@@ -99,6 +99,10 @@ class Manager :
           if (value == 'received') :
             found = True
       
+      #check bg sound
+      if("backgroundSound" in step_info) :
+        sounds.play_sound(step_info["backgroundSound"])
+      
       #check sound
       if("diegeticSounds" in step_info) :
         #get list of diegetic sounds from json
@@ -120,6 +124,8 @@ class Manager :
 
           #start playing sound and obtain duration in seconds
           duration = sounds.play_sound(sound_info["sound"], diegetic=True)
+          if("wait" in sound_info) :
+            duration = sound_info["wait"]
           
           #if there is no condition to stop sound, play until end
           if not "nextSoundIf" in sound_info :
@@ -139,11 +145,18 @@ class Manager :
             if value in sound_info["nextSoundIf"]["values"] :
               next_step = True
             duration = duration - 1
+      
+      
+      #duration = sounds.play_sound('/fax/sounds/step_change.wav', diegetic_sound=True)
+      sounds.diegetic_player.pause()
+      
+      #wait one second in between steps
+      utils.countdown(1)
             
       self.current_step += 1
         
 
-manager = Manager(1,9)
+manager = Manager(1,10)
 
 #startButton = Button(23)
 #startButton.wait_for_press()

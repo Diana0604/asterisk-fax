@@ -1,10 +1,19 @@
 [
   {
+    "backgroundSound": "/fax/sounds/step_change.wav"
+  },
+  {
     "stepName": "hello+questionnaireIntro",
     "call": {
       "call": "00_hello.call", 
       "wait": 90
-    }
+    },
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/step_change.wav",
+        "wait": 4
+      }
+    ]
   },
 
   {
@@ -135,6 +144,10 @@
           "key": "answer",
           "values": ["1", "2", "3", "4"]
         }
+      },
+      {
+        "sound": "/fax/sounds/step_change.wav",
+        "wait": 4
       }
     ]
   },
@@ -155,7 +168,7 @@
       "wait": 0
     },
     "diegeticSounds":
-      [
+    [
         {
           "sound": "/fax/sounds/speaker/11.0_your_solution.mp3"
         },
@@ -163,7 +176,6 @@
           "sound": "/fax/sounds/speaker/11_while_printing.wav"
         }
       ]
-    
   },
   {
     "stepName": "faxIncomingInstrucitons",
@@ -173,12 +185,19 @@
           "sound": "/fax/sounds/speaker/13_sending_instructions.mp3"
         }
       ]
-    
   },
   {
     "stepName": "faxIncoming",
     "incomingCall": {
       "key": "faxIncoming"
     }
+  },
+  {
+    "diegeticSounds":[
+      {
+        "sound": "/fax/sounds/step_change.wav",
+        "wait": 4
+      }
+    ]
   }
 ]
