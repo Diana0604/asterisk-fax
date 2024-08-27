@@ -4,6 +4,7 @@ from gpiozero import MotionSensor, Button
 from Call import Call
 import json
 import threading
+from lights import Lights
 
 class Manager : 
     def __init__(self, DEBUG = 0, current_step = 0):
@@ -13,6 +14,7 @@ class Manager :
       self.current_step = current_step
       self.previous_step = -1
       self.DEBUG = DEBUG
+      self.lights = Lights()
       
 
       #audio
@@ -70,7 +72,13 @@ class Manager :
             return
           step_info = json_data[self.current_step]
       
-      #print(step_info)
+      #lights
+      if "lights" in step_info:
+        lights_info = step_info["lights"]
+        if(lights_info == "wake_up"):
+          self.lights.wake_up()
+          
+        
       
       #check call - outgoing
       if("call" in step_info) :
@@ -147,7 +155,6 @@ class Manager :
             duration = duration - 1
       
       
-      #duration = sounds.play_sound('/fax/sounds/step_change.wav', diegetic_sound=True)
       sounds.diegetic_player.pause()
       
       #wait one second in between steps
@@ -156,7 +163,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(1,10)
+manager = Manager(1,0)
 
 #startButton = Button(23)
 #startButton.wait_for_press()

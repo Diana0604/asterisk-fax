@@ -1,6 +1,7 @@
 [
   {
-    "backgroundSound": "/fax/sounds/step_change.wav"
+    "backgroundSound": "/fax/sounds/step_change.wav",
+    "lights": "wake_up"
   },
   {
     "stepName": "hello+questionnaireIntro",
@@ -13,7 +14,8 @@
         "sound": "/fax/sounds/step_change.wav",
         "wait": 4
       }
-    ]
+    ],
+    "lights": "questionnaire"
   },
 
   {
