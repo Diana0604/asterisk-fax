@@ -5,6 +5,7 @@ from Call import Call
 import json
 import threading
 from lights import Lights
+import os
 
 class Manager : 
     def __init__(self, DEBUG = 0, current_step = 0):
@@ -21,7 +22,7 @@ class Manager :
       alsaaudio.Mixer(control="PCM").setvolume(100)
       
       #buttons
-      self.reboot_button = Button(24)
+      self.reboot_button = Button(23)
       self.reboot_button.when_pressed = self.reboot
       
       #Motion Sensor
@@ -44,7 +45,13 @@ class Manager :
 
     #reboot button stops loop
     def reboot(self):
-       self.loop = False
+      print('rebooting')
+      global run_threads
+      run_threads = False
+      manager.background_thread.join()
+      self.lights.finish_lights()
+      self.loop = False
+      os.system('pkill python')
     
     #start show
     def startShow(self):

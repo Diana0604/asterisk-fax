@@ -42,10 +42,11 @@ class Lights :
     self.wake_up_thread = threading.Thread(target=thread, args=[self.pixels])
     self.wake_up_thread.start()
     
-  def finish_wake_up(self):
+  def finish_lights(self):
     global waking_up
     waking_up = False
     self.wake_up_thread.join()
+    self.pixels.fill((0, 0, 0))
 
 #lights = Lights()
 
