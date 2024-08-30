@@ -176,15 +176,34 @@
         },
         {
           "sound": "/fax/sounds/speaker/11_while_printing.wav"
+        },
+        {
+          "sound": "/fax/sounds/step_change.wav",
+          "wait": 4
         }
       ]
+  },
+  {
+    "stepName": "after printing",
+    "diegeticSounds":[
+      {
+        "sound": "/fax/sounds/speaker/12_after_printing.mp3"
+      }
+    ],
+    "buttonPress": 1
   },
   {
     "stepName": "faxIncomingInstrucitons",
     "diegeticSounds":
       [
         {
-          "sound": "/fax/sounds/speaker/13_sending_instructions.mp3"
+          "sound": "/fax/sounds/speaker/13_sending_instructions.1.wav"
+        },
+        {
+          "sound": "/fax/sounds/phone/output/name.wav"
+        },
+        {
+          "sound": "/fax/sounds/speaker/13_sending_instructions.2.wav"
         }
       ]
   },
@@ -195,11 +214,25 @@
     }
   },
   {
+    "stepName": "ready to join?",
     "diegeticSounds":[
       {
-        "sound": "/fax/sounds/step_change.wav",
-        "wait": 4
+        "sound": "/fax/sounds/speaker/14_ready_to_join.1.wav"
+      },
+      {
+        "sound": "/fax/sounds/phone/output/name.wav"
+      },
+      {
+        "sound": "/fax/sounds/speaker/14_ready_to_join.2.wav"
       }
     ]
+  },
+  
+  {
+    "stepName": "credits",
+    "call" : {
+      "call": "tester.call",
+      "wait": 0
+    }
   }
 ]

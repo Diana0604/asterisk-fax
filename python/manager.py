@@ -20,8 +20,7 @@ class Manager :
       alsaaudio.Mixer(control="PCM").setvolume(100)
       
       #buttons
-      self.reboot_button = Button(23)
-      self.reboot_button.when_pressed = self.reboot
+      self.button = Button(16)
       
       #Motion Sensor
       self.pir = MotionSensor(26)
@@ -152,6 +151,10 @@ class Manager :
             duration = duration - 1
       
       
+      if("buttonPress" in step_info) :
+        print("waiting for press")
+        self.button.wait_for_press()
+      
       sounds.diegetic_player.pause()
       
       #wait one second in between steps
@@ -160,7 +163,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(0,0)
+manager = Manager(DEBUG=0,current_step=0)
 
 #startButton = Button(23)
 #startButton.wait_for_press()
