@@ -238,12 +238,17 @@
       }
     ]
   },
-  
   {
     "stepName": "credits",
     "call" : {
-      "call": "tester.call",
-      "wait": 300
-    }
+      "call": "credits.call",
+      "wait": 3
+    },
+    "diegeticSounds" : [
+      {
+        "sound": "/fax/sounds/speaker/credits.wav",
+        "wait": 300
+      }
+    ]
   }
 ]
