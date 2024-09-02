@@ -1,0 +1,6 @@
+Channel: Local/201@from-internal
+MaxRetries: 0
+RetryTime: 60
+WaitTime: 30
+Context: from-internal
+Extension: 201

@@ -1,21 +1,31 @@
 [
   {
-    "backgroundSound": "/fax/sounds/step_change.wav",
-    "lights": "wake_up"
+    "stepName": "hello",
+    "call": {
+      "call":"00_hello.call",
+      "wait": 3
+    },
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/00.1_please_answer_phone.wav",
+        "wait": 3,
+        "nextSoundIf": {
+          "key": "show",
+          "values": ["started"]
+        },
+        "loop": true
+      }
+    ],
+    "wait": 90
   },
   {
-    "stepName": "hello+questionnaireIntro",
-    "call": {
-      "call": "00_hello.call", 
-      "wait": 90
-    },
+    "stepName": "questionnaireIntro",
     "diegeticSounds": [
       {
         "sound": "/fax/sounds/step_change.wav",
         "wait": 4
       }
-    ],
-    "lights": "questionnaire"
+    ]
   },
 
   {

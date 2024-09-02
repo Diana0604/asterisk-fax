@@ -62,6 +62,40 @@ class Manager :
       
       while(self.loop):
         self.loop_step()
+        
+    def play_diegetic(self, sound_info):
+      #check if needs playing
+      if "playIf" in sound_info :
+        value = asterisk.get_from_database(sound_info["playIf"]["key"])
+        if not (value in sound_info["playIf"]["values"]) :
+          return
+
+      #start playing sound and obtain duration in seconds
+      duration = sounds.play_sound(sound_info["sound"], diegetic=True)
+      if("wait" in sound_info) :
+        duration = sound_info["wait"]
+      
+      #if there is no condition to stop sound, play until end
+      if not "nextSoundIf" in sound_info :
+        utils.countdown(duration)
+        return
+      
+      #if there is condition to stop sound play until either:
+      # 1. end reached
+      #or
+      #2. condition reached
+      next_step = False
+      while duration > 0 and not next_step:
+        utils.countdown(1)
+        #condition is checked on the asterisk databse
+        value = asterisk.get_from_database(sound_info["nextSoundIf"]["key"])
+        if value in sound_info["nextSoundIf"]["values"] :
+          next_step = True
+        duration = duration - 1
+      
+      if(not next_step) : 
+        if("loop" in sound_info) :
+          self.play_diegetic(sound_info)
     
     #loop continuously running
     def loop_step(self):
@@ -114,41 +148,7 @@ class Manager :
         
         #loop through list of sounds
         for sound_info in all_sounds :
-          
-          
-          #check if needs playing
-          should_play = True
-          if "playIf" in sound_info :
-            value = asterisk.get_from_database(sound_info["playIf"]["key"])
-            if not (value in sound_info["playIf"]["values"]) :
-              should_play = False
-              continue
-          if not should_play:
-            continue
-
-          #start playing sound and obtain duration in seconds
-          duration = sounds.play_sound(sound_info["sound"], diegetic=True)
-          if("wait" in sound_info) :
-            duration = sound_info["wait"]
-          
-          #if there is no condition to stop sound, play until end
-          if not "nextSoundIf" in sound_info :
-            utils.countdown(duration)
-            continue
-          
-          #if there is condition to stop sound play until either:
-          # 1. end reached
-          #or
-          #2. condition reached
-          next_step = False
-          while duration > 0 and not next_step:
-            
-            utils.countdown(1)
-            #condition is checked on the asterisk databse
-            value = asterisk.get_from_database(sound_info["nextSoundIf"]["key"])
-            if value in sound_info["nextSoundIf"]["values"] :
-              next_step = True
-            duration = duration - 1
+          self.play_diegetic(sound_info)
       
       
       if("buttonPress" in step_info) :
@@ -157,16 +157,16 @@ class Manager :
       
       sounds.diegetic_player.pause()
       
+      if("wait" in step_info) :
+        utils.countdown(step_info["wait"])
+      
       #wait one second in between steps
       utils.countdown(1)
             
       self.current_step += 1
         
 
-manager = Manager(DEBUG=0,current_step=0)
-
-#startButton = Button(23)
-#startButton.wait_for_press()
+manager = Manager(DEBUG=True,current_step=0)
 
 run_threads = True
 
