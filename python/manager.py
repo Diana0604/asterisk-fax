@@ -99,13 +99,11 @@ class Manager :
     
     #loop continuously running
     def loop_step(self):
-      
-      
       global step_info
       with open('/fax/performance.json') as f:
           json_data = json.load(f)
           if(self.current_step >= len(json_data)) :
-            self.loop = False
+            self.current_step = 0
             return
           step_info = json_data[self.current_step]
         
@@ -166,7 +164,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(DEBUG=True,current_step=0)
+manager = Manager(DEBUG=True,current_step=13)
 
 run_threads = True
 

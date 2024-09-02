@@ -233,7 +233,8 @@
         "sound": "/fax/sounds/phone/output/name.wav"
       },
       {
-        "sound": "/fax/sounds/speaker/14_ready_to_join.2.wav"
+        "sound": "/fax/sounds/speaker/14_ready_to_join.2.wav",
+        "wait": 77
       }
     ]
   },
@@ -242,7 +243,7 @@
     "stepName": "credits",
     "call" : {
       "call": "tester.call",
-      "wait": 0
+      "wait": 300
     }
   }
 ]
