@@ -168,7 +168,7 @@
     "stepName": "sendingFax",
     "diegeticSounds":[
       {
-        "sound": "/fax/sounds/speaker/10_sending_fax.mp3"
+        "sound": "/fax/sounds/speaker/10_sending_fax.wav"
       }
     ]
   },
@@ -233,8 +233,7 @@
         "sound": "/fax/sounds/phone/output/name.wav"
       },
       {
-        "sound": "/fax/sounds/speaker/14_ready_to_join.2.wav",
-        "wait": 77
+        "sound": "/fax/sounds/speaker/14_ready_to_join.2.wav"
       }
     ]
   },
@@ -242,7 +241,7 @@
     "stepName": "credits",
     "call" : {
       "call": "credits.call",
-      "wait": 3
+      "wait": 15
     },
     "diegeticSounds" : [
       {

@@ -164,7 +164,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(DEBUG=True,current_step=14)
+manager = Manager(DEBUG=True,current_step=0)
 
 run_threads = True
 
