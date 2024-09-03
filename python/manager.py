@@ -63,7 +63,7 @@ class Manager :
       while(self.loop):
         self.loop_step()
         
-    def play_diegetic(self, sound_info):
+    def play_diegetic(self, sound_info, loop=0):
       #check if needs playing
       if "playIf" in sound_info :
         value = asterisk.get_from_database(sound_info["playIf"]["key"])
@@ -95,10 +95,13 @@ class Manager :
       
       if(not next_step) : 
         if("loop" in sound_info) :
-          self.play_diegetic(sound_info)
+          if("stopAfter" in sound_info) :
+            if(loop > sound_info["stopAfter"]):
+              return
+          self.play_diegetic(sound_info, loop=loop+1)
     
     #loop continuously running
-    def loop_step(self):
+    def loop_step(self):      
       global step_info
       with open('/fax/performance.json') as f:
           json_data = json.load(f)
