@@ -17,7 +17,10 @@ class Manager :
       
 
       #audio
-      alsaaudio.Mixer(control="PCM").setvolume(100)
+      try :
+        alsaaudio.Mixer(control="PCM").setvolume(100) #audio jack
+      except :
+        alsaaudio.Mixer(control="Master").setvolume(100) #usb sound
       
       #buttons
       self.button = Button(16)
