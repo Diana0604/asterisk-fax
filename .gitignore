@@ -8,4 +8,4 @@ __pycache__
 */*/.DS_Store
 ./fax-venv
 fax-venv
-./sounds/phone/output
+sounds/phone/output/*
