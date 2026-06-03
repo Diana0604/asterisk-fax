@@ -17,7 +17,10 @@
         "loop": true
       }
     ],
-    "wait": 90
+    "nextStepWhen": {
+      "key": "name",
+      "values": ["finished"]
+    }
   },
   {
     "stepName": "questionnaireIntro",

@@ -164,6 +164,18 @@ class Manager :
       if("wait" in step_info) :
         utils.countdown(step_info["wait"])
       
+      if("nextStepWhen" in step_info) :
+        next_step_info = step_info["nextStepWhen"]
+        change_step = False
+        while(not change_step) : 
+          print("waiting for db change")
+          print(next_step_info)
+          utils.countdown(1)
+          value = asterisk.get_from_database(next_step_info["key"])
+          print(value)
+          if(value in next_step_info["values"]):
+            change_step = True
+      
       #wait one second in between steps
       utils.countdown(1)
             
