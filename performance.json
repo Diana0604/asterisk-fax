@@ -23,10 +23,10 @@
     }
   },
   {
-    "stepName": "questionnaireIntro",
+    "stepName": "calculating",
     "diegeticSounds": [
       {
-        "sound": "/fax/sounds/step_change.wav",
+        "sound": "/fax/sounds/speaker/08_loading.wav",
         "wait": 4
       }
     ]
