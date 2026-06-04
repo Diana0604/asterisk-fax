@@ -44,7 +44,7 @@ class Manager :
             sounds.background_player.pause()
         if(not sounds.background_player.is_playing()):
           #play bg sound
-          sounds.play_sound('/fax/sounds/background/bg_advert.wav', background=True)
+          sounds.play_sound('/fax/sounds/background/bg_advert.wav', diegetic = False, background=True)
         utils.countdown(1)
       
 

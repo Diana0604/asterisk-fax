@@ -121,9 +121,11 @@ def get_player_wrapper(diegetic, background, easteregg):
 
 def play_sound(sound, diegetic = False, background = False, easteregg = False):
     player_wrapper = get_player_wrapper(diegetic, background, easteregg)
+    if(background) : 
+        print("=========== RESET BG ==============")
     media = vlc.Media(sound)
     player_wrapper[0].set_media(media)
-    player_wrapper[0].play()    
+    player_wrapper[0].play()
     utils.countdown(1)
     if ((not diegetic_player and not background and not easteregg)):
         utils.countdown(1)
