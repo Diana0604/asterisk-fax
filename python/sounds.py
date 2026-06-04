@@ -66,8 +66,8 @@ def launch_diegetic_sounds(step):
     if diegetic_sound != None:
         asterisk.wait_fax_not_ringing()
         diegetic_sound = DIEGETIC_SOUNDS_PATH + diegetic_sound
-        background_player.audio_set_volume(50)
-        diegetic_player.audio_set_volume(100)
+        # background_player.audio_set_volume(20)
+        # diegetic_player.audio_set_volume(80)
         play_sound(sound = diegetic_sound, diegetic = True)
     previous_step = step
 
@@ -98,7 +98,7 @@ def finish_diegetic_sounds(step):
             while diegetic_player.is_playing():
                 utils.countdown(1)
             break
-    background_player.audio_set_volume(100)
+    # background_player.audio_set_volume(20)
 
 def finish_easter_eggs_sounds():
     global easter_egg_player
@@ -106,7 +106,7 @@ def finish_easter_eggs_sounds():
         return
     asterisk.wait_for_fax_free()
     easter_egg_player.stop()
-    background_player.audio_set_volume(100)
+    # background_player.audio_set_volume(20)
 
 #COMMON METHODS
 def get_player_wrapper(diegetic, background, easteregg):
