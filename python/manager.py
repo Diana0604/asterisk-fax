@@ -38,6 +38,8 @@ class Manager :
       global run_threads
       while(run_threads):
         play_background = asterisk.get_from_database("play_background")
+        print("obtained play bg")
+        print(play_background)
         if(play_background == "False") :
             sounds.background_player.pause()
         if(not sounds.background_player.is_playing()):
@@ -171,11 +173,8 @@ class Manager :
         next_step_info = step_info["nextStepWhen"]
         change_step = False
         while(not change_step) : 
-          print("waiting for db change")
-          print(next_step_info)
           utils.countdown(1)
           value = asterisk.get_from_database(next_step_info["key"])
-          print(value)
           if(value in next_step_info["values"]):
             change_step = True
       
