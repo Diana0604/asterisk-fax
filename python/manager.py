@@ -39,7 +39,7 @@ class Manager :
       while(run_threads):
         if(not sounds.background_player.is_playing()):
           #play bg sound
-          sounds.play_sound('/fax/sounds/background/breathing.wav', background=True)
+          sounds.play_sound('/fax/sounds/background/bg_advert.wav', background=True)
         utils.countdown(1)
       
 
