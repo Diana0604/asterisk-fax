@@ -37,6 +37,9 @@ class Manager :
     def background_sound(self):
       global run_threads
       while(run_threads):
+        play_background = asterisk.get_from_database("play_background")
+        if(play_background == "False") :
+            sounds.background_player.pause()
         if(not sounds.background_player.is_playing()):
           #play bg sound
           sounds.play_sound('/fax/sounds/background/bg_advert.wav', background=True)
