@@ -44,6 +44,10 @@
     "call": {
       "call": "infinite_scroll.call",
       "wait": 0
+    },
+    "nextStepWhen" : {
+      "key" : "post",
+      "values": ["received"]
     }
   },
   {

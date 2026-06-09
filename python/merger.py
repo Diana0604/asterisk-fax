@@ -7,8 +7,9 @@ import random, glob
 audience_faxes = "./tifs/output"
 merged_path = "./tifs/merged.tif"
 
+
 def merge_random_faxes():
-    print("merging");
+    print("merging")
     files = glob.glob(f"{audience_faxes}/*.tif")
     random.shuffle(files)
     print(files)
@@ -16,7 +17,7 @@ def merge_random_faxes():
     frames = []
 
     for i in range(0, 5):
-        if i > len(files):
+        if i >= len(files):
             break
         f = files[i]
         img = Image.open(f)
@@ -26,9 +27,13 @@ def merge_random_faxes():
 
     frames[0].save(
         merged_path,
+        format="TIFF",
         save_all=True,
         append_images=frames[1:],
-        compression="group4",  # standard fax compression
+        compression="group4",
+        dpi=(204, 196),
+        resolution_unit=2,
     )
+
 
 merge_random_faxes()

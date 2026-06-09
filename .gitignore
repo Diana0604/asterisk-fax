@@ -9,3 +9,4 @@ __pycache__
 ./fax-venv
 fax-venv
 sounds/phone/output/*
+tifs/output/*
