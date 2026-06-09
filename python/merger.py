@@ -7,6 +7,21 @@ import random, glob
 audience_faxes = "./tifs/output"
 merged_path = "./tifs/merged.tif"
 
+FAX_WIDTH = 1728
+
+def normalise_resolution(img):
+    img_copy = img.copy().convert("1")
+    # If vertical DPI is 98, scale up to 196 to unsquash
+    dpi = img.info.get("dpi", (204, 196))
+    if dpi[1] <= 100:  # low res vertical
+        new_height = img_copy.height * 2
+        width = img_copy.width
+        img_copy = img_copy.resize(
+            (width, new_height),
+            Image.NEAREST  # NEAREST preserves hard 1-bit edges
+        )
+    return img_copy
+
 
 def merge_random_faxes():
     print("merging")
@@ -23,7 +38,7 @@ def merge_random_faxes():
         img = Image.open(f)
         for i in range(img.n_frames):
             img.seek(i)
-            frames.append(img.copy().convert("1"))  # 1-bit, standard for fax
+            frames.append(normalise_resolution(img.copy()))  # 1-bit, standard for fax
 
     frames[0].save(
         merged_path,
