@@ -5,6 +5,7 @@ from Call import Call
 import json
 import threading
 import os
+from merger import merge_loop
 
 class Manager : 
     def __init__(self, DEBUG = 0, current_step = 0):
@@ -163,6 +164,8 @@ class Manager :
       if("buttonPress" in step_info) :
         print("waiting for press")
         self.button.wait_for_press()
+      
+      merge_loop()
       
       sounds.diegetic_player.pause()
       

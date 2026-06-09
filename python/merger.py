@@ -1,11 +1,12 @@
+import asterisk
 from PIL import Image
 import random, glob
 
-# audience_faxes = "/fax/tifs/output"
-# merged_path = "/fax/tifs"
+audience_faxes = "/fax/tifs/output"
+merged_path = "/fax/tifs"
 
-audience_faxes = "./tifs/output"
-merged_path = "./tifs/merged.tif"
+# audience_faxes = "./tifs/output"
+# merged_path = "./tifs/merged.tif"
 
 FAX_WIDTH = 1728
 
@@ -51,4 +52,10 @@ def merge_random_faxes():
     )
 
 
-merge_random_faxes()
+def merge_loop():
+    need_merging = asterisk.get_database_value("prep_feed")
+    if(need_merging == "True"):
+        merge_random_faxes()
+    asterisk.add_to_database("prep_feed", "False")
+
+merge_loop()
