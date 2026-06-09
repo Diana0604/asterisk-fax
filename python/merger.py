@@ -3,7 +3,7 @@ from PIL import Image
 import random, glob
 
 audience_faxes = "/fax/tifs/output"
-merged_path = "/fax/tifs"
+merged_path = "/fax/tifs/merged.tif"
 
 # audience_faxes = "./tifs/output"
 # merged_path = "./tifs/merged.tif"
@@ -53,7 +53,7 @@ def merge_random_faxes():
 
 
 def merge_loop():
-    need_merging = asterisk.get_database_value("prep_feed")
+    need_merging = asterisk.get_from_database("prep_feed")
     if need_merging != "True":
         return
     merge_random_faxes()
