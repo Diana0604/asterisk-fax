@@ -9,7 +9,7 @@ SOUNDS_PATH = '/fax/sounds/speaker/'
 previous_step = None
 
 background_player = vlc.MediaPlayer()
-background_player.audio_set_volume(100)
+background_player.audio_set_volume(60)
 diegetic_player = vlc.MediaPlayer()
 diegetic_player.audio_set_volume(70)
 easter_egg_player = vlc.MediaPlayer()
@@ -124,7 +124,7 @@ def play_sound(sound, diegetic = False, background = False, easteregg = False):
     media = vlc.Media(sound)
     if(background) : 
         print("=========== RESET BG ==============")
-        player_wrapper[0].audio_set_volume(20)
+        player_wrapper[0].audio_set_volume(60)
     if(diegetic) : 
         print("=========== RESET DG ==============")
         player_wrapper[0].audio_set_volume(70)
