@@ -39,9 +39,10 @@ class Manager :
       global run_threads
       while(run_threads):
         play_background = asterisk.get_from_database("play_background")
-        # print("obtained play bg")
-        # print(play_background)
+        print("obtained play bg")
+        print(play_background)
         if(play_background == "False") :
+            print("not playing bg")
             sounds.background_player.pause()
             return
         print("checking restart")
@@ -49,7 +50,7 @@ class Manager :
           #play bg sound
           print("restarting bg")
           sounds.play_sound('/fax/sounds/background/bg_advert.wav', diegetic = False, background=True)
-          sounds.background_player.audio_set_volume(60)
+          sounds.background_player.audio_set_volume(45)
         utils.countdown(1)
       
 
