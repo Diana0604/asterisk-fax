@@ -190,7 +190,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(DEBUG=False,current_step=0)
+manager = Manager(DEBUG=False,current_step=1)
 
 run_threads = True
 
