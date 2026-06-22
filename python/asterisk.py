@@ -159,6 +159,7 @@ def error():
 
 def reset_database():
   command = "asterisk -rx 'database deltree DRHA'"
+  add_to_database("prep_feed", "True")
   utils.debug(command)
   os.system(command)
   #add_to_database('questionnaire', '1')
