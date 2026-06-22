@@ -116,6 +116,7 @@ class Manager :
       with open('/fax/performance.json') as f:
           json_data = json.load(f)
           if(self.current_step >= len(json_data)) :
+            print("restarting show")
             self.current_step = 0
             return
           step_info = json_data[self.current_step]

@@ -27,6 +27,7 @@ def normalise_resolution(img):
 def merge_random_faxes():
     # print("merging")
     files = glob.glob(f"{audience_faxes}/*.tif")
+    print(files)
     random.shuffle(files)
     print(files)
 
