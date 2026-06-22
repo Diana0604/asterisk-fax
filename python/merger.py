@@ -32,7 +32,7 @@ def merge_random_faxes():
 
     frames = []
 
-    for i in range(0, 5):
+    for i in range(0, 3):
         if i >= len(files):
             break
         f = files[i]
