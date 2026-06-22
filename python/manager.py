@@ -40,7 +40,7 @@ class Manager :
         if(play_background == "False") :
             print("not playing bg")
             sounds.background_player.pause()
-            return
+            continue
         print("checking restart")
         if(not sounds.background_player.is_playing()):
           #play bg sound
