@@ -27,14 +27,9 @@ class Manager :
       self.button = Button(26)
       
       #Motion Sensor
-      # self.pir = MotionSensor(26)
       # print('motion sensor started')
       print(self.DEBUG)
       #wait for 1st motion at startup
-      if not self.DEBUG :
-        print("waiting for button press")
-        self.button.wait_for_press()
-        # self.pir.wait_for_no_motion()
     
     def background_sound(self):
       global run_threads
