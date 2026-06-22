@@ -52,14 +52,14 @@
     "nextStepWhen": {
       "key": "post",
       "values": ["received"]
-    }
+    },
+    "wait": 10
   },
   {
     "stepName": "well_done",
     "diegeticSounds": [],
     "call": {
-      "call" :  "credits.call",
-      "wait": 10
+      "call" :  "credits.call"
     }
   }
 ]
