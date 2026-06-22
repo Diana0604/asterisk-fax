@@ -53,6 +53,9 @@
   {
     "stepName": "well_done",
     "diegeticSounds": [],
-    "call": "credits.call"
+    "call": {
+      "call" :  "credits.call",
+      "wait": 10
+    }
   }
 ]
