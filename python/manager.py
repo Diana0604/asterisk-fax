@@ -62,8 +62,8 @@ class Manager :
     
     #start show
     def startShow(self):
-      if not self.DEBUG :
-        self.button.wait_for_press()
+      # if not self.DEBUG :
+      #   self.button.wait_for_press()
       
       #start bg sound
       self.background_thread = threading.Thread(target=self.background_sound)
@@ -190,7 +190,7 @@ class Manager :
       self.current_step += 1
         
 
-manager = Manager(DEBUG=False,current_step=1)
+manager = Manager(DEBUG=False,current_step=5)
 
 run_threads = True
 

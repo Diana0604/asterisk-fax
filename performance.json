@@ -1,5 +1,9 @@
 [
   {
+    "stepName": "wait_press",
+    "buttonPress": "True"
+  },
+  {
     "stepName": "hello",
     "call": {
       "call": "00_hello.call",
