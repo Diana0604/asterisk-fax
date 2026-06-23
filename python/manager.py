@@ -56,6 +56,7 @@ class Manager :
         print("checking run SM")
         print(run_SM)
         if(not run_SM) :
+          utils.countdown(1)
           continue
         print("checking if should send feed")
         print(asterisk.get_from_database("send_feed"))
