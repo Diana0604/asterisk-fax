@@ -53,11 +53,15 @@
       "key": "post",
       "values": ["received"]
     },
-    "wait": 10
+    "wait": 5
   },
   {
-    "stepName": "well_done",
-    "diegeticSounds": [],
+    "stepName": "goodbye",
+    "diegeticSounds": ["20_goodbye.mp3"],
+    "wait": 5
+  },
+  {
+    "stepName": "credits",
     "call": {
       "call" :  "credits.call"
     }
