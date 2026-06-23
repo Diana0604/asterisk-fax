@@ -55,6 +55,7 @@
       "key": "post",
       "values": ["received"]
     },
+    "runSM": "True",
     "wait": 5
   },
   {
