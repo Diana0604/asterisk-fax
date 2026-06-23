@@ -5,6 +5,7 @@ import random, glob
 audience_faxes = "/fax/tifs/output"
 merged_path = "/fax/tifs/merged.tif"
 
+# to run on computer:
 # audience_faxes = "./tifs/output"
 # merged_path = "./tifs/merged.tif"
 
@@ -42,6 +43,11 @@ def merge_random_faxes():
             img.seek(i)
             frames.append(normalise_resolution(img.copy()))  # 1-bit, standard for fax
 
+    final_image = Image.open("tifs/addon.tif")
+    for i in range(final_image.n_frames):
+        final_image.seek(i)
+        frames.append(normalise_resolution(final_image.copy()))
+
     frames[0].save(
         merged_path,
         format="TIFF",
@@ -61,4 +67,4 @@ def merge_loop():
     asterisk.add_to_database("prep_feed", "False")
 
 
-# merge_loop()
+merge_random_faxes()
