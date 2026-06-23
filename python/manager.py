@@ -58,7 +58,8 @@ class Manager :
         if(not run_SM) :
           continue
         print("checking if should send feed")
-        if(asterisk.get_from_database("send_feed") == True) :
+        print(asterisk.get_from_database("send_feed"))
+        if(asterisk.get_from_database("send_feed") == "True") :
           print("sending feed!")
           current_call = Call("infinite_scroll.call")
           current_call.launch_call()
