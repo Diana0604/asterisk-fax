@@ -50,6 +50,17 @@ class Manager :
           sounds.background_player.audio_set_volume(45)
         utils.countdown(1)
       
+    def runSM(self):
+      global run_SM
+      while(run_threads):
+        if(not run_SM) :
+          continue
+        if(asterisk.get_from_database("send_feed") == True) :
+          current_call = Call("infinite_scroll.call")
+          current_call.launch_call()
+          current_call.finish_call()
+          merge_loop()
+        utils.countdown(1)
 
     #reboot button stops loop
     def reboot(self):
@@ -68,6 +79,10 @@ class Manager :
       #start bg sound
       self.background_thread = threading.Thread(target=self.background_sound)
       self.background_thread.start()
+      
+      # start bg SM
+      self.social_media_thread = threading.Thread(target=self.runSM)
+      self.social_media_thread.start()
       
       
       
@@ -114,6 +129,7 @@ class Manager :
     #loop continuously running
     def loop_step(self):      
       global step_info
+      global run_SM
       with open('/fax/performance.json') as f:
           json_data = json.load(f)
           if(self.current_step >= len(json_data)) :
@@ -122,6 +138,9 @@ class Manager :
             return
           step_info = json_data[self.current_step]
         
+      # check if need reset db
+      if("resetDatabse" in step_info):
+        asterisk.reset_database()
       
       #check call - outgoing
       if("call" in step_info) :
@@ -163,10 +182,11 @@ class Manager :
         for sound_info in all_sounds :
           self.play_diegetic(sound_info)
       
+      if("runSM" in step_info):
+        run_SM = True
+        
+        
       
-      if("buttonPress" in step_info) :
-        print("waiting for press")
-        self.button.wait_for_press()
       
       merge_loop()
       
@@ -184,6 +204,12 @@ class Manager :
           if(value in next_step_info["values"]):
             change_step = True
       
+      # check button press for next step
+      if("buttonPress" in step_info) :
+        print("waiting for press")
+        self.button.wait_for_press()
+      
+      run_SM = False # reset run sm  
       #wait one second in between steps
       utils.countdown(1)
             
@@ -194,8 +220,11 @@ manager = Manager(DEBUG=False,current_step=0)
 
 run_threads = True
 
+run_SM = False
+
 manager.startShow()
 
 run_threads = False
 
 manager.background_thread.join()
+manager.social_media_thread.join()

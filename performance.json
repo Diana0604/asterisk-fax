@@ -1,10 +1,12 @@
 [
   {
     "stepName": "wait_press",
-    "buttonPress": "True"
+    "buttonPress": "True",
+    "runSM": "True"
   },
   {
     "stepName": "hello",
+    "resetDatabse": "True",
     "call": {
       "call": "00_hello.call",
       "wait": 3
@@ -57,8 +59,14 @@
   },
   {
     "stepName": "goodbye",
-    "diegeticSounds": ["20_goodbye.mp3"],
-    "wait": 5
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/20_goodbye.wav"
+      },
+      {
+        "sound": "/fax/sounds/phone/output/name.wav"
+      }
+    ]
   },
   {
     "stepName": "credits",
