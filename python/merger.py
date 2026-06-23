@@ -4,10 +4,12 @@ import random, glob
 
 audience_faxes = "/fax/tifs/output"
 merged_path = "/fax/tifs/merged.tif"
+addon_path = "/fax/tifs/addon.tif"
 
-# to run on computer:
-# audience_faxes = "./tifs/output"
-# merged_path = "./tifs/merged.tif"
+# to run on computer with local paths:
+# audience_faxes = "tifs/output"
+# merged_path = "tifs/merged.tif"
+# addon_path = "tifs/addon.tif"
 
 FAX_WIDTH = 1728
 
@@ -43,7 +45,7 @@ def merge_random_faxes():
             img.seek(i)
             frames.append(normalise_resolution(img.copy()))  # 1-bit, standard for fax
 
-    final_image = Image.open("tifs/addon.tif")
+    final_image = Image.open(addon_path)
     for i in range(final_image.n_frames):
         final_image.seek(i)
         frames.append(normalise_resolution(final_image.copy()))
