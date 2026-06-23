@@ -53,9 +53,13 @@ class Manager :
     def runSM(self):
       global run_SM
       while(run_threads):
+        print("checking run SM")
+        print(run_SM)
         if(not run_SM) :
           continue
+        print("checking if should send feed")
         if(asterisk.get_from_database("send_feed") == True) :
+          print("sending feed!")
           current_call = Call("infinite_scroll.call")
           current_call.launch_call()
           current_call.finish_call()
