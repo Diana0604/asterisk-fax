@@ -56,7 +56,7 @@
       "values": ["received"]
     },
     "runSM": "True",
-    "wait": 5
+    "wait": 60
   },
   {
     "stepName": "goodbye",
