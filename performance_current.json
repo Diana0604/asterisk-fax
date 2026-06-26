@@ -1,0 +1,78 @@
+[
+  {
+    "stepName": "wait_press",
+    "buttonPress": "True",
+    "runSM": "True"
+  },
+  {
+    "stepName": "hello",
+    "resetDatabse": "True",
+    "call": {
+      "call": "00_hello.call",
+      "wait": 3
+    },
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/00.1_please_answer_phone.wav",
+        "wait": 3,
+        "nextSoundIf": {
+          "key": "show",
+          "values": ["started"]
+        },
+        "stopAfter": 8,
+        "loop": true
+      }
+    ],
+    "nextStepWhen": {
+      "key": "name",
+      "values": ["finished"]
+    }
+  },
+  {
+    "stepName": "calculating",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/08_loading.wav",
+        "wait": 4
+      }
+    ]
+  },
+
+  {
+    "stepName": "idle",
+    "nextStepWhen": {
+      "key": "send_feed",
+      "values": ["True"]
+    }
+  },
+  {
+    "stepName": "feed",
+    "call": {
+      "call": "infinite_scroll.call",
+      "wait": 0
+    },
+    "nextStepWhen": {
+      "key": "post",
+      "values": ["received"]
+    },
+    "runSM": "True",
+    "wait": 5
+  },
+  {
+    "stepName": "goodbye",
+    "diegeticSounds": [
+      {
+        "sound": "/fax/sounds/speaker/20_goodbye.wav"
+      },
+      {
+        "sound": "/fax/sounds/phone/output/name.wav"
+      }
+    ]
+  },
+  {
+    "stepName": "credits",
+    "call": {
+      "call" :  "credits.call"
+    }
+  }
+]
