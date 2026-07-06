@@ -1,4 +1,4 @@
-import asterisk, utils
+import sounds, utils, asterisk
 import alsaaudio
 from gpiozero import MotionSensor, Button
 from Call import Call

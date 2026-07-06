@@ -1,7 +1,6 @@
 # Program to run "asterisk -rx 'pjsip list endpoints'" and check status of endpoinds
 import os, time
 import utils
-import sounds
 
 ASTLOGS = "/var/log/asterisk/freepbx.log"
 LASTLINE = ""
