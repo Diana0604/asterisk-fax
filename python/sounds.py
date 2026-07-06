@@ -1,4 +1,4 @@
-import os, utils, vlc, asterisk, easter_eggs
+import utils, vlc, asterisk, easter_eggs
 
 SOUNDS_PATH = '/fax/sounds/speaker/'
 #DIEGETIC_SOUNDS_PATH = SOUNDS_PATH + 'diegetic/'

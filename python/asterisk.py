@@ -1,6 +1,15 @@
 # Program to run "asterisk -rx 'pjsip list endpoints'" and check status of endpoinds
-import os, time
+import os, time, vlc
 import utils
+
+asterisk_player = vlc.MediaPlayer()
+asterisk_player.audio_set_volume(100)
+
+def play_restart():
+    media = vlc.Media("/fax/sounds/speaker/restart.mp3")
+    asterisk_player.set_media(media)
+    asterisk_player.play()
+    utils.countdown(12)
 
 ASTLOGS = "/var/log/asterisk/freepbx.log"
 LASTLINE = ""
@@ -69,7 +78,7 @@ def fax_available():
         availability = check_fax_status()
         if availability == "Unavailable":
             add_to_database("play_background", "False")
-            sounds.play_sound("/fax/sounds/speaker/restart.mp3", diegetic=True)
+            play_restart()
             utils.countdown(11)
             os.system("sudo reboot")
     print("availability: " + availability)
