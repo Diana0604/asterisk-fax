@@ -41,7 +41,7 @@ class Manager :
             print("not playing bg")
             if(sounds.background_player.is_playing()):
               sounds.background_player.pause()
-            utils.countdown(1)
+            utils.countdown(1.5)
             continue
         print("checking restart")
         if(not sounds.background_player.is_playing()):
