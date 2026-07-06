@@ -61,7 +61,7 @@ def fax_available():
         utils.countdown(15)
         availability = check_fax_status()
         if(availability == 'Unavailable') :
-            os.system("reboot")
+            os.system("sudo reboot")
     print('availability: ' + availability)
     return True
 
