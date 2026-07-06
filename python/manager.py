@@ -173,6 +173,7 @@ class Manager :
           utils.countdown(1)
           waited_for = waited_for + 1
           if(waited_for > 600) :
+            self.current_step = 0
             return
           
           #condition is checked on the asterisk databse
@@ -218,6 +219,7 @@ class Manager :
             change_step = True
           waited_for = waited_for + 1
           if(waited_for > 600) :
+            self.current_step = 0
             return
       
       # check button press for next step
