@@ -71,6 +71,7 @@ def fax_available():
         if availability == "Unavailable":
             add_to_database("play_background", "False")
             sounds.play_sound("/fax/sounds/speaker/restart.mp3", diegetic=True)
+            utils.countdown(11)
             os.system("sudo reboot")
     print("availability: " + availability)
     return True
