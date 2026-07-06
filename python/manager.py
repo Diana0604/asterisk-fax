@@ -41,6 +41,7 @@ class Manager :
             print("not playing bg")
             if(sounds.background_player.is_playing()):
               sounds.background_player.pause()
+            utils.countdown(1)
             continue
         print("checking restart")
         if(not sounds.background_player.is_playing()):
@@ -48,7 +49,6 @@ class Manager :
           print("restarting bg")
           sounds.play_sound('/fax/sounds/background/bg_advert.wav', diegetic = False, background=True)
           sounds.background_player.audio_set_volume(45)
-          utils.countdown(5)
         utils.countdown(1)
       
     def runSM(self):
