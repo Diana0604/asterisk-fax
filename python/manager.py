@@ -172,7 +172,7 @@ class Manager :
         while(not found) :
           utils.countdown(1)
           waited_for = waited_for + 1
-          if(waited_for > 600) :
+          if(waited_for > 300) :
             self.current_step = 0
             return
           
@@ -218,7 +218,7 @@ class Manager :
           if(value in next_step_info["values"]):
             change_step = True
           waited_for = waited_for + 1
-          if(waited_for > 600) :
+          if(waited_for > 300) :
             self.current_step = 0
             return
       
