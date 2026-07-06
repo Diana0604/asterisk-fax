@@ -58,7 +58,10 @@ def wait_fax_not_ringing():
 def fax_available():
     availability = check_fax_status()
     if availability == 'Unavailable':
-        return False
+        utils.countdown(15)
+        availability = check_fax_status()
+        if(availability == 'Unavailable') :
+            os.system("shutdown /r /t 1")
     print('availability: ' + availability)
     return True
 
