@@ -52,7 +52,7 @@ class Manager :
         utils.countdown(1)
       
     def runSM(self):
-      global run_SM
+      global run_SM, run_threads
       while(run_threads):
         print("checking run SM")
         print(run_SM)
@@ -68,6 +68,7 @@ class Manager :
           current_call.finish_call()
           merge_loop()
         utils.countdown(1)
+      
 
     #reboot button stops loop
     def reboot(self):
@@ -166,9 +167,13 @@ class Manager :
       #check call - incoming
       if("incomingCall" in step_info) :
         found = False
+        waited_for = 0
         
         while(not found) :
           utils.countdown(1)
+          waited_for = waited_for + 1
+          if(waited_for > 600) :
+            return
           
           #condition is checked on the asterisk databse
           
@@ -205,11 +210,15 @@ class Manager :
       if("nextStepWhen" in step_info) :
         next_step_info = step_info["nextStepWhen"]
         change_step = False
+        waited_for = 0
         while(not change_step) : 
           utils.countdown(1)
           value = asterisk.get_from_database(next_step_info["key"])
           if(value in next_step_info["values"]):
             change_step = True
+          waited_for = waited_for + 1
+          if(waited_for > 600) :
+            return
       
       # check button press for next step
       if("buttonPress" in step_info) :
