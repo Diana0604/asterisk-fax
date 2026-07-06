@@ -1,19 +1,21 @@
 # Program to run "asterisk -rx 'pjsip list endpoints'" and check status of endpoinds
 import os, time
 import utils
+import sounds
 
-ASTLOGS = '/var/log/asterisk/freepbx.log'
-LASTLINE  = ''
+ASTLOGS = "/var/log/asterisk/freepbx.log"
+LASTLINE = ""
 
-#clean all residual errors
-f = open(ASTLOGS, 'r')
+# clean all residual errors
+f = open(ASTLOGS, "r")
 while True:
     line = f.readline()
     if not line:
         break
     LASTLINE = line
 
-#FAX STATUS
+# FAX STATUS
+
 
 def check_fax_status():
     stream = os.popen("asterisk -rx 'pjsip list endpoints'")
@@ -22,22 +24,25 @@ def check_fax_status():
     i = 0
     while i < len(splited_output):
         element = splited_output[i]
-        if element == '1000/1000':
-            return splited_output[i+1]
+        if element == "1000/1000":
+            return splited_output[i + 1]
         i = i + 1
+
 
 def fax_free():
     if check_fax_status() == "Not":
         return True
     return False
 
+
 def wait_for_fax_free():
     while not fax_free():
         time.sleep(1)
-        utils.debug('waiting for fax free')
+        utils.debug("waiting for fax free")
     if error():
         return False
     return True
+
 
 def wait_for_fax_busy():
     while fax_free():
@@ -46,108 +51,124 @@ def wait_for_fax_busy():
             return False
     return True
 
+
 def fax_ringing():
-    if check_fax_status() == 'Ringing' or check_fax_status() =='Ring+Inuse':
+    if check_fax_status() == "Ringing" or check_fax_status() == "Ring+Inuse":
         return True
     return False
+
 
 def wait_fax_not_ringing():
     while fax_ringing():
         time.sleep(1)
 
+
 def fax_available():
     availability = check_fax_status()
-    if availability == 'Unavailable':
+    if availability == "Unavailable":
         utils.countdown(15)
         availability = check_fax_status()
-        if(availability == 'Unavailable') :
+        if availability == "Unavailable":
+            add_to_database("play_background", "False")
+            sounds.play_sound("/fax/sounds/speaker/restart.mp3", diegetic=True)
             os.system("sudo reboot")
-    print('availability: ' + availability)
+    print("availability: " + availability)
     return True
 
+
 def wait_fax_available():
-    for i in range(0,10):
+    for i in range(0, 10):
         time.sleep(1)
         if fax_available():
             return True
-    utils.send_email('fax not available')
+    utils.send_email("fax not available")
     return False
 
-#DATABASE
 
-def add_to_database(key, value): 
+# DATABASE
+
+
+def add_to_database(key, value):
     # equivalent terminal command: 'asterisk -rx "database put DRHA key value"'
     command = "asterisk -rx 'database put DRHA " + key + " " + value + "'"
     utils.debug(command)
     os.system(command)
+
 
 def get_from_database(key):
     command = "asterisk -rx 'database get DRHA " + key + "'"
     stream = os.popen(command)
     return stream.read().split()[1]
 
+
 def database_exists(key):
     if get_from_database(key) == "entry":
         return False
     return True
 
+
 def get_database_value(output):
     return output.split()[1]
+
 
 def check_current_step():
     database_output = os.popen("asterisk -rx 'database get DRHA step'").read()
     return get_database_value(database_output)
 
+
 def update_step(current_step):
-    utils.debug('updating step: ' + check_current_step())
-    if current_step == '31':
-        add_to_database('step', '00')
+    utils.debug("updating step: " + check_current_step())
+    if current_step == "31":
+        add_to_database("step", "00")
         return
-    if current_step == '30':
-        add_to_database('step', '31')
+    if current_step == "30":
+        add_to_database("step", "31")
         return
-    if current_step == '24':
-        add_to_database('step', '25')
+    if current_step == "24":
+        add_to_database("step", "25")
         return
-    if current_step == '22':
-        add_to_database('step', '23')
+    if current_step == "22":
+        add_to_database("step", "23")
         return
-    if current_step == '20':
-        add_to_database('step', '21')
+    if current_step == "20":
+        add_to_database("step", "21")
         return
-    if current_step == '19':
-        add_to_database('step', '20')
+    if current_step == "19":
+        add_to_database("step", "20")
         return
-    if current_step == '18':
-        add_to_database('step', '19')
+    if current_step == "18":
+        add_to_database("step", "19")
         return
-    if current_step == '15':
-        add_to_database('step', '16')
+    if current_step == "15":
+        add_to_database("step", "16")
         return
-    if current_step == '13':
-        add_to_database('step', '14')
+    if current_step == "13":
+        add_to_database("step", "14")
         return
-    if current_step == '01':
-        add_to_database('step', '02')
+    if current_step == "01":
+        add_to_database("step", "02")
         return
-    if current_step == '00':
-        add_to_database('step', '01')
+    if current_step == "00":
+        add_to_database("step", "01")
         return
+
 
 def error():
     global LASTLINE
-    f = open(ASTLOGS, 'r')
+    f = open(ASTLOGS, "r")
     lines = f.readlines()
     i = len(lines) - 1
     next_line = lines[i]
     while next_line != LASTLINE:
-        if 'Call failed to go through' in next_line:
+        if "Call failed to go through" in next_line:
             LASTLINE = lines[len(lines) - 1]
-            utils.send_email('ERROR: Call failed to go through', 'ERROR')
+            utils.send_email("ERROR: Call failed to go through", "ERROR")
             return True
-        if 'error reading frame while generating CNG' in next_line:
+        if "error reading frame while generating CNG" in next_line:
             LASTLINE = lines[len(lines) - 1]
-            utils.send_email('ERROR: Someone pressed STOP or picked up a fax call', 'ERROR')
+            utils.send_email(
+                "ERROR: Someone pressed STOP or picked up a fax call", "ERROR"
+            )
             return True
         i = i - 1
         next_line = lines[i]
@@ -160,25 +181,27 @@ def error():
         return False
     return True
 
+
 def reset_database():
-  command = "asterisk -rx 'database deltree DRHA'"
-  add_to_database("prep_feed", "True")
-  utils.debug(command)
-  os.system(command)
-  #add_to_database('questionnaire', '1')
-  #add_to_database('answer', '0')
+    command = "asterisk -rx 'database deltree DRHA'"
+    add_to_database("prep_feed", "True")
+    utils.debug(command)
+    os.system(command)
+    # add_to_database('questionnaire', '1')
+    # add_to_database('answer', '0')
 
 
-if not database_exists('step'):
-    add_to_database('step', '00')
+if not database_exists("step"):
+    add_to_database("step", "00")
+
 
 def resest_easter_eggs():
-    add_to_database('faxegg11', '0')
-    add_to_database('faxegg12', '0')
-    add_to_database('faxegg14', '0')
-    add_to_database('faxegg19', '0')
-    add_to_database('faxegg22', '0')
-    add_to_database('faxegg25', '0')
-    add_to_database('faxegg26', '0')
-    add_to_database('faxegg30', '0')
-    add_to_database('faxegg32', '0')
+    add_to_database("faxegg11", "0")
+    add_to_database("faxegg12", "0")
+    add_to_database("faxegg14", "0")
+    add_to_database("faxegg19", "0")
+    add_to_database("faxegg22", "0")
+    add_to_database("faxegg25", "0")
+    add_to_database("faxegg26", "0")
+    add_to_database("faxegg30", "0")
+    add_to_database("faxegg32", "0")
