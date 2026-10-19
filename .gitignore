@@ -11,3 +11,4 @@ fax-venv
 sounds/phone/output/*
 tifs/output/*
 tifs/merged.tif
+.venv
