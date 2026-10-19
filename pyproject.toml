@@ -1,0 +1,17 @@
+[project]
+name = "berna"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "python-vlc>=3.0.21203",
+    "wheel>=0.48.0",
+    "pyalsaaudio">=0.11.0",
+    "pillow>=13.0.0"
+]
+
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+py-modules = ["serve"]
